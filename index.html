@@ -20,7 +20,7 @@
     --card: #ffffff;
     --text: #1f2937;
     --muted: #6b7280;
-    --border: #e5e7eb;
+    --border: #e1e7ec;
 }
 
 * {
@@ -65,7 +65,7 @@ header {
     justify-content: center;
     align-items: center;
     font-weight: 900;
-    font-size: 19px;
+    font-size: 18px;
 }
 
 .brand h1 {
@@ -112,7 +112,7 @@ header {
 }
 
 /* =========================
-   STAT CARDS
+   STATS
 ========================= */
 
 .stats {
@@ -213,7 +213,6 @@ header {
     height: 11px;
     border-radius: 50%;
     display: inline-block;
-    margin-right: 5px;
 }
 
 .dot-green {
@@ -391,7 +390,7 @@ header {
 }
 
 /* =========================
-   ACTION BUTTONS
+   BUTTONS
 ========================= */
 
 .primary-btn {
@@ -435,10 +434,12 @@ header {
     border-radius: 8px;
     margin-bottom: 10px;
     cursor: pointer;
+    transition: .15s;
 }
 
 .quick-action:hover {
     background: #f7fafc;
+    transform: translateX(2px);
 }
 
 .quick-icon {
@@ -467,6 +468,10 @@ header {
     border-left: 3px solid #d9e2ea;
     padding: 0 0 20px 17px;
     position: relative;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
 }
 
 .timeline-item::before {
@@ -514,6 +519,248 @@ header {
 }
 
 /* =========================
+   MODAL
+========================= */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 30, 45, .62);
+    z-index: 1000;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.modal {
+    background: white;
+    max-width: 760px;
+    margin: 30px auto;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: var(--navy);
+    color: white;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+}
+
+.modal-header p {
+    font-size: 12px;
+    opacity: .75;
+    margin-top: 4px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.form-section {
+    margin-bottom: 22px;
+}
+
+.form-section-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 12px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--border);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    border: 1px solid #cfd8df;
+    border-radius: 7px;
+    padding: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    background: white;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 2px rgba(47,111,159,.12);
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* =========================
+   CHOICE BUTTONS
+========================= */
+
+.choice-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.choice {
+    position: relative;
+}
+
+.choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.choice label {
+    margin: 0;
+    border: 1px solid #cfd8df;
+    border-radius: 7px;
+    padding: 10px 13px;
+    cursor: pointer;
+    background: white;
+    font-size: 12px;
+    font-weight: normal;
+    transition: .15s;
+}
+
+.choice input:checked + label {
+    background: #eaf2f8;
+    border-color: var(--blue);
+    color: var(--navy);
+    font-weight: bold;
+}
+
+/* =========================
+   MODAL FOOTER
+========================= */
+
+.modal-footer {
+    background: #f7f9fb;
+    border-top: 1px solid var(--border);
+    padding: 17px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-left {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.footer-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* =========================
+   CASE NOTE RESULT
+========================= */
+
+.note-result {
+    display: none;
+    margin-top: 20px;
+    border: 1px solid #b9dfc0;
+    background: #f3faf4;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.note-result-header {
+    background: #e5f4e8;
+    padding: 13px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-result-header strong {
+    color: #216b2d;
+    font-size: 13px;
+}
+
+.case-note {
+    padding: 17px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #27313a;
+}
+
+.copy-btn {
+    background: white;
+    border: 1px solid #8dbd96;
+    color: #216b2d;
+    border-radius: 6px;
+    padding: 7px 11px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+
+.success-message {
+    display: none;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: #216b2d;
+    color: white;
+    padding: 14px 18px;
+    border-radius: 9px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.2);
+    z-index: 2000;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* =========================
    RESPONSIVE
 ========================= */
 
@@ -553,12 +800,45 @@ header {
     .overall-status {
         text-align: left;
     }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .modal-overlay {
+        padding: 10px;
+    }
+
+    .modal {
+        margin: 10px auto;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .footer-actions {
+        width: 100%;
+    }
+
+    .footer-actions button {
+        flex: 1;
+    }
 }
 
 </style>
 </head>
 
 <body>
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -586,7 +866,7 @@ header {
 
 
 <!-- =========================
-     CASEWORKER DASHBOARD
+     DASHBOARD
 ========================= -->
 
 <section id="dashboard">
@@ -680,9 +960,7 @@ header {
                     Michael R.
                 </div>
 
-                <div>
-                    <span class="status-dot dot-yellow"></span>
-                </div>
+                <span class="status-dot dot-yellow"></span>
 
             </div>
 
@@ -756,9 +1034,7 @@ header {
                     Sarah T.
                 </div>
 
-                <div>
-                    <span class="status-dot dot-red"></span>
-                </div>
+                <span class="status-dot dot-red"></span>
 
             </div>
 
@@ -821,9 +1097,7 @@ header {
                     David L.
                 </div>
 
-                <div>
-                    <span class="status-dot dot-green"></span>
-                </div>
+                <span class="status-dot dot-green"></span>
 
             </div>
 
@@ -972,23 +1246,17 @@ header {
                 </div>
 
                 <div class="goal-details">
-
                     Barrier:
                     Limited housing availability
-
                 </div>
 
                 <div class="goal-details">
-
                     Next Action:
                     Submit two applications
-
                 </div>
 
                 <div class="goal-due">
-
                     Due: August 30, 2026
-
                 </div>
 
             </div>
@@ -1010,23 +1278,17 @@ header {
                 </div>
 
                 <div class="goal-details">
-
                     Barrier:
                     None currently identified
-
                 </div>
 
                 <div class="goal-details">
-
                     Next Action:
                     Attend scheduled interview
-
                 </div>
 
                 <div class="goal-due">
-
                     Due: August 28, 2026
-
                 </div>
 
             </div>
@@ -1048,23 +1310,17 @@ header {
                 </div>
 
                 <div class="goal-details">
-
                     Barrier:
                     Limited reliable transportation
-
                 </div>
 
                 <div class="goal-details">
-
                     Next Action:
                     Identify available resources
-
                 </div>
 
                 <div class="goal-due">
-
                     Due: August 29, 2026
-
                 </div>
 
             </div>
@@ -1086,23 +1342,17 @@ header {
                 </div>
 
                 <div class="goal-details">
-
                     Barrier:
                     None currently identified
-
                 </div>
 
                 <div class="goal-details">
-
                     Next Action:
                     Continue current programming
-
                 </div>
 
                 <div class="goal-due">
-
                     Ongoing
-
                 </div>
 
             </div>
@@ -1110,7 +1360,7 @@ header {
 
             <button
                 class="primary-btn"
-                onclick="alert('Goal creation will be added in Beta 0.2B.')">
+                onclick="alert('Goal creation will be added in Beta 0.2C.')">
 
                 + Add Goal
 
@@ -1131,7 +1381,7 @@ header {
 
             <div
                 class="quick-action"
-                onclick="recordContact()">
+                onclick="openContactModal()">
 
                 <div class="quick-icon">
                     📝
@@ -1214,16 +1464,15 @@ header {
 
             </div>
 
-
-            <div id="contactMessage"></div>
-
         </div>
 
     </div>
 
 
 
-    <!-- TIMELINE -->
+    <!-- =========================
+         TIMELINE
+    ========================= -->
 
     <div class="panel timeline">
 
@@ -1231,57 +1480,62 @@ header {
             📜 Client Timeline
         </h3>
 
+        <div id="timelineContainer">
 
-        <div class="timeline-item">
 
-            <div class="timeline-date">
-                AUGUST 25, 2026
+            <div class="timeline-item">
+
+                <div class="timeline-date">
+                    AUGUST 25, 2026
+                </div>
+
+                <div class="timeline-title">
+                    Transportation Barrier Identified
+                </div>
+
+                <div class="timeline-text">
+                    Reliable transportation identified as a current
+                    barrier. Resources discussed.
+                </div>
+
             </div>
 
-            <div class="timeline-title">
-                Transportation Barrier Identified
+
+            <div class="timeline-item">
+
+                <div class="timeline-date">
+                    AUGUST 22, 2026
+                </div>
+
+                <div class="timeline-title">
+                    Treatment Progress
+                </div>
+
+                <div class="timeline-text">
+                    Client reports continued participation in current
+                    programming.
+                </div>
+
             </div>
 
-            <div class="timeline-text">
-                Reliable transportation identified as a current
-                barrier. Resources discussed.
+
+            <div class="timeline-item">
+
+                <div class="timeline-date">
+                    AUGUST 18, 2026
+                </div>
+
+                <div class="timeline-title">
+                    Housing Resources
+                </div>
+
+                <div class="timeline-text">
+                    Housing resources provided and application plan
+                    discussed.
+                </div>
+
             </div>
 
-        </div>
-
-
-        <div class="timeline-item">
-
-            <div class="timeline-date">
-                AUGUST 22, 2026
-            </div>
-
-            <div class="timeline-title">
-                Treatment Progress
-            </div>
-
-            <div class="timeline-text">
-                Client reports continued participation in current
-                programming.
-            </div>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-            <div class="timeline-date">
-                AUGUST 18, 2026
-            </div>
-
-            <div class="timeline-title">
-                Housing Resources
-            </div>
-
-            <div class="timeline-text">
-                Housing resources provided and application plan
-                discussed.
-            </div>
 
         </div>
 
@@ -1294,15 +1548,499 @@ header {
 
 
 
+<!-- =========================
+     RECORD CONTACT MODAL
+========================= -->
+
+<div
+    id="contactModal"
+    class="modal-overlay">
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>
+                    📝 Record Contact
+                </h2>
+
+                <p id="modalClientName">
+                    Michael R. • Demo Client
+                </p>
+
+            </div>
+
+            <button
+                class="close-btn"
+                onclick="closeContactModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <div class="modal-body">
+
+
+            <!-- CONTACT -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    CONTACT INFORMATION
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="contactDate">
+                            Contact Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="contactDate">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="contactType">
+                            Contact Type
+                        </label>
+
+                        <select id="contactType">
+
+                            <option value="">
+                                Select contact type...
+                            </option>
+
+                            <option>
+                                Office
+                            </option>
+
+                            <option>
+                                Phone
+                            </option>
+
+                            <option>
+                                Home Visit
+                            </option>
+
+                            <option>
+                                Collateral
+                            </option>
+
+                            <option>
+                                Virtual
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AREAS -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    AREAS DISCUSSED
+                </div>
+
+
+                <div class="choice-grid">
+
+
+                    <div class="choice">
+
+                        <input
+                            type="checkbox"
+                            id="housing"
+                            value="Housing">
+
+                        <label for="housing">
+                            🏠 Housing
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="checkbox"
+                            id="employment"
+                            value="Employment">
+
+                        <label for="employment">
+                            💼 Employment
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="checkbox"
+                            id="treatment"
+                            value="Treatment">
+
+                        <label for="treatment">
+                            🧠 Treatment
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="checkbox"
+                            id="transportation"
+                            value="Transportation">
+
+                        <label for="transportation">
+                            🚌 Transportation
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="checkbox"
+                            id="education"
+                            value="Education">
+
+                        <label for="education">
+                            🎓 Education
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="checkbox"
+                            id="financial"
+                            value="Financial">
+
+                        <label for="financial">
+                            💰 Financial
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="checkbox"
+                            id="otherArea"
+                            value="Other">
+
+                        <label for="otherArea">
+                            Other
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PROGRESS -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    OVERALL PROGRESS
+                </div>
+
+
+                <div class="choice-grid">
+
+
+                    <div class="choice">
+
+                        <input
+                            type="radio"
+                            name="progress"
+                            id="improving"
+                            value="Improving">
+
+                        <label for="improving">
+                            🟢 Improving
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="radio"
+                            name="progress"
+                            id="maintaining"
+                            value="Maintaining">
+
+                        <label for="maintaining">
+                            🟡 Maintaining
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="radio"
+                            name="progress"
+                            id="nochange"
+                            value="No Change">
+
+                        <label for="nochange">
+                            🟠 No Change
+                        </label>
+
+                    </div>
+
+
+                    <div class="choice">
+
+                        <input
+                            type="radio"
+                            name="progress"
+                            id="declining"
+                            value="Declining">
+
+                        <label for="declining">
+                            🔴 Declining
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DETAILS -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    CONTACT DETAILS
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="barrier">
+                        Barrier Identified
+                    </label>
+
+                    <textarea
+                        id="barrier"
+                        placeholder="What barrier, if any, was identified?"></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="actionTaken">
+                        Action Taken
+                    </label>
+
+                    <textarea
+                        id="actionTaken"
+                        placeholder="What action did the caseworker take?"></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="commitment">
+                        Client Commitment
+                    </label>
+
+                    <textarea
+                        id="commitment"
+                        placeholder="What did the client agree to do?"></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="nextStep">
+                        Next Step
+                    </label>
+
+                    <textarea
+                        id="nextStep"
+                        placeholder="What happens next?"></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="followUp">
+                        Follow-Up Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="followUp">
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CASE NOTE -->
+
+            <div
+                id="noteResult"
+                class="note-result">
+
+                <div class="note-result-header">
+
+                    <strong>
+                        🤖 GENERATED CASE NOTE
+                    </strong>
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyCaseNote()">
+
+                        📋 Copy Case Note
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="caseNote"
+                    class="case-note">
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="modal-footer">
+
+            <div class="footer-left">
+
+                Demo only • No information is saved to a database.
+
+            </div>
+
+
+            <div class="footer-actions">
+
+                <button
+                    class="secondary-btn"
+                    onclick="closeContactModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="generateCaseNote()">
+
+                    ⚡ Generate Case Note
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     SUCCESS MESSAGE
+========================= -->
+
+<div
+    id="successMessage"
+    class="success-message">
+
+    ✓ Contact added to client timeline
+
+</div>
+
+
+
 <script>
 
+/* =========================
+   GLOBAL VARIABLES
+========================= */
+
+let currentClient = "Michael R.";
+
+
+/* =========================
+   DASHBOARD / CLIENT
+========================= */
+
 function showClient(name) {
+
+    currentClient = name;
 
     document.getElementById("dashboard").style.display = "none";
 
     document.getElementById("clientView").style.display = "block";
 
     document.getElementById("clientName").innerText = name;
+
+    document.getElementById("modalClientName").innerText =
+        name + " • Demo Client";
 
     window.scrollTo(0, 0);
 
@@ -1320,33 +2058,458 @@ function showDashboard() {
 }
 
 
-function recordContact() {
+/* =========================
+   CONTACT MODAL
+========================= */
 
-    const message = document.getElementById("contactMessage");
+function openContactModal() {
 
-    message.innerHTML = `
-        <div style="
-            margin-top:18px;
-            padding:15px;
-            background:#eef7f0;
-            border:1px solid #b9dfc0;
-            border-radius:8px;
-            color:#216b2d;
-            font-size:13px;
-            line-height:1.5;
-        ">
+    document.getElementById("modalClientName").innerText =
+        currentClient + " • Demo Client";
 
-            <strong>CONTACT WORKFLOW COMING NEXT</strong><br><br>
+    document.getElementById("contactModal").style.display = "block";
 
-            Beta 0.2B will allow the caseworker to
-            record contact type, areas discussed,
-            progress, barriers, actions taken,
-            client commitments and follow-up dates.
-
-        </div>
-    `;
+    setDefaultDates();
 
 }
+
+
+function closeContactModal() {
+
+    document.getElementById("contactModal").style.display = "none";
+
+    document.getElementById("noteResult").style.display = "none";
+
+}
+
+
+/* =========================
+   DEFAULT DATES
+========================= */
+
+function setDefaultDates() {
+
+    const today = new Date();
+
+    const todayString =
+        today.toISOString().split("T")[0];
+
+    document.getElementById("contactDate").value =
+        todayString;
+
+}
+
+
+/* =========================
+   GET SELECTED AREAS
+========================= */
+
+function getSelectedAreas() {
+
+    const checkboxes =
+        document.querySelectorAll(
+            '#contactModal input[type="checkbox"]:checked'
+        );
+
+    return Array.from(checkboxes)
+        .map(box => box.value);
+
+}
+
+
+/* =========================
+   GET PROGRESS
+========================= */
+
+function getProgress() {
+
+    const selected =
+        document.querySelector(
+            '#contactModal input[name="progress"]:checked'
+        );
+
+    return selected
+        ? selected.value
+        : "";
+
+}
+
+
+/* =========================
+   GENERATE CASE NOTE
+========================= */
+
+function generateCaseNote() {
+
+    const contactDate =
+        document.getElementById("contactDate").value;
+
+    const contactType =
+        document.getElementById("contactType").value;
+
+    const areas =
+        getSelectedAreas();
+
+    const progress =
+        getProgress();
+
+    const barrier =
+        document.getElementById("barrier").value.trim();
+
+    const action =
+        document.getElementById("actionTaken").value.trim();
+
+    const commitment =
+        document.getElementById("commitment").value.trim();
+
+    const nextStep =
+        document.getElementById("nextStep").value.trim();
+
+    const followUp =
+        document.getElementById("followUp").value;
+
+
+    /* VALIDATION */
+
+    if (!contactDate) {
+
+        alert("Please enter the contact date.");
+
+        return;
+
+    }
+
+
+    if (!contactType) {
+
+        alert("Please select a contact type.");
+
+        return;
+
+    }
+
+
+    if (areas.length === 0) {
+
+        alert("Please select at least one area discussed.");
+
+        return;
+
+    }
+
+
+    if (!progress) {
+
+        alert("Please select the client's overall progress.");
+
+        return;
+
+    }
+
+
+    /* FORMAT DATE */
+
+    const formattedDate =
+        new Date(
+            contactDate + "T12:00:00"
+        ).toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+
+    /* BUILD CASE NOTE */
+
+    let note =
+        currentClient +
+        " was contacted via " +
+        contactType.toLowerCase() +
+        " regarding the current case plan. ";
+
+
+    note +=
+        "Areas discussed included " +
+        formatList(areas) +
+        ". ";
+
+
+    note +=
+        "Overall client progress was assessed as " +
+        progress.toLowerCase() +
+        ". ";
+
+
+    if (barrier) {
+
+        note +=
+            "A current barrier identified was " +
+            barrier +
+            ". ";
+
+    }
+
+
+    if (action) {
+
+        note +=
+            "The caseworker took the following action: " +
+            action +
+            ". ";
+
+    }
+
+
+    if (commitment) {
+
+        note +=
+            "The client agreed to " +
+            commitment +
+            ". ";
+
+    }
+
+
+    if (nextStep) {
+
+        note +=
+            "The next step is to " +
+            nextStep +
+            ". ";
+
+    }
+
+
+    if (followUp) {
+
+        const formattedFollowUp =
+            new Date(
+                followUp + "T12:00:00"
+            ).toLocaleDateString(
+                "en-US",
+                {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric"
+                }
+            );
+
+        note +=
+            "Follow-up is planned for " +
+            formattedFollowUp +
+            ".";
+
+    }
+
+
+    document.getElementById("caseNote").innerText =
+        note;
+
+
+    document.getElementById("noteResult").style.display =
+        "block";
+
+
+    /* ADD TO TIMELINE */
+
+    addTimelineEntry(
+        formattedDate,
+        areas,
+        progress,
+        action,
+        nextStep
+    );
+
+}
+
+
+/* =========================
+   FORMAT LIST
+========================= */
+
+function formatList(items) {
+
+    if (items.length === 1) {
+        return items[0];
+    }
+
+    if (items.length === 2) {
+        return items[0] + " and " + items[1];
+    }
+
+    return (
+        items.slice(0, -1).join(", ") +
+        ", and " +
+        items[items.length - 1]
+    );
+
+}
+
+
+/* =========================
+   ADD TIMELINE ENTRY
+========================= */
+
+function addTimelineEntry(
+    date,
+    areas,
+    progress,
+    action,
+    nextStep
+) {
+
+    const timeline =
+        document.getElementById("timelineContainer");
+
+
+    const item =
+        document.createElement("div");
+
+    item.className =
+        "timeline-item";
+
+
+    let title =
+        formatList(areas) +
+        " • " +
+        progress;
+
+
+    let description =
+        action ||
+        nextStep ||
+        "Contact documented and progress reviewed.";
+
+
+    item.innerHTML = `
+
+        <div class="timeline-date">
+            ${date.toUpperCase()}
+        </div>
+
+        <div class="timeline-title">
+            ${title}
+        </div>
+
+        <div class="timeline-text">
+            ${description}
+        </div>
+
+    `;
+
+
+    timeline.prepend(item);
+
+
+    showSuccessMessage();
+
+}
+
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+
+function showSuccessMessage() {
+
+    const message =
+        document.getElementById("successMessage");
+
+    message.style.display = "block";
+
+
+    setTimeout(function() {
+
+        message.style.display = "none";
+
+    }, 3000);
+
+}
+
+
+/* =========================
+   COPY CASE NOTE
+========================= */
+
+function copyCaseNote() {
+
+    const note =
+        document.getElementById("caseNote").innerText;
+
+
+    navigator.clipboard.writeText(note)
+        .then(function() {
+
+            const button =
+                document.querySelector(".copy-btn");
+
+            const original =
+                button.innerText;
+
+            button.innerText =
+                "✓ Copied!";
+
+
+            setTimeout(function() {
+
+                button.innerText =
+                    original;
+
+            }, 2000);
+
+        })
+        .catch(function() {
+
+            alert(
+                "The case note could not be copied automatically. Please select and copy the text manually."
+            );
+
+        });
+
+}
+
+
+/* =========================
+   CLOSE MODAL WHEN CLICKING
+   OUTSIDE IT
+========================= */
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById("contactModal");
+
+        if (event.target === modal) {
+
+            closeContactModal();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   ESC KEY CLOSE
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeContactModal();
+
+        }
+
+    }
+);
 
 </script>
 
