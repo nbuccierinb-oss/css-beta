@@ -3,495 +3,1349 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSS — Client Success System</title>
+
+<title>CSS | Client Success System</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
 
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: #f4f6f8;
-        color: #1f2937;
-    }
+:root {
+    --navy: #17324d;
+    --navy-light: #234d73;
+    --blue: #2f6f9f;
+    --green: #218739;
+    --yellow: #c58a00;
+    --red: #c0392b;
+    --orange: #d97706;
+    --background: #f3f6f9;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+}
 
-    header {
-        background: #17324d;
-        color: white;
-        padding: 24px 32px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    .brand h1 {
-        font-size: 28px;
-        letter-spacing: 1px;
-    }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
 
-    .brand p {
-        margin-top: 4px;
-        opacity: .8;
-        font-size: 14px;
-    }
+/* =========================
+   HEADER
+========================= */
 
-    .demo-badge {
-        background: #f4b942;
-        color: #17324d;
-        padding: 8px 14px;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 12px;
-    }
+header {
+    background: var(--navy);
+    color: white;
+    padding: 18px 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
 
-    .container {
-        max-width: 1200px;
-        margin: 30px auto;
-        padding: 0 20px;
-    }
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
 
-    .welcome {
-        margin-bottom: 24px;
-    }
+.logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: white;
+    color: var(--navy);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 19px;
+}
 
-    .welcome h2 {
-        font-size: 25px;
-        margin-bottom: 6px;
-    }
+.brand h1 {
+    font-size: 25px;
+    letter-spacing: 1px;
+}
 
-    .welcome p {
-        color: #6b7280;
-    }
+.brand p {
+    font-size: 12px;
+    opacity: .75;
+    margin-top: 2px;
+}
+
+.demo-badge {
+    background: #f4b942;
+    color: var(--navy);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+    max-width: 1250px;
+    margin: 30px auto;
+    padding: 0 22px;
+}
+
+.welcome {
+    margin-bottom: 25px;
+}
+
+.welcome h2 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.welcome p {
+    color: var(--muted);
+}
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 7px rgba(0,0,0,.05);
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.stat-number {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.green {
+    color: var(--green);
+}
+
+.yellow {
+    color: var(--yellow);
+}
+
+.red {
+    color: var(--red);
+}
+
+.blue {
+    color: var(--blue);
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-size: 20px;
+}
+
+/* =========================
+   CLIENT CARDS
+========================= */
+
+.clients {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.client-card {
+    background: white;
+    border-radius: 13px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    transition: .15s ease;
+}
+
+.client-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(0,0,0,.10);
+}
+
+.client-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.client-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.status-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.dot-green {
+    background: var(--green);
+}
+
+.dot-yellow {
+    background: #e0a900;
+}
+
+.dot-red {
+    background: var(--red);
+}
+
+.phase {
+    display: inline-block;
+    background: #e9f0f6;
+    color: var(--navy);
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 17px;
+}
+
+.goal {
+    border-top: 1px solid #edf0f2;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.goal-status {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.view-btn {
+    width: 100%;
+    margin-top: 17px;
+    padding: 12px;
+    border: none;
+    border-radius: 7px;
+    background: var(--navy);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.view-btn:hover {
+    background: var(--navy-light);
+}
+
+/* =========================
+   CLIENT PROFILE
+========================= */
+
+#clientView {
+    display: none;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--navy);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.profile-header {
+    background: white;
+    padding: 25px;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.profile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-header h2 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.profile-meta {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.overall-status {
+    text-align: right;
+}
+
+.overall-status-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+.overall-status-value {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* =========================
+   PROFILE GRID
+========================= */
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 20px;
+}
+
+.panel {
+    background: white;
+    padding: 22px;
+    border-radius: 13px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.panel h3 {
+    margin-bottom: 17px;
+    font-size: 18px;
+}
+
+/* =========================
+   GOALS
+========================= */
+
+.goal-card {
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 15px;
+    margin-bottom: 12px;
+}
+
+.goal-card:last-child {
+    margin-bottom: 0;
+}
+
+.goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 7px;
+}
+
+.goal-name {
+    font-weight: bold;
+}
+
+.goal-details {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.goal-due {
+    margin-top: 7px;
+    font-size: 12px;
+    color: var(--navy);
+    font-weight: bold;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.primary-btn {
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 12px 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.primary-btn:hover {
+    opacity: .9;
+}
+
+.secondary-btn {
+    background: white;
+    color: var(--navy);
+    border: 1px solid var(--navy);
+    border-radius: 7px;
+    padding: 11px 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.secondary-btn:hover {
+    background: #f0f4f7;
+}
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.quick-action:hover {
+    background: #f7fafc;
+}
+
+.quick-icon {
+    font-size: 20px;
+}
+
+.quick-action strong {
+    display: block;
+    font-size: 14px;
+}
+
+.quick-action span {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline {
+    margin-top: 20px;
+}
+
+.timeline-item {
+    border-left: 3px solid #d9e2ea;
+    padding: 0 0 20px 17px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--blue);
+    left: -6px;
+    top: 3px;
+}
+
+.timeline-date {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.timeline-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.timeline-text {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+/* =========================
+   DEMO NOTICE
+========================= */
+
+.demo-note {
+    margin-top: 30px;
+    padding: 14px 17px;
+    background: #fff7df;
+    border: 1px solid #f0d77c;
+    border-radius: 8px;
+    color: #695000;
+    font-size: 12px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
 
     .stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        margin-bottom: 30px;
-    }
-
-    .stat-card {
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.07);
-    }
-
-    .stat-number {
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .green { color: #218739; }
-    .yellow { color: #c58a00; }
-    .red { color: #c0392b; }
-
-    .section-title {
-        margin-bottom: 14px;
-        font-size: 20px;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .clients {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        grid-template-columns: 1fr;
     }
 
-    .client-card {
-        background: white;
-        border-radius: 12px;
-        padding: 22px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.07);
-        transition: transform .15s, box-shadow .15s;
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .stats {
+        grid-template-columns: 1fr;
     }
 
-    .client-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0,0,0,.12);
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
     }
 
-    .client-name {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 8px;
+    .profile-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
     }
 
-    .phase {
-        display: inline-block;
-        background: #e8eef5;
-        color: #17324d;
-        padding: 6px 10px;
-        border-radius: 15px;
-        font-size: 12px;
-        font-weight: bold;
-        margin-bottom: 18px;
+    .overall-status {
+        text-align: left;
     }
+}
 
-    .goal {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 0;
-        border-top: 1px solid #eee;
-        font-size: 14px;
-    }
-
-    .status {
-        font-weight: bold;
-    }
-
-    .view-btn {
-        width: 100%;
-        margin-top: 18px;
-        padding: 11px;
-        border: none;
-        border-radius: 7px;
-        background: #17324d;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .view-btn:hover {
-        background: #234d73;
-    }
-
-    #clientView {
-        display: none;
-    }
-
-    .back-btn {
-        background: transparent;
-        border: none;
-        color: #17324d;
-        font-weight: bold;
-        cursor: pointer;
-        margin-bottom: 18px;
-        font-size: 15px;
-    }
-
-    .profile-header {
-        background: white;
-        border-radius: 12px;
-        padding: 24px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.07);
-    }
-
-    .profile-header h2 {
-        margin-bottom: 8px;
-    }
-
-    .dashboard-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .panel {
-        background: white;
-        padding: 22px;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,.07);
-    }
-
-    .panel h3 {
-        margin-bottom: 15px;
-    }
-
-    .goal-row {
-        padding: 13px 0;
-        border-bottom: 1px solid #eee;
-    }
-
-    .goal-row:last-child {
-        border-bottom: none;
-    }
-
-    .goal-title {
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
-
-    .next-action {
-        color: #6b7280;
-        font-size: 13px;
-    }
-
-    .contact-btn {
-        background: #218739;
-        color: white;
-        border: none;
-        padding: 13px 18px;
-        border-radius: 7px;
-        cursor: pointer;
-        font-weight: bold;
-        margin-top: 15px;
-    }
-
-    .note-box {
-        margin-top: 20px;
-        background: #f8fafc;
-        border-left: 4px solid #17324d;
-        padding: 16px;
-        line-height: 1.6;
-        font-size: 14px;
-    }
-
-    .demo-note {
-        margin-top: 30px;
-        padding: 15px;
-        background: #fff7df;
-        border-radius: 8px;
-        font-size: 13px;
-        color: #695000;
-    }
-
-    @media (max-width: 800px) {
-        .stats,
-        .clients,
-        .dashboard-grid {
-            grid-template-columns: 1fr;
-        }
-
-        header {
-            align-items: flex-start;
-            gap: 15px;
-            flex-direction: column;
-        }
-    }
 </style>
 </head>
 
 <body>
 
 <header>
+
     <div class="brand">
-        <h1>CSS</h1>
-        <p>Client Success System</p>
+
+        <div class="logo">
+            CSS
+        </div>
+
+        <div>
+            <h1>Client Success System</h1>
+            <p>Case Planning • Progress • Success</p>
+        </div>
+
     </div>
 
-    <div class="demo-badge">BETA • DEMO DATA ONLY</div>
+    <div class="demo-badge">
+        BETA • DEMO DATA ONLY
+    </div>
+
 </header>
+
 
 <div class="container">
 
-    <!-- MAIN DASHBOARD -->
-    <section id="dashboard">
 
-        <div class="welcome">
-            <h2>Good Morning, Caseworker</h2>
-            <p>Your caseload at a glance.</p>
-        </div>
+<!-- =========================
+     CASEWORKER DASHBOARD
+========================= -->
 
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-number">6</div>
-                <div>Clients Progressing</div>
+<section id="dashboard">
+
+    <div class="welcome">
+
+        <h2>Good Morning, Caseworker</h2>
+
+        <p>
+            Here's your caseload at a glance.
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                TOTAL CASELOAD
             </div>
 
-            <div class="stat-card">
-                <div class="stat-number yellow">4</div>
-                <div>Clients Needing Attention</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-number red">2</div>
-                <div>Clients With Critical Barriers</div>
-            </div>
-        </div>
-
-        <h2 class="section-title">My Caseload</h2>
-
-        <div class="clients">
-
-            <div class="client-card">
-                <div class="client-name">Michael R.</div>
-                <div class="phase">PHASE 2 — ENGAGEMENT</div>
-
-                <div class="goal">
-                    <span>Housing</span>
-                    <span class="status yellow">● Working</span>
-                </div>
-
-                <div class="goal">
-                    <span>Employment</span>
-                    <span class="status green">● Progressing</span>
-                </div>
-
-                <div class="goal">
-                    <span>Transportation</span>
-                    <span class="status red">● Barrier</span>
-                </div>
-
-                <div class="goal">
-                    <span>Treatment</span>
-                    <span class="status green">● Progressing</span>
-                </div>
-
-                <button class="view-btn" onclick="showClient('Michael R.')">
-                    View Client
-                </button>
-            </div>
-
-
-            <div class="client-card">
-                <div class="client-name">Sarah T.</div>
-                <div class="phase">PHASE 1 — FOUNDATION</div>
-
-                <div class="goal">
-                    <span>Housing</span>
-                    <span class="status red">● Barrier</span>
-                </div>
-
-                <div class="goal">
-                    <span>Employment</span>
-                    <span class="status yellow">● Working</span>
-                </div>
-
-                <div class="goal">
-                    <span>Transportation</span>
-                    <span class="status green">● Progressing</span>
-                </div>
-
-                <button class="view-btn" onclick="showClient('Sarah T.')">
-                    View Client
-                </button>
-            </div>
-
-
-            <div class="client-card">
-                <div class="client-name">David L.</div>
-                <div class="phase">PHASE 3 — PROGRESS</div>
-
-                <div class="goal">
-                    <span>Employment</span>
-                    <span class="status green">● Progressing</span>
-                </div>
-
-                <div class="goal">
-                    <span>Transportation</span>
-                    <span class="status green">● Progressing</span>
-                </div>
-
-                <div class="goal">
-                    <span>Financial</span>
-                    <span class="status yellow">● Working</span>
-                </div>
-
-                <button class="view-btn" onclick="showClient('David L.')">
-                    View Client
-                </button>
+            <div class="stat-number">
+                15
             </div>
 
         </div>
 
-        <div class="demo-note">
-            <strong>POC NOTE:</strong> This prototype uses fictional client information.
-            No real client information should be entered into this demonstration.
-        </div>
 
-    </section>
+        <div class="stat-card">
 
-
-    <!-- CLIENT VIEW -->
-    <section id="clientView">
-
-        <button class="back-btn" onclick="showDashboard()">
-            ← Back to Caseload
-        </button>
-
-        <div class="profile-header">
-            <h2 id="clientName">Michael R.</h2>
-            <span class="phase">PHASE 2 — ENGAGEMENT</span>
-            <p style="margin-top:12px;color:#6b7280;">
-                Last Contact: August 25, 2026
-            </p>
-        </div>
-
-        <div class="dashboard-grid">
-
-            <div class="panel">
-                <h3>Current Goals</h3>
-
-                <div class="goal-row">
-                    <div class="goal-title">🏠 Housing — <span class="yellow">Working</span></div>
-                    <div class="next-action">Next: Submit housing application</div>
-                </div>
-
-                <div class="goal-row">
-                    <div class="goal-title">💼 Employment — <span class="green">Progressing</span></div>
-                    <div class="next-action">Next: Attend interview Friday</div>
-                </div>
-
-                <div class="goal-row">
-                    <div class="goal-title">🚌 Transportation — <span class="red">Barrier</span></div>
-                    <div class="next-action">Next: Identify transportation resources</div>
-                </div>
-
-                <div class="goal-row">
-                    <div class="goal-title">🧠 Treatment — <span class="green">Progressing</span></div>
-                    <div class="next-action">Next: Continue current programming</div>
-                </div>
+            <div class="stat-label">
+                PROGRESSING
             </div>
 
-
-            <div class="panel">
-                <h3>Quick Contact</h3>
-
-                <p style="color:#6b7280;line-height:1.5;">
-                    Record the important information from today's contact.
-                </p>
-
-                <button class="contact-btn" onclick="generateNote()">
-                    ＋ Record Contact
-                </button>
-
-                <div id="noteArea"></div>
+            <div class="stat-number green">
+                6
             </div>
 
         </div>
 
-    </section>
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                NEED ATTENTION
+            </div>
+
+            <div class="stat-number yellow">
+                4
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                CRITICAL BARRIERS
+            </div>
+
+            <div class="stat-number red">
+                2
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="section-header">
+
+        <h2 class="section-title">
+            My Caseload
+        </h2>
+
+    </div>
+
+
+    <div class="clients">
+
+
+        <!-- MICHAEL -->
+
+        <div class="client-card">
+
+            <div class="client-top">
+
+                <div class="client-name">
+                    Michael R.
+                </div>
+
+                <div>
+                    <span class="status-dot dot-yellow"></span>
+                </div>
+
+            </div>
+
+            <div class="phase">
+                PHASE 2 — ENGAGEMENT
+            </div>
+
+
+            <div class="goal">
+
+                <span>🏠 Housing</span>
+
+                <span class="goal-status yellow">
+                    Working
+                </span>
+
+            </div>
+
+
+            <div class="goal">
+
+                <span>💼 Employment</span>
+
+                <span class="goal-status green">
+                    Progressing
+                </span>
+
+            </div>
+
+
+            <div class="goal">
+
+                <span>🚌 Transportation</span>
+
+                <span class="goal-status red">
+                    Barrier
+                </span>
+
+            </div>
+
+
+            <div class="goal">
+
+                <span>🧠 Treatment</span>
+
+                <span class="goal-status green">
+                    Progressing
+                </span>
+
+            </div>
+
+
+            <button
+                class="view-btn"
+                onclick="showClient('Michael R.')">
+
+                View Client
+
+            </button>
+
+        </div>
+
+
+        <!-- SARAH -->
+
+        <div class="client-card">
+
+            <div class="client-top">
+
+                <div class="client-name">
+                    Sarah T.
+                </div>
+
+                <div>
+                    <span class="status-dot dot-red"></span>
+                </div>
+
+            </div>
+
+            <div class="phase">
+                PHASE 1 — FOUNDATION
+            </div>
+
+
+            <div class="goal">
+
+                <span>🏠 Housing</span>
+
+                <span class="goal-status red">
+                    Barrier
+                </span>
+
+            </div>
+
+
+            <div class="goal">
+
+                <span>💼 Employment</span>
+
+                <span class="goal-status yellow">
+                    Working
+                </span>
+
+            </div>
+
+
+            <div class="goal">
+
+                <span>🚌 Transportation</span>
+
+                <span class="goal-status green">
+                    Progressing
+                </span>
+
+            </div>
+
+
+            <button
+                class="view-btn"
+                onclick="showClient('Sarah T.')">
+
+                View Client
+
+            </button>
+
+        </div>
+
+
+        <!-- DAVID -->
+
+        <div class="client-card">
+
+            <div class="client-top">
+
+                <div class="client-name">
+                    David L.
+                </div>
+
+                <div>
+                    <span class="status-dot dot-green"></span>
+                </div>
+
+            </div>
+
+            <div class="phase">
+                PHASE 3 — PROGRESS
+            </div>
+
+
+            <div class="goal">
+
+                <span>💼 Employment</span>
+
+                <span class="goal-status green">
+                    Progressing
+                </span>
+
+            </div>
+
+
+            <div class="goal">
+
+                <span>🚌 Transportation</span>
+
+                <span class="goal-status green">
+                    Progressing
+                </span>
+
+            </div>
+
+
+            <div class="goal">
+
+                <span>💰 Financial</span>
+
+                <span class="goal-status yellow">
+                    Working
+                </span>
+
+            </div>
+
+
+            <button
+                class="view-btn"
+                onclick="showClient('David L.')">
+
+                View Client
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="demo-note">
+
+        <strong>POC / DEMO:</strong>
+        This prototype uses fictional client information.
+        Do not enter real client information.
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CLIENT PROFILE
+========================= -->
+
+<section id="clientView">
+
+
+    <button
+        class="back-btn"
+        onclick="showDashboard()">
+
+        ← Back to Caseload
+
+    </button>
+
+
+    <div class="profile-header">
+
+        <div class="profile-top">
+
+            <div>
+
+                <h2 id="clientName">
+                    Michael R.
+                </h2>
+
+                <div class="phase">
+                    PHASE 2 — ENGAGEMENT
+                </div>
+
+                <div class="profile-meta">
+                    Demo Client • Last Contact: August 25, 2026
+                </div>
+
+            </div>
+
+
+            <div class="overall-status">
+
+                <div class="overall-status-label">
+                    OVERALL STATUS
+                </div>
+
+                <div class="overall-status-value yellow">
+                    ● Needs Attention
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="profile-grid">
+
+
+        <!-- GOALS -->
+
+        <div class="panel">
+
+            <h3>
+                🎯 Active Goals
+            </h3>
+
+
+            <div class="goal-card">
+
+                <div class="goal-header">
+
+                    <div class="goal-name">
+                        🏠 Housing
+                    </div>
+
+                    <strong class="yellow">
+                        Working
+                    </strong>
+
+                </div>
+
+                <div class="goal-details">
+
+                    Barrier:
+                    Limited housing availability
+
+                </div>
+
+                <div class="goal-details">
+
+                    Next Action:
+                    Submit two applications
+
+                </div>
+
+                <div class="goal-due">
+
+                    Due: August 30, 2026
+
+                </div>
+
+            </div>
+
+
+
+            <div class="goal-card">
+
+                <div class="goal-header">
+
+                    <div class="goal-name">
+                        💼 Employment
+                    </div>
+
+                    <strong class="green">
+                        Progressing
+                    </strong>
+
+                </div>
+
+                <div class="goal-details">
+
+                    Barrier:
+                    None currently identified
+
+                </div>
+
+                <div class="goal-details">
+
+                    Next Action:
+                    Attend scheduled interview
+
+                </div>
+
+                <div class="goal-due">
+
+                    Due: August 28, 2026
+
+                </div>
+
+            </div>
+
+
+
+            <div class="goal-card">
+
+                <div class="goal-header">
+
+                    <div class="goal-name">
+                        🚌 Transportation
+                    </div>
+
+                    <strong class="red">
+                        Barrier
+                    </strong>
+
+                </div>
+
+                <div class="goal-details">
+
+                    Barrier:
+                    Limited reliable transportation
+
+                </div>
+
+                <div class="goal-details">
+
+                    Next Action:
+                    Identify available resources
+
+                </div>
+
+                <div class="goal-due">
+
+                    Due: August 29, 2026
+
+                </div>
+
+            </div>
+
+
+
+            <div class="goal-card">
+
+                <div class="goal-header">
+
+                    <div class="goal-name">
+                        🧠 Treatment
+                    </div>
+
+                    <strong class="green">
+                        Progressing
+                    </strong>
+
+                </div>
+
+                <div class="goal-details">
+
+                    Barrier:
+                    None currently identified
+
+                </div>
+
+                <div class="goal-details">
+
+                    Next Action:
+                    Continue current programming
+
+                </div>
+
+                <div class="goal-due">
+
+                    Ongoing
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="alert('Goal creation will be added in Beta 0.2B.')">
+
+                + Add Goal
+
+            </button>
+
+        </div>
+
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="panel">
+
+            <h3>
+                ⚡ Quick Actions
+            </h3>
+
+
+            <div
+                class="quick-action"
+                onclick="recordContact()">
+
+                <div class="quick-icon">
+                    📝
+                </div>
+
+                <div>
+
+                    <strong>
+                        Record Contact
+                    </strong>
+
+                    <span>
+                        Document today's interaction
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-action">
+
+                <div class="quick-icon">
+                    📈
+                </div>
+
+                <div>
+
+                    <strong>
+                        Update Progress
+                    </strong>
+
+                    <span>
+                        Review current goals
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-action">
+
+                <div class="quick-icon">
+                    📋
+                </div>
+
+                <div>
+
+                    <strong>
+                        View Case History
+                    </strong>
+
+                    <span>
+                        Review client timeline
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-action">
+
+                <div class="quick-icon">
+                    🔄
+                </div>
+
+                <div>
+
+                    <strong>
+                        Review Phase
+                    </strong>
+
+                    <span>
+                        Assess readiness for next phase
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div id="contactMessage"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- TIMELINE -->
+
+    <div class="panel timeline">
+
+        <h3>
+            📜 Client Timeline
+        </h3>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-date">
+                AUGUST 25, 2026
+            </div>
+
+            <div class="timeline-title">
+                Transportation Barrier Identified
+            </div>
+
+            <div class="timeline-text">
+                Reliable transportation identified as a current
+                barrier. Resources discussed.
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-date">
+                AUGUST 22, 2026
+            </div>
+
+            <div class="timeline-title">
+                Treatment Progress
+            </div>
+
+            <div class="timeline-text">
+                Client reports continued participation in current
+                programming.
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-date">
+                AUGUST 18, 2026
+            </div>
+
+            <div class="timeline-title">
+                Housing Resources
+            </div>
+
+            <div class="timeline-text">
+                Housing resources provided and application plan
+                discussed.
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
 
 </div>
+
 
 
 <script>
 
 function showClient(name) {
+
     document.getElementById("dashboard").style.display = "none";
+
     document.getElementById("clientView").style.display = "block";
+
     document.getElementById("clientName").innerText = name;
-    window.scrollTo(0,0);
+
+    window.scrollTo(0, 0);
+
 }
+
 
 function showDashboard() {
+
     document.getElementById("clientView").style.display = "none";
+
     document.getElementById("dashboard").style.display = "block";
-    window.scrollTo(0,0);
+
+    window.scrollTo(0, 0);
+
 }
 
-function generateNote() {
 
-    const note = `
-        <div class="note-box">
-            <strong>DEMO CASE NOTE</strong><br><br>
+function recordContact() {
 
-            Client contacted regarding current case plan.
-            Client reports progress toward employment goal and
-            has an upcoming interview. Housing remains an identified
-            barrier. Officer provided housing resources and client
-            agreed to submit an application prior to next contact.
-            Transportation resources were also discussed.
-            Follow-up will occur at the next scheduled contact.
+    const message = document.getElementById("contactMessage");
+
+    message.innerHTML = `
+        <div style="
+            margin-top:18px;
+            padding:15px;
+            background:#eef7f0;
+            border:1px solid #b9dfc0;
+            border-radius:8px;
+            color:#216b2d;
+            font-size:13px;
+            line-height:1.5;
+        ">
+
+            <strong>CONTACT WORKFLOW COMING NEXT</strong><br><br>
+
+            Beta 0.2B will allow the caseworker to
+            record contact type, areas discussed,
+            progress, barriers, actions taken,
+            client commitments and follow-up dates.
+
         </div>
     `;
 
-    document.getElementById("noteArea").innerHTML = note;
 }
 
 </script>
