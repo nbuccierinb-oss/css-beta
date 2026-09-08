@@ -1358,13 +1358,14 @@ textarea {
             </div>
 
 
-            <button
-                class="primary-btn"
-                onclick="alert('Goal creation will be added in Beta 0.2C.')">
+           <button
+    id="addGoalButton"
+    class="primary-btn"
+    onclick="openGoalModal()">
 
-                + Add Goal
-
-            </button>
+    + Add Goal
+id="addGoalButton"
+</button>
 
         </div>
 
@@ -1792,7 +1793,254 @@ textarea {
 <!-- =========================
      RECORD CONTACT MODAL
 ========================= -->
+<!-- =========================
+     ADD GOAL MODAL
+========================= -->
 
+<div
+    id="goalModal"
+    class="modal-overlay">
+
+    <div class="modal">
+
+
+        <!-- MODAL HEADER -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>
+                    🎯 Add Goal
+                </h2>
+
+                <p>
+                    Create a clear goal and identify the next step.
+                </p>
+
+            </div>
+
+            <button
+                class="modal-close"
+                onclick="closeGoalModal()"
+                type="button">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <!-- MODAL BODY -->
+
+        <div class="modal-body">
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    GOAL INFORMATION
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="form-group">
+
+                        <label for="goalCategory">
+                            Goal Category
+                        </label>
+
+                        <select id="goalCategory">
+
+                            <option value="">
+                                Select a category
+                            </option>
+
+                            <option value="Housing">
+                                🏠 Housing
+                            </option>
+
+                            <option value="Employment">
+                                💼 Employment
+                            </option>
+
+                            <option value="Transportation">
+                                🚌 Transportation
+                            </option>
+
+                            <option value="Financial">
+                                💰 Financial
+                            </option>
+
+                            <option value="ID & Documents">
+                                📄 ID & Documents
+                            </option>
+
+                            <option value="Treatment / Support">
+                                🧠 Treatment / Support
+                            </option>
+
+                            <option value="Other">
+                                ✏️ Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DUE DATE -->
+
+                    <div class="form-group">
+
+                        <label for="goalDueDate">
+                            Due Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="goalDueDate">
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- GOAL -->
+
+                <div class="form-group">
+
+                    <label for="goalDescription">
+                        Goal
+                    </label>
+
+                    <input
+                        type="text"
+                        id="goalDescription"
+                        placeholder="What does the client want to accomplish?">
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BARRIER -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    BARRIER & ACTION PLAN
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="goalBarrier">
+                        Barrier Identified
+                    </label>
+
+                    <textarea
+                        id="goalBarrier"
+                        placeholder="What is preventing the client from reaching this goal?"></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="goalAction">
+                        First Action Step
+                    </label>
+
+                    <textarea
+                        id="goalAction"
+                        placeholder="What is the first realistic action the client will take?"></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CLIENT COMMITMENT -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    CLIENT COMMITMENT
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="goalCommitment">
+                        Client Commitment
+                    </label>
+
+                    <textarea
+                        id="goalCommitment"
+                        placeholder="What did the client agree to do?"></textarea>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- MODAL FOOTER -->
+
+        <div class="modal-footer">
+
+            <div>
+
+                <span style="
+                    color:var(--muted);
+                    font-size:12px;
+                ">
+                    Goal → Barrier → Action → Follow-Up
+                </span>
+
+            </div>
+
+
+            <div class="footer-actions">
+
+                <button
+                    class="secondary-btn"
+                    type="button"
+                    onclick="closeGoalModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    class="primary-btn"
+                    type="button"
+                    onclick="saveGoal()">
+
+                    🎯 Add Goal
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
 <div
     id="contactModal"
     class="modal-overlay">
@@ -2837,7 +3085,346 @@ function openLesson(topic) {
         message
     );
 
+} /* =========================
+   GOAL MANAGEMENT
+========================= */
+
+function openGoalModal() {
+
+    const modal = document.getElementById("goalModal");
+
+    if (!modal) {
+        alert("Goal form could not be opened.");
+        return;
+    }
+
+    modal.style.display = "flex";
+
+    const category = document.getElementById("goalCategory");
+    const description = document.getElementById("goalDescription");
+
+    if (category) category.value = "";
+    if (description) description.value = "";
+
+    document.getElementById("goalBarrier").value = "";
+    document.getElementById("goalAction").value = "";
+    document.getElementById("goalCommitment").value = "";
+    document.getElementById("goalDueDate").value = "";
+
+    setTimeout(() => {
+        if (category) category.focus();
+    }, 100);
+
 }
+
+
+function closeGoalModal() {
+
+    const modal = document.getElementById("goalModal");
+
+    if (modal) {
+        modal.style.display = "none";
+    }
+
+}
+
+
+/* =========================
+   SAVE GOAL
+========================= */
+
+function saveGoal() {
+
+    const category =
+        document.getElementById("goalCategory").value.trim();
+
+    const description =
+        document.getElementById("goalDescription").value.trim();
+
+    const barrier =
+        document.getElementById("goalBarrier").value.trim();
+
+    const action =
+        document.getElementById("goalAction").value.trim();
+
+    const commitment =
+        document.getElementById("goalCommitment").value.trim();
+
+    const dueDate =
+        document.getElementById("goalDueDate").value;
+
+
+    /* REQUIRED FIELDS */
+
+    if (!category) {
+
+        alert("Please select a goal category.");
+
+        return;
+
+    }
+
+
+    if (!description) {
+
+        alert("Please enter the client's goal.");
+
+        return;
+
+    }
+
+
+    if (!action) {
+
+        alert("Please enter the first action step.");
+
+        return;
+
+    }
+
+
+    /* CREATE GOAL OBJECT */
+
+    const newGoal = {
+
+        id: Date.now(),
+
+        client:
+            typeof currentClient !== "undefined"
+                ? currentClient
+                : "Current Client",
+
+        category: category,
+
+        description: description,
+
+        barrier: barrier || "Not identified",
+
+        action: action,
+
+        commitment: commitment || "Not documented",
+
+        dueDate: dueDate || "",
+
+        status: "In Progress",
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    /* GET EXISTING GOALS */
+
+    const savedGoals =
+        JSON.parse(
+            localStorage.getItem("cssGoals") || "[]"
+        );
+
+
+    /* SAVE NEW GOAL */
+
+    savedGoals.push(newGoal);
+
+    localStorage.setItem(
+        "cssGoals",
+        JSON.stringify(savedGoals)
+    );
+
+
+    /* ADD GOAL TO SCREEN */
+
+    renderGoalCard(newGoal);
+
+
+    /* CLOSE MODAL */
+
+    closeGoalModal();
+
+
+    /* CONFIRMATION */
+
+    alert(
+        "🎯 Goal added successfully for " +
+        newGoal.client + "."
+    );
+
+}
+
+
+/* =========================
+   RENDER GOAL CARD
+========================= */
+
+function renderGoalCard(goal) {
+
+    const button =
+        document.getElementById("addGoalButton");
+
+    if (!button) {
+        return;
+    }
+
+
+    const card =
+        document.createElement("div");
+
+    card.className = "goal-card";
+
+    card.dataset.goalId = goal.id;
+
+
+    let dueText = "No due date";
+
+    if (goal.dueDate) {
+
+        const date =
+            new Date(goal.dueDate + "T00:00:00");
+
+        dueText =
+            "Due: " +
+            date.toLocaleDateString();
+
+    }
+
+
+    card.innerHTML = `
+
+        <div class="goal-main">
+
+            <div class="goal-title">
+
+                ${escapeGoalText(goal.category)}
+                —
+                ${escapeGoalText(goal.description)}
+
+            </div>
+
+
+            <div class="goal-details">
+
+                <div class="goal-detail">
+
+                    <strong>Barrier:</strong>
+
+                    ${escapeGoalText(goal.barrier)}
+
+                </div>
+
+
+                <div class="goal-detail">
+
+                    <strong>Next Action:</strong>
+
+                    ${escapeGoalText(goal.action)}
+
+                </div>
+
+
+                <div class="goal-detail">
+
+                    <strong>Commitment:</strong>
+
+                    ${escapeGoalText(goal.commitment)}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="goal-due">
+
+            <div class="goal-status">
+
+                ${escapeGoalText(goal.status)}
+
+            </div>
+
+            <div>
+
+                ${escapeGoalText(dueText)}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    button.parentNode.insertBefore(
+        card,
+        button
+    );
+
+}
+
+
+/* =========================
+   LOAD SAVED GOALS
+========================= */
+
+function loadSavedGoals() {
+
+    const savedGoals =
+        JSON.parse(
+            localStorage.getItem("cssGoals") || "[]"
+        );
+
+
+    const client =
+        typeof currentClient !== "undefined"
+            ? currentClient
+            : "Current Client";
+
+
+    savedGoals
+
+        .filter(goal => goal.client === client)
+
+        .forEach(goal => {
+
+            renderGoalCard(goal);
+
+        });
+
+}
+
+
+/* =========================
+   SAFE TEXT DISPLAY
+========================= */
+
+function escapeGoalText(text) {
+
+    return String(text)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================
+   LOAD GOALS WHEN APP LOADS
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadSavedGoals();
+
+    }
+);
 </script>
 
 </body>
