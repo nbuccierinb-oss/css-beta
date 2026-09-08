@@ -1403,7 +1403,7 @@ textarea {
             </div>
 
 
-           <div class="quick-action">
+    <div class="quick-action" onclick="openProgressModal()">      
 
     <div class="quick-icon">
         📈
@@ -2041,6 +2041,100 @@ textarea {
     </div>
 
 </div>
+ <!-- =========================
+     UPDATE PROGRESS MODAL
+     ========================= -->
+<div id="progressModal" class="modal-overlay">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>📈 Update Progress</h2>
+
+                <p>Record what changed and identify the next step.</p>
+
+            </div>
+
+            <button
+                class="modal-close"
+                type="button"
+                onclick="closeProgressModal()">
+                ×
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="form-section">
+
+                <h3>GOAL PROGRESS</h3>
+
+                <label for="progressGoal">Goal</label>
+
+                <select id="progressGoal">
+
+                    <option value="">Select a goal</option>
+
+                </select>
+
+
+                <label for="progressStatus">Status</label>
+
+                <select id="progressStatus">
+
+                    <option value="Progressing">🟢 Progressing</option>
+
+                    <option value="Needs Attention">🟡 Needs Attention</option>
+
+                    <option value="Barrier">🔴 Barrier</option>
+
+                    <option value="Completed">🔵 Completed</option>
+
+                </select>
+
+
+                <label for="progressUpdate">What happened?</label>
+
+                <textarea
+                    id="progressUpdate"
+                    placeholder="What changed since the last update?"></textarea>
+
+
+                <label for="progressNextAction">Next Action</label>
+
+                <textarea
+                    id="progressNextAction"
+                    placeholder="What should happen next?"></textarea>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="secondary-btn"
+                type="button"
+                onclick="closeProgressModal()">
+                Cancel
+            </button>
+
+            <button
+                class="primary-btn"
+                type="button"
+                onclick="saveProgress()">
+                💾 Save Progress
+            </button>
+
+        </div>
+
+    </div>
+
+</div>   
 <div
     id="contactModal"
     class="modal-overlay">
@@ -2999,6 +3093,119 @@ document.addEventListener(
 
     }
 );
+ // UPDATE PROGRESS
+
+function openProgressModal() {
+
+    const modal = document.getElementById("progressModal");
+    const goalSelect = document.getElementById("progressGoal");
+
+    if (!modal || !goalSelect) {
+        return;
+    }
+
+    goalSelect.innerHTML = '<option value="">Select a goal</option>';
+
+    const savedGoals = JSON.parse(
+        localStorage.getItem("cssSavedGoals") || "[]"
+    );
+
+    const client = typeof currentClient !== "undefined"
+        ? currentClient
+        : "Current Client";
+
+    const clientGoals = savedGoals.filter(
+        goal => goal.Client === client
+    );
+
+    clientGoals.forEach((goal, index) => {
+
+        const option = document.createElement("option");
+
+        option.value = index;
+
+        option.textContent =
+            goal.Category + " — " + goal.Goal;
+
+        goalSelect.appendChild(option);
+
+    });
+
+    modal.style.display = "flex";
+}
+
+
+function closeProgressModal() {
+
+    const modal = document.getElementById("progressModal");
+
+    if (modal) {
+        modal.style.display = "none";
+    }
+function saveProgress() {
+
+    const goalSelect = document.getElementById("progressGoal");
+    const status = document.getElementById("progressStatus");
+    const update = document.getElementById("progressUpdate");
+    const nextAction = document.getElementById("progressNextAction");
+
+    if (!goalSelect || !status || !update || !nextAction) {
+        return;
+    }
+
+    if (goalSelect.value === "") {
+        alert("Please select a goal.");
+        return;
+    }
+
+    if (update.value.trim() === "") {
+        alert("Please enter a progress update.");
+        return;
+    }
+
+    const savedGoals = JSON.parse(
+        localStorage.getItem("cssSavedGoals") || "[]"
+    );
+
+    const client = typeof currentClient !== "undefined"
+        ? currentClient
+        : "Current Client";
+
+    const clientGoals = savedGoals.filter(
+        goal => goal.Client === client
+    );
+
+    const selectedIndex = parseInt(goalSelect.value, 10);
+    const selectedGoal = clientGoals[selectedIndex];
+
+    if (!selectedGoal) {
+        alert("Unable to find that goal.");
+        return;
+    }
+
+    const realIndex = savedGoals.indexOf(selectedGoal);
+
+    if (realIndex === -1) {
+        alert("Unable to update that goal.");
+        return;
+    }
+
+    savedGoals[realIndex].Status = status.value;
+    savedGoals[realIndex].ProgressUpdate = update.value.trim();
+    savedGoals[realIndex].NextAction = nextAction.value.trim();
+    savedGoals[realIndex].LastUpdated = new Date().toLocaleDateString();
+
+    localStorage.setItem(
+        "cssSavedGoals",
+        JSON.stringify(savedGoals)
+    );
+
+    closeProgressModal();
+
+    alert("Progress updated successfully!");
+
+}
+}   
 /* =========================
    LEARN MODE
 ========================= */
