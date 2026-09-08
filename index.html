@@ -1570,7 +1570,225 @@ textarea {
 </div>
 
 
+<!-- =========================
+     LEARN MODE
+========================= -->
 
+<section id="learnMode" style="display:none;">
+
+    <button
+        class="back-btn"
+        onclick="closeLearnMode()">
+        ← Back to Client
+    </button>
+
+    <div class="profile-header">
+
+        <div class="profile-top">
+
+            <div>
+
+                <h2>🧠 Learn Mode</h2>
+
+                <div class="profile-meta">
+                    Practical learning for case planning and client success
+                </div>
+
+            </div>
+
+            <div class="overall-status">
+
+                <div class="overall-status-label">
+                    LEARNING MODE
+                </div>
+
+                <div class="overall-status-value blue">
+                    ● Ready to Learn
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <h3>
+            What would you like to learn about?
+        </h3>
+
+        <p style="
+            color:var(--muted);
+            font-size:13px;
+            margin-bottom:20px;
+            line-height:1.5;
+        ">
+            Choose a topic to explore practical information,
+            questions to consider, and next-step strategies.
+        </p>
+
+
+        <div class="clients">
+
+
+            <!-- HOUSING -->
+
+            <div
+                class="client-card"
+                onclick="openLesson('housing')"
+                style="cursor:pointer;">
+
+                <div style="font-size:34px; margin-bottom:12px;">
+                    🏠
+                </div>
+
+                <div class="client-name">
+                    Housing Stability
+                </div>
+
+                <p style="
+                    color:var(--muted);
+                    font-size:12px;
+                    margin-top:8px;
+                    line-height:1.4;
+                ">
+                    Understand housing barriers and identify
+                    realistic next steps.
+                </p>
+
+            </div>
+
+
+            <!-- EMPLOYMENT -->
+
+            <div
+                class="client-card"
+                onclick="openLesson('employment')"
+                style="cursor:pointer;">
+
+                <div style="font-size:34px; margin-bottom:12px;">
+                    💼
+                </div>
+
+                <div class="client-name">
+                    Employment
+                </div>
+
+                <p style="
+                    color:var(--muted);
+                    font-size:12px;
+                    margin-top:8px;
+                    line-height:1.4;
+                ">
+                    Explore employment barriers, preparation,
+                    and realistic job-search strategies.
+                </p>
+
+            </div>
+
+
+            <!-- TRANSPORTATION -->
+
+            <div
+                class="client-card"
+                onclick="openLesson('transportation')"
+                style="cursor:pointer;">
+
+                <div style="font-size:34px; margin-bottom:12px;">
+                    🚌
+                </div>
+
+                <div class="client-name">
+                    Transportation
+                </div>
+
+                <p style="
+                    color:var(--muted);
+                    font-size:12px;
+                    margin-top:8px;
+                    line-height:1.4;
+                ">
+                    Identify transportation barriers and
+                    possible solutions.
+                </p>
+
+            </div>
+
+
+            <!-- ID -->
+
+            <div
+                class="client-card"
+                onclick="openLesson('documents')"
+                style="cursor:pointer;">
+
+                <div style="font-size:34px; margin-bottom:12px;">
+                    📄
+                </div>
+
+                <div class="client-name">
+                    ID & Documents
+                </div>
+
+                <p style="
+                    color:var(--muted);
+                    font-size:12px;
+                    margin-top:8px;
+                    line-height:1.4;
+                ">
+                    Learn how missing identification or documents
+                    can create barriers to progress.
+                </p>
+
+            </div>
+
+
+            <!-- FINANCIAL -->
+
+            <div
+                class="client-card"
+                onclick="openLesson('financial')"
+                style="cursor:pointer;">
+
+                <div style="font-size:34px; margin-bottom:12px;">
+                    💰
+                </div>
+
+                <div class="client-name">
+                    Financial Stability
+                </div>
+
+                <p style="
+                    color:var(--muted);
+                    font-size:12px;
+                    margin-top:8px;
+                    line-height:1.4;
+                ">
+                    Explore financial barriers, budgeting,
+                    and practical planning.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="demo-note">
+
+        <strong>LEARN MODE • POC / DEMO:</strong>
+
+        This learning content is designed to support
+        case planning and discussion. It does not replace
+        professional judgment or individualized assessment.
+
+    </div>
+
+</section>
 <!-- =========================
      RECORD CONTACT MODAL
 ========================= -->
@@ -2533,7 +2751,93 @@ document.addEventListener(
 
     }
 );
+/* =========================
+   LEARN MODE
+========================= */
 
+function openLearnMode() {
+
+    document.getElementById("clientView").style.display = "none";
+
+    document.getElementById("learnMode").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+}
+
+
+function closeLearnMode() {
+
+    document.getElementById("learnMode").style.display = "none";
+
+    document.getElementById("clientView").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+}
+
+
+/* =========================
+   LEARN MODE LESSONS
+========================= */
+
+function openLesson(topic) {
+
+    let lessonTitle = "";
+    let message = "";
+
+    if (topic === "housing") {
+
+        lessonTitle = "🏠 Housing Stability";
+
+        message =
+            "Housing Stability lesson content will be added next.";
+
+    }
+
+    else if (topic === "employment") {
+
+        lessonTitle = "💼 Employment";
+
+        message =
+            "Employment lesson content will be added next.";
+
+    }
+
+    else if (topic === "transportation") {
+
+        lessonTitle = "🚌 Transportation";
+
+        message =
+            "Transportation lesson content will be added next.";
+
+    }
+
+    else if (topic === "documents") {
+
+        lessonTitle = "📄 ID & Documents";
+
+        message =
+            "ID & Documents lesson content will be added next.";
+
+    }
+
+    else if (topic === "financial") {
+
+        lessonTitle = "💰 Financial Stability";
+
+        message =
+            "Financial Stability lesson content will be added next.";
+
+    }
+
+    alert(
+        lessonTitle +
+        "\n\n" +
+        message
+    );
+
+}
 </script>
 
 </body>
