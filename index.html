@@ -3464,7 +3464,14 @@ function saveGoal() {
 ========================= */
 
 function renderGoalCard(goal) {
+   
+    const client = typeof currentClient !== "undefined"
+        ? currentClient
+        : "Current Client";
 
+    if (goal.Client !== client) {
+        return;
+    }
     const button =
         document.getElementById("addGoalButton");
 
