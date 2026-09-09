@@ -3605,13 +3605,7 @@ function renderGoalCard(goal) {
     `;
 
 
-   const firstGoal = button.parentNode.querySelector(".goal");
-
-if (firstGoal) {
-    button.parentNode.insertBefore(card, firstGoal);
-} else {
-    button.parentNode.insertBefore(card, button);
-} 
+ button.parentNode.insertBefore(card, button); 
 
 }
 
