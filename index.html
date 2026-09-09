@@ -2624,7 +2624,7 @@ function showClient(name) {
 
     document.getElementById("modalClientName").innerText =
         name + " • Demo Client";
-
+renderDemoTimeline();
     window.scrollTo(0, 0);
 
 }
@@ -3420,7 +3420,39 @@ function saveGoal() {
 
     };
 
+/* TEMPORARY DEMO TIMELINE */
 
+let demoTimelineEvents = [];
+   function renderDemoTimeline() {
+    const timeline = document.getElementById("timelineContainer");
+
+    if (!timeline) {
+        return;
+    }
+
+    // Remove temporary demo entries before rebuilding
+    timeline.querySelectorAll(".demo-timeline-item").forEach(item => {
+        item.remove();
+    });
+
+    const clientEvents = demoTimelineEvents.filter(
+        event => event.client === currentClient
+    );
+
+    clientEvents.reverse().forEach(event => {
+        const item = document.createElement("div");
+
+        item.className = "timeline-item demo-timeline-item";
+
+        item.innerHTML = `
+            <div class="timeline-date">${escapeGoalText(event.date)}</div>
+            <div class="timeline-title">${escapeGoalText(event.title)}</div>
+            <div class="timeline-text">${escapeGoalText(event.text)}</div>
+        `;
+
+        timeline.insertBefore(item, timeline.firstChild);
+    });
+} 
     /* GET EXISTING GOALS */
 
     const savedGoals =
@@ -3441,12 +3473,18 @@ function saveGoal() {
 
     /* ADD GOAL TO SCREEN */
 
-    renderGoalCard(newGoal);
+   renderGoalCard(newGoal);
 
+demoTimelineEvents.push({
+    client: newGoal.client,
+    date: new Date().toLocaleDateString(),
+    title: "New Goal Added",
+    text: `${newGoal.category}: ${newGoal.description}`
+});
 
-    /* CLOSE MODAL */
+renderDemoTimeline();
 
-    closeGoalModal();
+closeGoalModal();
 
 
     /* CONFIRMATION */
@@ -3567,9 +3605,13 @@ function renderGoalCard(goal) {
     `;
 
 
-    button.parentNode.insertBefore(
-        card,
-        button
+   const firstGoal = button.parentNode.querySelector(".goal-card");
+
+if (firstGoal) {
+    button.parentNode.insertBefore(card, firstGoal);
+} else {
+    button.parentNode.insertBefore(card, button);
+} 
     );
 
 }
