@@ -2494,7 +2494,17 @@ textarea {
 
                 </div>
 
+<div class="form-group">
 
+    <label for="appointmentNotes">
+        Additional Appointment Notes
+    </label>
+
+    <textarea
+        id="appointmentNotes"
+        placeholder="Add any additional details from this appointment that should be included in the case note."></textarea>
+
+</div>
                 <div class="form-group">
 
                     <label for="followUp">
@@ -2746,10 +2756,13 @@ function generateCaseNote() {
         document.getElementById("commitment").value.trim();
 
     const nextStep =
-        document.getElementById("nextStep").value.trim();
+    document.getElementById("nextStep").value.trim();
 
-    const followUp =
-        document.getElementById("followUp").value;
+const appointmentNotes =
+    document.getElementById("appointmentNotes").value.trim();
+
+const followUp =
+    document.getElementById("followUp").value;
 
 
     /* VALIDATION */
@@ -2821,12 +2834,22 @@ function generateCaseNote() {
 
 
     note +=
-        "Overall client progress was assessed as " +
-        progress.toLowerCase() +
+    "Overall client progress was assessed as " +
+    progress.toLowerCase() +
+    ". ";
+
+
+if (appointmentNotes) {
+
+    note +=
+        "Additional appointment details: " +
+        appointmentNotes +
         ". ";
 
+}
 
-    if (barrier) {
+
+if (barrier) {
 
         note +=
             "A current barrier identified was " +
