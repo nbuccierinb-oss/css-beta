@@ -3797,13 +3797,14 @@ function closeProgressModal() {
         return;
     }
 
-   savedGoals[realIndex].status = status.value;
-savedGoals[realIndex].progressUpdate = update.value.trim();
-savedGoals[realIndex].nextAction = nextAction.value.trim();
-savedGoals[realIndex].lastUpdated =
-    new Date().toISOString();
+      savedGoals[realIndex].status = status.value;
+    savedGoals[realIndex].progressUpdate = update.value.trim();
+    savedGoals[realIndex].nextAction = nextAction.value.trim();
+    savedGoals[realIndex].lastUpdated =
+        new Date().toISOString();
 
-    localStorage.getItem("cssGoals")
+    localStorage.setItem(
+        "cssGoals",
         JSON.stringify(savedGoals)
     );
 
@@ -3811,7 +3812,6 @@ savedGoals[realIndex].lastUpdated =
 
     alert("Progress updated successfully!");
 
-}
 }   
 /* =========================
    LEARN MODE
