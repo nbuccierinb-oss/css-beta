@@ -3185,7 +3185,101 @@ function changeCalendarMonth(direction) {
     renderCalendar();
 
 }
+function openOutlookCalendarEvent(eventType, dateKey) {
 
+    const client = currentClient || "Client";
+
+    const [year, month, day] = dateKey.split("-").map(Number);
+
+    let subject = "";
+    let body = "";
+    let location = "";
+    let startHour = 9;
+    let startMinute = 0;
+    let endHour = 9;
+    let endMinute = 30;
+
+    if (eventType === "office") {
+
+        subject = "Office Visit — " + client;
+        body = "CSS Client Calendar\nOffice Visit\nClient: " + client;
+        startHour = 9;
+        endHour = 9;
+        endMinute = 30;
+
+    } else if (eventType === "urine") {
+
+        subject = "Required Urine Test — " + client;
+        body = "CSS Client Calendar\nRequired Urine Test\nClient: " + client;
+        startHour = 8;
+        startMinute = 30;
+        endHour = 16;
+        endMinute = 30;
+
+    } else if (eventType === "court") {
+
+        subject = "Court Date — " + client;
+        body = "CSS Client Calendar\nCourt Date\nClient: " + client;
+        startHour = 9;
+        endHour = 10;
+
+    } else if (eventType === "home") {
+
+        subject = "Home Contact — " + client;
+        body = "CSS Client Calendar\nHome Contact\nClient: " + client;
+        startHour = 9;
+        endHour = 9;
+        endMinute = 30;
+
+    } else {
+
+        return;
+    }
+
+    const startDate = new Date(
+        year,
+        month - 1,
+        day,
+        startHour,
+        startMinute
+    );
+
+    const endDate = new Date(
+        year,
+        month - 1,
+        day,
+        endHour,
+        endMinute
+    );
+
+    const formatOutlookDate = function(date) {
+
+        return date.getFullYear() +
+            "-" +
+            String(date.getMonth() + 1).padStart(2, "0") +
+            "-" +
+            String(date.getDate()).padStart(2, "0") +
+            "T" +
+            String(date.getHours()).padStart(2, "0") +
+            ":" +
+            String(date.getMinutes()).padStart(2, "0") +
+            ":00";
+
+    };
+
+    const outlookUrl =
+        "https://outlook.office.com/calendar/0/deeplink/compose" +
+        "?path=%2Fcalendar%2Faction%2Fcompose" +
+        "&rru=addevent" +
+        "&startdt=" + encodeURIComponent(formatOutlookDate(startDate)) +
+        "&enddt=" + encodeURIComponent(formatOutlookDate(endDate)) +
+        "&subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body) +
+        "&location=" + encodeURIComponent(location);
+
+    window.open(outlookUrl, "_blank");
+
+}
 
 function goToCalendarToday() {
 
