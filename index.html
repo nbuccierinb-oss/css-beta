@@ -962,6 +962,10 @@ textarea {
     background: var(--orange);
 }
 .calendar-action-panel {
+    .calendar-action-panel.court-report {
+    border-left: 4px solid var(--orange);
+    background: #fff7ed;
+}
     margin-top: 16px;
     padding: 16px;
     border: 1px solid var(--border);
@@ -3248,28 +3252,48 @@ function cycleCalendarDate(dateKey) {
 
     if (actionPanel && actionContent) {
 
-        if (status.label) {
+    if (status.key === "court-report") {
 
-            actionContent.innerHTML =
-                "<strong>" +
-                status.icon +
-                " " +
-                status.label +
-                "</strong><br>" +
-                dateKey;
+    actionContent.innerHTML =
+        "<strong>🟠 Court Report Needed</strong>" +
+        "<br>" +
+        "<span>Selected date: " +
+        dateKey +
+        "</span>" +
+        "<div style='margin-top:12px;'>" +
+        "<label><input type='checkbox'> Review case plan</label><br>" +
+        "<label><input type='checkbox'> Review goals & progress</label><br>" +
+        "<label><input type='checkbox'> Review barriers</label><br>" +
+        "<label><input type='checkbox'> Review compliance</label><br>" +
+        "<label><input type='checkbox'> Draft court report</label><br>" +
+        "<label><input type='checkbox'> Submit / route report</label>" +
+        "</div>";
 
-        } else {
+} else if (status.label) {
 
-            actionContent.innerText =
-                "Select a calendar date to view its action.";
+    actionContent.innerHTML =
+        "<strong>" +
+        status.icon +
+        " " +
+        status.label +
+        "</strong>" +
+        "<br>" +
+        "<span>Selected date: " +
+        dateKey +
+        "</span>";
 
-        }
+} else {
+
+    actionContent.innerHTML =
+        "Select a calendar date to view its action.";
+
+} 
 
     }
 
     renderCalendar();
-}
 
+}
 
 function changeCalendarMonth(direction) {
 
