@@ -961,7 +961,22 @@ textarea {
 .calendar-dot-orange {
     background: var(--orange);
 }
-    
+.calendar-action-panel {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+}
+
+.calendar-action-panel h3 {
+    margin: 0 0 8px 0;
+}
+
+#calendarActionContent {
+    font-size: 14px;
+    color: #666;
+}    
 @media (max-width: 600px) {
 
     .calendar-header {
@@ -1850,7 +1865,16 @@ textarea {
     </div>
 
 </div>
+<div class="calendar-action-panel" id="calendarActionPanel">
 
+    <h3>📋 Calendar Action</h3>
+
+    <div id="calendarActionContent">
+        Select a calendar date to view its action.
+    </div>
+
+</div>
+    
     <!-- =========================
          TIMELINE
     ========================= -->
@@ -3202,23 +3226,48 @@ function cycleCalendarDate(dateKey) {
     const clientStates =
         getClientCalendarStates();
 
-
     const currentState =
         clientStates[dateKey] || 0;
-
 
     const nextState =
         (
             currentState + 1
         ) % CALENDAR_STATUSES.length;
 
-
     clientStates[dateKey] =
         nextState;
 
+    const status =
+        CALENDAR_STATUSES[nextState];
+
+    const actionPanel =
+        document.getElementById("calendarActionPanel");
+
+    const actionContent =
+        document.getElementById("calendarActionContent");
+
+    if (actionPanel && actionContent) {
+
+        if (status.label) {
+
+            actionContent.innerHTML =
+                "<strong>" +
+                status.icon +
+                " " +
+                status.label +
+                "</strong><br>" +
+                dateKey;
+
+        } else {
+
+            actionContent.innerText =
+                "Select a calendar date to view its action.";
+
+        }
+
+    }
 
     renderCalendar();
-
 }
 
 
@@ -4388,7 +4437,40 @@ function loadSavedGoals() {
         });
 
 }
+/* TEMPORARY DEMO TIMELINE */
 
+let demoTimelineEvents = [];
+
+function renderDemoTimeline() {
+    const timeline = document.getElementById("timelineContainer");
+
+    if (!timeline) {
+        return;
+    }
+
+    // Remove temporary demo entries before rebuilding
+    timeline.querySelectorAll(".demo-timeline-item").forEach(item => {
+        item.remove();
+    });
+
+    const clientEvents = demoTimelineEvents.filter(
+        event => event.client === currentClient
+    );
+
+    clientEvents.reverse().forEach(event => {
+        const item = document.createElement("div");
+
+        item.className = "timeline-item demo-timeline-item";
+
+        item.innerHTML = `
+            <div class="timeline-date">${escapeGoalText(event.date)}</div>
+            <div class="timeline-title">${escapeGoalText(event.title)}</div>
+            <div class="timeline-text">${escapeGoalText(event.text)}</div>
+        `;
+
+        timeline.insertBefore(item, timeline.firstChild);
+    });
+}
 
 /* =========================
    SAFE TEXT DISPLAY
