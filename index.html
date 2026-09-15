@@ -908,7 +908,15 @@ textarea {
 .calendar-day.home .calendar-status {
     color: var(--green);
 }
+/* COURT REPORT */
+.calendar-day.court-report {
+    background: #fff7ed;
+    border-color: var(--orange);
+}
 
+.calendar-day.court-report .calendar-status {
+    color: var(--orange);
+}
 /* CALENDAR LEGEND */
 
 .calendar-legend {
@@ -950,7 +958,10 @@ textarea {
 .calendar-dot-green {
     background: var(--green);
 }
-
+.calendar-dot-orange {
+    background: var(--orange);
+}
+    
 @media (max-width: 600px) {
 
     .calendar-header {
@@ -1832,6 +1843,10 @@ textarea {
             Home Contact
         </div>
 
+        <div class="calendar-legend-item">
+    <span class="calendar-legend-dot calendar-dot-orange"></span>
+    Court Report
+</div>
     </div>
 
 </div>
@@ -2992,8 +3007,21 @@ const CALENDAR_STATUSES = [
         label: "Home Contact",
         icon: "🟢",
         className: "home"
+        {
+        key: "home",
+        label: "Home Contact",
+        icon: "🟢",
+        className: "home"
+    },
+    {
+        key: "court-report",
+        label: "Court Report",
+        icon: "🟠",
+        className: "court-report"
     }
 ];
+
+
 
 
 function getClientCalendarStates() {
