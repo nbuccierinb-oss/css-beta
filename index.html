@@ -3261,14 +3261,26 @@ function cycleCalendarDate(dateKey) {
         dateKey +
         "</span>" +
         "<div style='margin-top:12px;'>" +
-        "<label><input type='checkbox'> Review case plan</label><br>" +
-        "<label><input type='checkbox'> Review goals & progress</label><br>" +
-        "<label><input type='checkbox'> Review barriers</label><br>" +
-        "<label><input type='checkbox'> Review compliance</label><br>" +
-        "<label><input type='checkbox'> Draft court report</label><br>" +
-        "<label><input type='checkbox'> Submit / route report</label>" +
+        "<label><input type="checkbox" id="courtReportReviewCasePlan"> Review case plan</label><br>
+         <label><input type="checkbox" id="courtReportReviewGoals"> Review goals & progress</label><br>
+         <label><input type="checkbox" id="courtReportReviewBarriers"> Review barriers</label><br>
+         <label><input type="checkbox" id="courtReportReviewCompliance"> Review compliance</label><br>
+         <label><input type="checkbox" id="courtReportDraft"> Draft court report</label><br>
+         <label><input type="checkbox" id="courtReportSubmit"> Submit / route report</label>
         "</div>";
+const courtReportCheckboxes = actionContent.querySelectorAll(
+    'input[type="checkbox"]'
+);
 
+courtReportCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+        console.log(
+            "Court Report checklist changed:",
+            checkbox.id,
+            checkbox.checked
+        );
+    });
+});
 } else if (status.label) {
 
     actionContent.innerHTML =
