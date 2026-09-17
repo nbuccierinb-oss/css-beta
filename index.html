@@ -3268,10 +3268,27 @@ function cycleCalendarDate(dateKey) {
         '<label><input type="checkbox" id="courtReportDraft"> Draft court report</label><br>' +
         '<label><input type="checkbox" id="courtReportSubmit"> Submit / route report</label>' +
         "</div>";
+        const savedCourtReports = JSON.parse(
+    localStorage.getItem("cssCourtReportChecklists") || "[]"
+);
+
+const clientName = typeof currentClient !== "undefined"
+    ? currentClient
+    : "Current Client";
+
+const savedCourtReport = savedCourtReports.find(
+    (report) =>
+        report.client === clientName &&
+        report.reportDate === dateKey
+);
 const courtReportCheckboxes = actionContent.querySelectorAll(
     'input[type="checkbox"]'
 );
-
+if (savedCourtReport && savedCourtReport.checklist) {
+    courtReportCheckboxes.forEach((checkbox) => {
+        checkbox.checked = !!savedCourtReport.checklist[checkbox.id];
+    });
+}
 courtReportCheckboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
         const savedCourtReports = JSON.parse(
