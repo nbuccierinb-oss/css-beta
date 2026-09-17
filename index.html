@@ -3508,7 +3508,155 @@ function showClient(name) {
     window.scrollTo(0, 0);
 
 }
+// REAL showClient function above
 
+function openClientApp(name) {
+    const existingView = document.getElementById("clientAppView");
+    if (existingView) {
+        existingView.remove();
+    }
+
+    const appView = document.createElement("div");
+    appView.id = "clientAppView";
+    appView.style.cssText = `
+        position: fixed;
+        inset: 0;
+        background: #f4f7fb;
+        z-index: 9999;
+        overflow-y: auto;
+        padding: 30px;
+        font-family: Arial, sans-serif;
+    `;
+
+    appView.innerHTML = `
+        <div style="max-width:1000px;margin:0 auto;">
+
+            <div style="
+                background:#1f3655;
+                color:white;
+                padding:20px;
+                border-radius:10px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                margin-bottom:20px;
+            ">
+                <div>
+                    <div style="font-size:12px;opacity:.8;">
+                        CLIENT APP — READ ONLY
+                    </div>
+                    <h2 style="margin:5px 0 0;">
+                        ${name}
+                    </h2>
+                </div>
+
+                <button
+                    type="button"
+                    onclick="document.getElementById('clientAppView').remove()"
+                    style="
+                        background:white;
+                        color:#1f3655;
+                        border:0;
+                        border-radius:6px;
+                        padding:10px 16px;
+                        font-weight:bold;
+                        cursor:pointer;
+                    "
+                >
+                    ← Back to Caseworker
+                </button>
+            </div>
+
+            <div style="
+                background:white;
+                border-radius:10px;
+                padding:20px;
+                margin-bottom:16px;
+                box-shadow:0 2px 6px rgba(0,0,0,.08);
+            ">
+                <h3 style="margin-top:0;">📅 Client Calendar</h3>
+                <p style="color:#666;">
+                    Client-facing calendar information will appear here.
+                </p>
+            </div>
+
+            <div style="
+                background:white;
+                border-radius:10px;
+                padding:20px;
+                margin-bottom:16px;
+                box-shadow:0 2px 6px rgba(0,0,0,.08);
+            ">
+                <h3 style="margin-top:0;">🔔 Upcoming Reminders</h3>
+                <p style="color:#666;">
+                    Reminders scheduled to appear in the client app will appear here.
+                </p>
+            </div>
+
+            <div style="
+                display:grid;
+                grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+                gap:16px;
+                margin-bottom:16px;
+            ">
+
+                <div style="
+                    background:white;
+                    border-radius:10px;
+                    padding:20px;
+                    box-shadow:0 2px 6px rgba(0,0,0,.08);
+                ">
+                    <h3 style="margin-top:0;">📈 App Usage</h3>
+                    <p style="color:#666;">
+                        Client activity and usage information will appear here.
+                    </p>
+                </div>
+
+                <div style="
+                    background:white;
+                    border-radius:10px;
+                    padding:20px;
+                    box-shadow:0 2px 6px rgba(0,0,0,.08);
+                ">
+                    <h3 style="margin-top:0;">🔐 Login Activity</h3>
+                    <p style="color:#666;">
+                        Client login/activity information will appear here.
+                    </p>
+                </div>
+
+            </div>
+
+            <div style="
+                background:white;
+                border-radius:10px;
+                padding:20px;
+                margin-bottom:16px;
+                box-shadow:0 2px 6px rgba(0,0,0,.08);
+            ">
+                <h3 style="margin-top:0;">🧩 Current Phase</h3>
+                <p style="color:#666;">
+                    Client Phase information will appear here.
+                </p>
+            </div>
+
+            <div style="
+                background:white;
+                border-radius:10px;
+                padding:20px;
+                box-shadow:0 2px 6px rgba(0,0,0,.08);
+            ">
+                <h3 style="margin-top:0;">🎯 Goals & Progress</h3>
+                <p style="color:#666;">
+                    Client goals and progress information will appear here.
+                </p>
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(appView);
+}
+}
 
 function showDashboard() {
 
