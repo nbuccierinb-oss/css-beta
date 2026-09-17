@@ -3274,10 +3274,50 @@ const courtReportCheckboxes = actionContent.querySelectorAll(
 
 courtReportCheckboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
+        const savedCourtReports = JSON.parse(
+            localStorage.getItem("cssCourtReportChecklists") || "[]"
+        );
+
+        const clientName = typeof currentClient !== "undefined"
+            ? currentClient
+            : "Current Client";
+
+        const existingIndex = savedCourtReports.findIndex(
+            (report) =>
+                report.client === clientName &&
+                report.reportDate === dateKey
+        );
+
+        const checklist = {};
+
+        courtReportCheckboxes.forEach((item) => {
+            checklist[item.id] = item.checked;
+        });
+
+        const reportData = {
+            id: existingIndex >= 0
+                ? savedCourtReports[existingIndex].id
+                : Date.now(),
+            client: clientName,
+            reportDate: dateKey,
+            checklist: checklist,
+            updatedAt: new Date().toISOString()
+        };
+
+        if (existingIndex >= 0) {
+            savedCourtReports[existingIndex] = reportData;
+        } else {
+            savedCourtReports.push(reportData);
+        }
+
+        localStorage.setItem(
+            "cssCourtReportChecklists",
+            JSON.stringify(savedCourtReports)
+        );
+
         console.log(
-            "Court Report checklist changed:",
-            checkbox.id,
-            checkbox.checked
+            "Court Report checklist saved:",
+            reportData
         );
     });
 });
