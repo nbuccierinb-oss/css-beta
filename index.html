@@ -3655,7 +3655,12 @@ function openClientApp(name) {
     `;
 
     document.body.appendChild(appView);
-    document.getElementById("clientPhase").innerText = "PHASE 2 - ENGAGEMENT";
+   const selectedClientCard = Array.from(document.querySelectorAll(".client-card"))
+    .find(card => card.querySelector(".client-name")?.textContent.trim() === currentClient);
+
+const clientPhase = selectedClientCard?.querySelector(".phase")?.textContent.trim();
+
+document.getElementById("clientPhase").innerText = clientPhase || "Client phase information unavailable.";
 }
 
 function showDashboard() {
