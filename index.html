@@ -1341,7 +1341,7 @@ textarea {
 
             <button
                 class="view-btn"
-                onclick="showClient('Sarah T.')">
+               onclick="showClient('Sarah T.', this.closest('.client-card'))">
 
                 View Client
 
@@ -3009,6 +3009,7 @@ textarea {
 ========================= */
 
 let currentClient = "Michael R.";
+    let selectedClientCard = null;
 let calendarViewDate = new Date();
 
 let calendarStatesByClient = {};
@@ -3493,10 +3494,11 @@ function goToCalendarToday() {
    DASHBOARD / CLIENT
 ========================= */
 
-function showClient(name) {
+function showClient(name, card) {
 
     currentClient = name;
-
+     selectedClientCard = card;
+    
     document.getElementById("dashboard").style.display = "none";
 
     document.getElementById("clientView").style.display = "block";
@@ -3659,8 +3661,7 @@ function openClientApp(name) {
     `;
 
     document.body.appendChild(appView);
-   const selectedClientCard = Array.from(document.querySelectorAll(".client-card"))
-    .find(card => card.querySelector(".client-name")?.textContent.trim() === currentClient);
+  
 
 const clientPhase = selectedClientCard?.querySelector(".phase")?.textContent.trim();
 
