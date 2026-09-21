@@ -3498,7 +3498,7 @@ function showClient(name) {
     document.getElementById("clientView").style.display = "block";
 
     document.getElementById("clientName").innerText = name;
-
+    document.getElementById("clientPhase").innerText = "PHASE 2 — ENGAGEMENT";
     document.getElementById("modalClientName").innerText =
         name + " • Demo Client";
    
@@ -3634,9 +3634,9 @@ function openClientApp(name) {
                 box-shadow:0 2px 6px rgba(0,0,0,.08);
             ">
                 <h3 style="margin-top:0;">🧩 Current Phase</h3>
-                <p style="color:#666;">
-                    Client Phase information will appear here.
-                </p>
+                <p id="clientPhase" style="color:#666;">
+    Client Phase information will appear here.
+</p>
             </div>
 
             <div style="
