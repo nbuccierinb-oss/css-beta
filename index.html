@@ -4472,7 +4472,17 @@ function openLesson(topic) {
     document.body.appendChild(lessonOverlay);
 }
 
+let housingLearnResponses = {};
 
+function recordHousingAnswer(questionNumber) {
+    const selected = document.querySelector(
+        'input[name="housingQuestion' + questionNumber + '"]:checked'
+    );
+
+    if (selected) {
+        housingLearnResponses[questionNumber] = selected.value;
+    }
+}
 function learnQuestionOneNext() {
 
     const selected = document.querySelector(
@@ -4582,7 +4592,7 @@ function learnQuestionOneNext() {
     `;
 
     nextButton.textContent = "Next →";
-    nextButton.setAttribute("onclick", "learnQuestionTwoNext()");
+  nextButton.setAttribute("onclick", "recordHousingAnswer(1); learnQuestionTwoNext()"); 
 }
 
 
@@ -4695,7 +4705,7 @@ function learnQuestionTwoNext() {
     `;
 
     nextButton.textContent = "Next →";
-    nextButton.setAttribute("onclick", "learnQuestionThreeNext()");
+   nextButton.setAttribute("onclick", "recordHousingAnswer(2); learnQuestionThreeNext()");
 }
 
 
@@ -4808,7 +4818,7 @@ function learnQuestionThreeNext() {
     `;
 
     nextButton.textContent = "Next →";
-    nextButton.setAttribute("onclick", "learnQuestionFourNext()");
+   nextButton.setAttribute("onclick", "recordHousingAnswer(3); learnQuestionFourNext()");
 }
 
 
@@ -4937,7 +4947,7 @@ function learnQuestionFourNext() {
     `;
 
     nextButton.textContent = "Finish";
-    nextButton.setAttribute("onclick", "finishHousingLearnMode()");
+   nextButton.setAttribute("onclick", "recordHousingAnswer(4); finishHousingLearnMode()");
 }
 
 
@@ -4951,7 +4961,7 @@ function finishHousingLearnMode() {
         alert("Please select an answer before finishing.");
         return;
     }
-
+recordHousingAnswer(5);
     alert(
         "Housing Stability Learn Mode complete for this demo.\n\n" +
         "Your responses can help guide the next conversation with your caseworker."
