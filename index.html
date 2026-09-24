@@ -4597,9 +4597,122 @@ function learnQuestionTwoNext() {
         return;
     }
 
+    const overlay = document.getElementById("learnQuestionOverlay");
+
+    const questionNumber = overlay.querySelector(".modal-header p");
+    const questionTitle = overlay.querySelector(".modal-body h3");
+    const sectionTitle = overlay.querySelector(".form-section-title");
+    const answerContainer = overlay.querySelector(".form-section > div:last-child");
+    const nextButton = overlay.querySelector(".primary-btn");
+
+    questionNumber.textContent = "Learn Mode • Question 3 of 5";
+
+    sectionTitle.textContent = "HOUSING STABILITY";
+
+    questionTitle.textContent =
+        "What is the biggest thing that could make it difficult for you to maintain your current housing?";
+
+    answerContainer.innerHTML = `
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion3"
+                value="rent"
+                style="width:auto; margin-right:8px;">
+            Paying rent or other housing costs
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion3"
+                value="utilities"
+                style="width:auto; margin-right:8px;">
+            Keeping up with utilities or other household bills
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion3"
+                value="roommates"
+                style="width:auto; margin-right:8px;">
+            Problems with roommates, family, or others in the home
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion3"
+                value="housing-condition"
+                style="width:auto; margin-right:8px;">
+            Problems with the condition or safety of my housing
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion3"
+                value="other"
+                style="width:auto; margin-right:8px;">
+            Something else or I'm not sure
+        </label>
+    `;
+
+    nextButton.textContent = "Next →";
+    nextButton.setAttribute("onclick", "learnQuestionThreeNext()");
+}
+
+
+function learnQuestionThreeNext() {
+
+    const selected = document.querySelector(
+        'input[name="housingQuestion3"]:checked'
+    );
+
+    if (!selected) {
+        alert("Please select an answer before continuing.");
+        return;
+    }
+
     alert(
-        "Question 2 answer recorded for this demo.\n\n" +
-        "Question 3 will be added next."
+        "Question 3 answer recorded for this demo.\n\n" +
+        "Question 4 will be added next."
     );
 }
 
