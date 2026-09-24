@@ -4823,9 +4823,138 @@ function learnQuestionFourNext() {
         return;
     }
 
+    const overlay = document.getElementById("learnQuestionOverlay");
+
+    const questionNumber = overlay.querySelector(".modal-header p");
+    const questionTitle = overlay.querySelector(".modal-body h3");
+    const sectionTitle = overlay.querySelector(".form-section-title");
+    const answerContainer = overlay.querySelector(".form-section > div:last-child");
+    const nextButton = overlay.querySelector(".primary-btn");
+
+    questionNumber.textContent = "Learn Mode • Question 5 of 5";
+
+    sectionTitle.textContent = "HOUSING STABILITY";
+
+    questionTitle.textContent =
+        "What would you most like help with regarding your housing situation right now?";
+
+    answerContainer.innerHTML = `
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion5"
+                value="finding-housing"
+                style="width:auto; margin-right:8px;">
+            Finding affordable housing
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion5"
+                value="keeping-housing"
+                style="width:auto; margin-right:8px;">
+            Keeping my current housing
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion5"
+                value="housing-costs"
+                style="width:auto; margin-right:8px;">
+            Paying rent or housing costs
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion5"
+                value="utilities"
+                style="width:auto; margin-right:8px;">
+            Utilities or household expenses
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion5"
+                value="resources"
+                style="width:auto; margin-right:8px;">
+            Finding housing resources or assistance
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion5"
+                value="not-sure"
+                style="width:auto; margin-right:8px;">
+            I'm not sure what I need help with yet
+        </label>
+    `;
+
+    nextButton.textContent = "Finish";
+    nextButton.setAttribute("onclick", "finishHousingLearnMode()");
+}
+
+
+function finishHousingLearnMode() {
+
+    const selected = document.querySelector(
+        'input[name="housingQuestion5"]:checked'
+    );
+
+    if (!selected) {
+        alert("Please select an answer before finishing.");
+        return;
+    }
+
     alert(
-        "Question 4 answer recorded for this demo.\n\n" +
-        "Question 5 will be added next."
+        "Housing Stability Learn Mode complete for this demo.\n\n" +
+        "Your responses can help guide the next conversation with your caseworker."
     );
 }
 
