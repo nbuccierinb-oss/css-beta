@@ -4962,10 +4962,52 @@ function finishHousingLearnMode() {
         return;
     }
 recordHousingAnswer(5);
-    alert(
-        "Housing Stability Learn Mode complete for this demo.\n\n" +
-        "Your responses can help guide the next conversation with your caseworker."
-    );
+   const overlay = document.getElementById("learnQuestionOverlay");
+const questionNumber = overlay.querySelector(".modal-header p");
+const body = overlay.querySelector(".modal-body");
+
+questionNumber.textContent = "Learn Mode • Results";
+
+body.innerHTML = `
+    <div class="form-section-title">HOUSING STABILITY</div>
+
+    <h3>Client Responses</h3>
+
+    <div style="display:grid; gap:10px; margin-top:15px;">
+        <div>
+            <strong>Question 1</strong><br>
+            ${housingLearnResponses[1] || "No response recorded"}
+        </div>
+
+        <div>
+            <strong>Question 2</strong><br>
+            ${housingLearnResponses[2] || "No response recorded"}
+        </div>
+
+        <div>
+            <strong>Question 3</strong><br>
+            ${housingLearnResponses[3] || "No response recorded"}
+        </div>
+
+        <div>
+            <strong>Question 4</strong><br>
+            ${housingLearnResponses[4] || "No response recorded"}
+        </div>
+
+        <div>
+            <strong>Question 5</strong><br>
+            ${housingLearnResponses[5] || "No response recorded"}
+        </div>
+    </div>
+
+    <div style="margin-top:20px; padding:14px; border:1px solid #cfd8e3; border-radius:8px;">
+        <strong>💬 Caseworker Discussion</strong>
+        <p style="margin-top:8px;">
+            These responses are intended to help guide the next conversation
+            with the client and identify areas that may be useful to explore.
+        </p>
+    </div>
+`; 
 }
 
    
