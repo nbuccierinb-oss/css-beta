@@ -4710,9 +4710,122 @@ function learnQuestionThreeNext() {
         return;
     }
 
+    const overlay = document.getElementById("learnQuestionOverlay");
+
+    const questionNumber = overlay.querySelector(".modal-header p");
+    const questionTitle = overlay.querySelector(".modal-body h3");
+    const sectionTitle = overlay.querySelector(".form-section-title");
+    const answerContainer = overlay.querySelector(".form-section > div:last-child");
+    const nextButton = overlay.querySelector(".primary-btn");
+
+    questionNumber.textContent = "Learn Mode • Question 4 of 5";
+
+    sectionTitle.textContent = "HOUSING STABILITY";
+
+    questionTitle.textContent =
+        "If your housing situation changed, how confident are you that you would know where to go for help?";
+
+    answerContainer.innerHTML = `
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion4"
+                value="very-confident"
+                style="width:auto; margin-right:8px;">
+            Very confident
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion4"
+                value="somewhat-confident"
+                style="width:auto; margin-right:8px;">
+            Somewhat confident
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion4"
+                value="not-very-confident"
+                style="width:auto; margin-right:8px;">
+            Not very confident
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion4"
+                value="no-idea"
+                style="width:auto; margin-right:8px;">
+            I would not know where to start
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion4"
+                value="not-sure"
+                style="width:auto; margin-right:8px;">
+            I'm not sure
+        </label>
+    `;
+
+    nextButton.textContent = "Next →";
+    nextButton.setAttribute("onclick", "learnQuestionFourNext()");
+}
+
+
+function learnQuestionFourNext() {
+
+    const selected = document.querySelector(
+        'input[name="housingQuestion4"]:checked'
+    );
+
+    if (!selected) {
+        alert("Please select an answer before continuing.");
+        return;
+    }
+
     alert(
-        "Question 3 answer recorded for this demo.\n\n" +
-        "Question 4 will be added next."
+        "Question 4 answer recorded for this demo.\n\n" +
+        "Question 5 will be added next."
     );
 }
 
