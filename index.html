@@ -4484,11 +4484,126 @@ function learnQuestionOneNext() {
         return;
     }
 
+    const overlay = document.getElementById("learnQuestionOverlay");
+
+    const questionNumber = overlay.querySelector(".modal-header p");
+    const questionTitle = overlay.querySelector(".modal-body h3");
+    const sectionTitle = overlay.querySelector(".form-section-title");
+    const answerContainer = overlay.querySelector(".form-section > div:last-child");
+    const nextButton = overlay.querySelector(".primary-btn");
+
+    questionNumber.textContent = "Learn Mode • Question 2 of 5";
+
+    sectionTitle.textContent = "HOUSING STABILITY";
+
+    questionTitle.textContent =
+        "How confident are you that you can maintain your housing costs for the next 30 days?";
+
+    answerContainer.innerHTML = `
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion2"
+                value="very-confident"
+                style="width:auto; margin-right:8px;">
+            Very confident
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion2"
+                value="somewhat-confident"
+                style="width:auto; margin-right:8px;">
+            Somewhat confident
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion2"
+                value="not-very-confident"
+                style="width:auto; margin-right:8px;">
+            Not very confident
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion2"
+                value="behind"
+                style="width:auto; margin-right:8px;">
+            I am behind on housing costs
+        </label>
+
+        <label style="
+            border:1px solid #cfd8df;
+            border-radius:8px;
+            padding:13px;
+            cursor:pointer;
+            font-weight:normal;
+            background:white;
+        ">
+            <input
+                type="radio"
+                name="housingQuestion2"
+                value="not-sure"
+                style="width:auto; margin-right:8px;">
+            I'm not sure
+        </label>
+    `;
+
+    nextButton.textContent = "Next →";
+    nextButton.setAttribute("onclick", "learnQuestionTwoNext()");
+}
+
+
+function learnQuestionTwoNext() {
+
+    const selected = document.querySelector(
+        'input[name="housingQuestion2"]:checked'
+    );
+
+    if (!selected) {
+        alert("Please select an answer before continuing.");
+        return;
+    }
+
     alert(
-        "Answer recorded for this demo.\n\n" +
-        "Question 2 will be added next."
+        "Question 2 answer recorded for this demo.\n\n" +
+        "Question 3 will be added next."
     );
 }
+
+   
  /* =========================
    GOAL MANAGEMENT
 ========================= */
