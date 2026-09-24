@@ -4288,64 +4288,208 @@ function closeLearnMode() {
 /* =========================
    LEARN MODE LESSONS
 ========================= */
-
 function openLesson(topic) {
 
-    let lessonTitle = "";
-    let message = "";
-
-    if (topic === "housing") {
-
-        lessonTitle = "🏠 Housing Stability";
-
-        message =
-            "Housing Stability lesson content will be added next.";
-
+    if (topic !== "housing") {
+        alert("This Learn Mode topic is coming next.");
+        return;
     }
 
-    else if (topic === "employment") {
+    const lessonOverlay = document.createElement("div");
 
-        lessonTitle = "💼 Employment";
+    lessonOverlay.id = "learnQuestionOverlay";
+    lessonOverlay.className = "modal-overlay";
+    lessonOverlay.style.display = "block";
 
-        message =
-            "Employment lesson content will be added next.";
+    lessonOverlay.innerHTML = `
+        <div class="modal">
 
-    }
+            <div class="modal-header">
 
-    else if (topic === "transportation") {
+                <div>
+                    <h2>🏠 Housing Stability</h2>
+                    <p>Learn Mode • Question 1 of 5</p>
+                </div>
 
-        lessonTitle = "🚌 Transportation";
+                <button
+                    class="close-btn"
+                    type="button"
+                    onclick="document.getElementById('learnQuestionOverlay').remove()">
+                    ×
+                </button>
 
-        message =
-            "Transportation lesson content will be added next.";
+            </div>
 
-    }
+            <div class="modal-body">
 
-    else if (topic === "documents") {
+                <div style="
+                    margin-bottom:20px;
+                    color:var(--muted);
+                    font-size:13px;
+                    line-height:1.5;
+                ">
+                    There are no right or wrong answers. Your answers
+                    help identify areas that may be useful to discuss
+                    with your caseworker.
+                </div>
 
-        lessonTitle = "📄 ID & Documents";
+                <div class="form-section">
 
-        message =
-            "ID & Documents lesson content will be added next.";
+                    <div class="form-section-title">
+                        HOUSING STABILITY
+                    </div>
 
-    }
+                    <h3 style="
+                        font-size:18px;
+                        line-height:1.4;
+                        margin-bottom:18px;
+                    ">
+                        How confident are you that your current housing
+                        situation will remain stable over the next 30 days?
+                    </h3>
 
-    else if (topic === "financial") {
+                    <div style="
+                        display:flex;
+                        flex-direction:column;
+                        gap:10px;
+                    ">
 
-        lessonTitle = "💰 Financial Stability";
+                        <label style="
+                            border:1px solid #cfd8df;
+                            border-radius:8px;
+                            padding:13px;
+                            cursor:pointer;
+                            font-weight:normal;
+                            background:white;
+                        ">
+                            <input
+                                type="radio"
+                                name="housingQuestion1"
+                                value="very-confident"
+                                style="width:auto; margin-right:8px;">
+                            Very confident
+                        </label>
 
-        message =
-            "Financial Stability lesson content will be added next.";
+                        <label style="
+                            border:1px solid #cfd8df;
+                            border-radius:8px;
+                            padding:13px;
+                            cursor:pointer;
+                            font-weight:normal;
+                            background:white;
+                        ">
+                            <input
+                                type="radio"
+                                name="housingQuestion1"
+                                value="somewhat-confident"
+                                style="width:auto; margin-right:8px;">
+                            Somewhat confident
+                        </label>
 
+                        <label style="
+                            border:1px solid #cfd8df;
+                            border-radius:8px;
+                            padding:13px;
+                            cursor:pointer;
+                            font-weight:normal;
+                            background:white;
+                        ">
+                            <input
+                                type="radio"
+                                name="housingQuestion1"
+                                value="not-very-confident"
+                                style="width:auto; margin-right:8px;">
+                            Not very confident
+                        </label>
+
+                        <label style="
+                            border:1px solid #cfd8df;
+                            border-radius:8px;
+                            padding:13px;
+                            cursor:pointer;
+                            font-weight:normal;
+                            background:white;
+                        ">
+                            <input
+                                type="radio"
+                                name="housingQuestion1"
+                                value="no-stable-housing"
+                                style="width:auto; margin-right:8px;">
+                            I don't currently have stable housing
+                        </label>
+
+                        <label style="
+                            border:1px solid #cfd8df;
+                            border-radius:8px;
+                            padding:13px;
+                            cursor:pointer;
+                            font-weight:normal;
+                            background:white;
+                        ">
+                            <input
+                                type="radio"
+                                name="housingQuestion1"
+                                value="not-sure"
+                                style="width:auto; margin-right:8px;">
+                            I'm not sure
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <div class="footer-left">
+                    Learn Mode • Housing Stability
+                </div>
+
+                <div class="footer-actions">
+
+                    <button
+                        class="secondary-btn"
+                        type="button"
+                        onclick="document.getElementById('learnQuestionOverlay').remove()">
+                        Exit
+                    </button>
+
+                    <button
+                        class="primary-btn"
+                        type="button"
+                        onclick="learnQuestionOneNext()">
+                        Next →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(lessonOverlay);
+}
+
+
+function learnQuestionOneNext() {
+
+    const selected = document.querySelector(
+        'input[name="housingQuestion1"]:checked'
+    );
+
+    if (!selected) {
+        alert("Please select an answer before continuing.");
+        return;
     }
 
     alert(
-        lessonTitle +
-        "\n\n" +
-        message
+        "Answer recorded for this demo.\n\n" +
+        "Question 2 will be added next."
     );
-
-} /* =========================
+}
+ /* =========================
    GOAL MANAGEMENT
 ========================= */
 
