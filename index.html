@@ -4493,7 +4493,7 @@ function learnQuestionOneNext() {
         alert("Please select an answer before continuing.");
         return;
     }
-
+    recordHousingAnswer(1);
     const overlay = document.getElementById("learnQuestionOverlay");
 
     const questionNumber = overlay.querySelector(".modal-header p");
@@ -4592,7 +4592,7 @@ function learnQuestionOneNext() {
     `;
 
     nextButton.textContent = "Next →";
-  nextButton.setAttribute("onclick", "recordHousingAnswer(1); learnQuestionTwoNext()"); 
+  nextButton.setAttribute("onclick", "learnQuestionTwoNext()"); 
 }
 
 
@@ -4606,7 +4606,7 @@ function learnQuestionTwoNext() {
         alert("Please select an answer before continuing.");
         return;
     }
-
+    recordHousingAnswer(2);
     const overlay = document.getElementById("learnQuestionOverlay");
 
     const questionNumber = overlay.querySelector(".modal-header p");
@@ -4705,7 +4705,7 @@ function learnQuestionTwoNext() {
     `;
 
     nextButton.textContent = "Next →";
-   nextButton.setAttribute("onclick", "recordHousingAnswer(2); learnQuestionThreeNext()");
+ nextButton.setAttribute("onclick", "learnQuestionThreeNext()"); 
 }
 
 
