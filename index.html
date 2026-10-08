@@ -3623,11 +3623,11 @@ localStorage.setItem(activityKey, JSON.stringify(activity));
                     box-shadow:0 2px 6px rgba(0,0,0,.08);
                 ">
                     <h3 style="margin-top:0;">📈 App Usage</h3>
-                   <div style="color:#666;line-height:1.8;">
-    <div><strong>Last Login:</strong> Not available</div>
-    <div><strong>Total Logins:</strong> 0</div>
-    <div><strong>Last Activity:</strong> Not available</div>
-</div> 
+                  <div style="color:#666;line-height:1.8;">
+    <div><strong>Last App Opened:</strong> ${activity.lastOpened || "Not available"}</div>
+    <div><strong>App Sessions:</strong> ${activity.sessions}</div>
+    <div><strong>Last Activity:</strong> ${activity.lastActivity || "Not available"}</div>
+</div>
                 </div>
 
                 <div style="
