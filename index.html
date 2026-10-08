@@ -3641,10 +3641,19 @@ localStorage.setItem(activityKey, JSON.stringify(activity));
                     padding:20px;
                     box-shadow:0 2px 6px rgba(0,0,0,.08);
                 ">
-                    <h3 style="margin-top:0;">🔐 Login Activity</h3>
-                    <p style="color:#666;">
-                        Client login/activity information will appear here.
-                    </p>
+                   <h3 style="margin-top:0;">📋 Activity History</h3>
+<div style="color:#666;line-height:1.6;">
+    ${
+        (activity.history || []).length
+        ? activity.history.slice(0,5).map(item =>
+            `<div style="padding:6px 0;border-bottom:1px solid #eee;">
+                🟢 ${item}<br>
+                <span style="font-size:12px;">Client App opened</span>
+            </div>`
+        ).join("")
+        : `<div>No recent activity recorded.</div>`
+    }
+</div>
                 </div>
             
             </div>
