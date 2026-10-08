@@ -3540,7 +3540,12 @@ const activity = JSON.parse(
 );
 
 activity.sessions += 1;
-activity.lastOpened = new Date().toLocaleString();
+if (!activity.history) {
+    activity.history = [];
+}
+
+activity.history.unshift(new Date().toLocaleString());
+    activity.lastOpened = new Date().toLocaleString();
 activity.lastActivity = activity.lastOpened;
 
 localStorage.setItem(activityKey, JSON.stringify(activity));
