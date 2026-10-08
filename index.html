@@ -3533,7 +3533,17 @@ function openClientApp(name) {
         padding: 30px;
         font-family: Arial, sans-serif;
     `;
+      const activityKey = "cssAppActivity_" + name;
+const activity = JSON.parse(
+    localStorage.getItem(activityKey) ||
+    '{"sessions":0,"lastOpened":null,"lastActivity":null}'
+);
 
+activity.sessions += 1;
+activity.lastOpened = new Date().toLocaleString();
+activity.lastActivity = activity.lastOpened;
+
+localStorage.setItem(activityKey, JSON.stringify(activity));
     appView.innerHTML = `
         <div style="max-width:1000px;margin:0 auto;">
 
@@ -3613,9 +3623,11 @@ function openClientApp(name) {
                     box-shadow:0 2px 6px rgba(0,0,0,.08);
                 ">
                     <h3 style="margin-top:0;">📈 App Usage</h3>
-                    <p style="color:#666;">
-                        Client activity and usage information will appear here.
-                    </p>
+                   <div style="color:#666;line-height:1.8;">
+    <div><strong>Last Login:</strong> Not available</div>
+    <div><strong>Total Logins:</strong> 0</div>
+    <div><strong>Last Activity:</strong> Not available</div>
+</div> 
                 </div>
 
                 <div style="
