@@ -3549,6 +3549,17 @@ activity.history.unshift(new Date().toLocaleString());
 activity.lastActivity = activity.lastOpened;
 
 localStorage.setItem(activityKey, JSON.stringify(activity));
+    window.recordClientActivity = function(eventText) {
+    if (!activity.history) {
+        activity.history = [];
+    }
+
+    activity.history.unshift(
+        new Date().toLocaleString() + " — " + eventText
+    );
+
+    localStorage.setItem(activityKey, JSON.stringify(activity));
+};
     appView.innerHTML = `
         <div style="max-width:1000px;margin:0 auto;">
 
@@ -3661,7 +3672,7 @@ localStorage.setItem(activityKey, JSON.stringify(activity));
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0;">
   <button
     type="button"
-    onclick="openProbationDictionary()"
+   onclick="window.recordClientActivity('Probation Dictionary viewed'); openProbationDictionary()"
     style="
         width:100%;
         padding:16px;
