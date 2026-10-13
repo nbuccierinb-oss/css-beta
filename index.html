@@ -3909,11 +3909,13 @@ function openProbationDictionary() {
 
     function renderDictionary() {
         const query = search.value.trim().toLowerCase();
-        const matches = dictionaryTerms.filter(item =>
-            `${item.term} ${item.full} ${item.definition} ${item.example}`
-                .toLowerCase()
-                .includes(query)
-        );
+        const matches = dictionaryTerms
+    .filter(item =>
+        `${item.term} ${item.full} ${item.definition} ${item.example}`
+            .toLowerCase()
+            .includes(query)
+    )
+    .sort((a, b) => a.term.localeCompare(b.term));
 
         results.innerHTML = "";
 
