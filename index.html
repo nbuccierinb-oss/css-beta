@@ -3752,62 +3752,72 @@ function openProbationDictionary() {
 
     const dictionaryTerms = [
         {
-            term: "NCD",
-            full: "Next Court Date",
-            definition: "The next date you are scheduled to appear in court.",
-            example: "Check your reminders so you know when and where to appear."
-        },
+    term: "NCD",
+    full: "Next Court Date",
+    category: "Court & Legal",
+    definition: "The next date you are scheduled to appear in court.",
+    example: "Check your reminders so you know when and where to appear."
+},
+       {
+    term: "DD",
+    full: "Drug Drop",
+    category: "Court & Legal",
+    definition: "A required drug test or appointment for providing a urine sample.",
+    example: "Follow your officer's instructions about when and where to report."
+},
+       {
+    term: "PTR",
+    full: "Petition to Revoke",
+    category: "Court & Legal",
+    definition: "A formal request asking the court to revoke probation because a violation is alleged.",
+    example: "A PTR is a court process. It does not, by itself, mean the judge has made a final decision."
+},
         {
-            term: "DD",
-            full: "Drug Drop",
-            definition: "A required drug test or appointment for providing a urine sample.",
-            example: "Follow your officer's instructions about when and where to report."
-        },
+    term: "Phase 1",
+    full: "Foundation",
+    category: "Phases & Progress",
+    definition: "The starting phase focused on building a foundation for success.",
+    example: "You may work on identifying needs, understanding expectations, and connecting with resources."
+},
         {
-            term: "PTR",
-            full: "Petition to Revoke",
-            definition: "A formal request asking the court to revoke probation because a violation is alleged.",
-            example: "A PTR is a court process. It does not, by itself, mean the judge has made a final decision."
-        },
+    term: "Phase 2",
+    full: "Engagement",
+    category: "Phases & Progress",
+    definition: "A phase focused on staying involved in your plan and working toward your goals.",
+    example: "This may include attending appointments, practicing skills, and using available support."
+},
         {
-            term: "Phase 1",
-            full: "Foundation",
-            definition: "The starting phase focused on building a foundation for success.",
-            example: "You may work on identifying needs, understanding expectations, and connecting with resources."
-        },
+    term: "Phase 3",
+    full: "Progress",
+    category: "Phases & Progress",
+    definition: "A phase focused on maintaining progress and preparing for continued success.",
+    example: "You may review completed goals and identify steps to help maintain progress."
+},
         {
-            term: "Phase 2",
-            full: "Engagement",
-            definition: "A phase focused on staying involved in your plan and working toward your goals.",
-            example: "This may include attending appointments, practicing skills, and using available support."
-        },
-        {
-            term: "Phase 3",
-            full: "Progress",
-            definition: "A phase focused on building on your progress and strengthening positive routines.",
-            example: "You may review completed goals and identify steps to help maintain progress."
-        },
-        {
-            term: "Probation",
-            full: "Community supervision",
-            definition: "A court-ordered period of supervision with conditions you are expected to follow.",
-            example: "Your conditions and expectations depend on your individual court order."
-        },
-        {
-            term: "Case Plan",
-            full: "Your plan for success",
-            definition: "A plan that identifies goals, needs, and steps you can work on with your caseworker or probation officer.",
-            example: "Your plan may include housing, employment, transportation, or other goals."
-        },
+    term: "Probation",
+    full: "Community supervision",
+    category: "Probation Requirements",
+    definition: "A court-ordered period of supervision with conditions you are expected to follow.",
+    example: "Your conditions and expectations depend on your individual court order."
+},
+       {
+    term: "Case Plan",
+    full: "Your plan for success",
+    category: "Phases & Progress",
+    definition: "A plan that identifies goals, needs, and steps you can work on with your caseworker or probation officer.",
+    example: "Your plan may include housing, employment, transportation, or other goals."
+}, 
         {
             term: "Compliance",
             full: "Following requirements",
+            category: "Probation Requirements",
             definition: "Meeting the conditions and requirements set by the court and your supervision plan.",
             example: "If you are unsure about a requirement, ask your probation officer for clarification."
         },
         {
             term: "Violation",
             full: "A possible failure to follow a condition",
+            category: "Probation Requirements",
             definition: "An alleged failure to follow a court-ordered condition or supervision requirement.",
             example: "If you receive notice of a possible violation, talk with your attorney or probation officer about the next steps."
         }
@@ -3815,36 +3825,42 @@ function openProbationDictionary() {
     {
         term: "Conditions of Probation",
         full: "Rules and requirements",
+        category: "Probation Requirements",
         definition: "The rules and requirements a person must follow while on probation.",
         example: "If you are unsure what a condition means, ask your probation officer to explain it."
     },
     {
         term: "Violation Hearing",
         full: "Court hearing about an alleged violation",
+        category: "Court & Legal",
         definition: "A court hearing where an alleged probation violation may be addressed.",
         example: "A hearing is part of the court process. Ask your attorney about your specific situation."
     },
     {
         term: "Warrant",
         full: "Court-authorized order",
+        category: "Court & Legal",
         definition: "A court-authorized order that may allow law enforcement to take a specified action.",
         example: "If you have questions about a warrant, contact your attorney for guidance."
     },
     {
         term: "Restitution",
         full: "Payment for certain losses",
+        category: "Community & Financial",
         definition: "Money a court orders someone to pay to compensate a victim for certain losses.",
         example: "Check your court paperwork or ask the appropriate court office if you have questions about an amount due."
     },
     {
         term: "Community Service",
         full: "Approved unpaid work",
+        category: "Community & Financial",
         definition: "Approved unpaid work that a court may require someone to complete.",
         example: "Ask which activities qualify and how your completed hours must be documented."
     },
     {
         term: "Continuance",
         full: "Postponed court date",
+        category: "Court & Legal",
         definition: "When a court hearing is postponed to a later date.",
         example: "Confirm your next court date with your attorney or the appropriate court office."
     }
@@ -3887,7 +3903,29 @@ function openProbationDictionary() {
                     Select a term to open its definition and example.
                 </p>
             </div>
-
+             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+  <button type="button" onclick="setDictionaryCategory('All')"
+    style="background:#e8eef7;color:#243b5a;border:0;border-radius:8px;padding:12px;cursor:pointer;">
+    📋 All Terms
+  </button>
+  <button type="button" onclick="setDictionaryCategory('Probation Requirements')"
+    style="background:#d9f3e5;color:#166534;border:0;border-radius:8px;padding:12px;cursor:pointer;">
+    📋 Requirements
+  </button>
+  <button type="button" onclick="setDictionaryCategory('Phases & Progress')"
+    style="background:#eee1ff;color:#6b21a8;border:0;border-radius:8px;padding:12px;cursor:pointer;">
+    📈 Phases & Progress
+  </button>
+  <button type="button" onclick="setDictionaryCategory('Community & Financial')"
+    style="background:#ffedd5;color:#9a3412;border:0;border-radius:8px;padding:12px;cursor:pointer;">
+    🤝 Community & Financial
+  </button>
+  <button type="button" onclick="setDictionaryCategory('Court & Legal')"
+    style="grid-column:1 / -1;background:#dbeafe;color:#1d4ed8;border:0;border-radius:8px;padding:12px;cursor:pointer;">
+    ⚖️ Court & Legal
+  </button>
+</div>
+            
             <div id="dictionaryResults"></div>
 
             <div style="text-align:center;margin:22px 0;">
@@ -3907,16 +3945,31 @@ function openProbationDictionary() {
     const search = view.querySelector("#dictionarySearch");
     const results = view.querySelector("#dictionaryResults");
 
-    function renderDictionary() {
-        const query = search.value.trim().toLowerCase();
-        const matches = dictionaryTerms
-    .filter(item =>
-        `${item.term} ${item.full} ${item.definition} ${item.example}`
-            .toLowerCase()
-            .includes(query)
-    )
-    .sort((a, b) => a.term.localeCompare(b.term));
+    function setDictionaryCategory(category) {
+    const view = document.getElementById("probationDictionaryView");
+    if (!view) return;
 
+    view.dataset.activeCategory = category;
+    renderDictionary();
+}
+    function renderDictionary() {
+    const query = search.value.trim().toLowerCase();
+
+  const activeCategory = view.dataset.activeCategory || "All"; 
+
+    const matches = dictionaryTerms
+        .filter(item => {
+            const matchesSearch =
+                `${item.term} ${item.full} ${item.definition} ${item.example}`
+                    .toLowerCase()
+                    .includes(query);
+
+            const matchesCategory =
+                activeCategory === "All" || item.category === activeCategory;
+
+            return matchesSearch && matchesCategory;
+        })
+        .sort((a, b) => a.term.localeCompare(b.term));
         results.innerHTML = "";
 
         if (matches.length === 0) {
@@ -3972,7 +4025,7 @@ function openProbationDictionary() {
         });
     }
 
-    search.addEventListener("input", renderDictionary);
+    ("input", renderDictionary);
 
     view.querySelector("#closeProbationDictionary").addEventListener("click", () => {
         view.remove();
