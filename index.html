@@ -3743,7 +3743,205 @@ function showDashboard() {
     window.scrollTo(0, 0);
 
 }
+// PROBATION DICTIONARY
+function openProbationDictionary() {
+    const existingDictionary = document.getElementById("probationDictionaryView");
+    if (existingDictionary) {
+        existingDictionary.remove();
+    }
 
+    const dictionaryTerms = [
+        {
+            term: "NCD",
+            full: "Next Court Date",
+            definition: "The next date you are scheduled to appear in court.",
+            example: "Check your reminders so you know when and where to appear."
+        },
+        {
+            term: "DD",
+            full: "Drug Drop",
+            definition: "A required drug test or appointment for providing a urine sample.",
+            example: "Follow your officer's instructions about when and where to report."
+        },
+        {
+            term: "PTR",
+            full: "Petition to Revoke",
+            definition: "A formal request asking the court to revoke probation because a violation is alleged.",
+            example: "A PTR is a court process. It does not, by itself, mean the judge has made a final decision."
+        },
+        {
+            term: "Phase 1",
+            full: "Foundation",
+            definition: "The starting phase focused on building a foundation for success.",
+            example: "You may work on identifying needs, understanding expectations, and connecting with resources."
+        },
+        {
+            term: "Phase 2",
+            full: "Engagement",
+            definition: "A phase focused on staying involved in your plan and working toward your goals.",
+            example: "This may include attending appointments, practicing skills, and using available support."
+        },
+        {
+            term: "Phase 3",
+            full: "Progress",
+            definition: "A phase focused on building on your progress and strengthening positive routines.",
+            example: "You may review completed goals and identify steps to help maintain progress."
+        },
+        {
+            term: "Probation",
+            full: "Community supervision",
+            definition: "A court-ordered period of supervision with conditions you are expected to follow.",
+            example: "Your conditions and expectations depend on your individual court order."
+        },
+        {
+            term: "Case Plan",
+            full: "Your plan for success",
+            definition: "A plan that identifies goals, needs, and steps you can work on with your caseworker or probation officer.",
+            example: "Your plan may include housing, employment, transportation, or other goals."
+        },
+        {
+            term: "Compliance",
+            full: "Following requirements",
+            definition: "Meeting the conditions and requirements set by the court and your supervision plan.",
+            example: "If you are unsure about a requirement, ask your probation officer for clarification."
+        },
+        {
+            term: "Violation",
+            full: "A possible failure to follow a condition",
+            definition: "An alleged failure to follow a court-ordered condition or supervision requirement.",
+            example: "If you receive notice of a possible violation, talk with your attorney or probation officer about the next steps."
+        }
+    ];
+
+    const view = document.createElement("div");
+    view.id = "probationDictionaryView";
+    view.style.cssText = [
+        "position:fixed",
+        "inset:0",
+        "z-index:10000",
+        "overflow-y:auto",
+        "background:#f1f5f9",
+        "font-family:Arial,sans-serif",
+        "padding:24px",
+        "box-sizing:border-box"
+    ].join(";");
+
+    view.innerHTML = `
+        <div style="max-width:850px;margin:0 auto;">
+            <div style="background:#1e334f;color:white;padding:22px;border-radius:12px;margin-bottom:18px;">
+                <div style="font-size:26px;font-weight:bold;">📖 Probation Dictionary</div>
+                <p style="margin:8px 0 0;color:#e2e8f0;">
+                    Plain-language explanations of common probation terms and abbreviations.
+                </p>
+            </div>
+
+            <div style="background:white;padding:20px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.08);margin-bottom:16px;">
+                <label for="dictionarySearch" style="display:block;font-weight:bold;margin-bottom:8px;">
+                    Search for a word or abbreviation
+                </label>
+                <input
+                    id="dictionarySearch"
+                    type="search"
+                    placeholder="Try PTR, Phase 1, court date..."
+                    style="width:100%;box-sizing:border-box;padding:13px;border:1px solid #cbd5e1;border-radius:8px;font-size:16px;"
+                >
+                <p style="color:#64748b;font-size:13px;margin-bottom:0;">
+                    Select a term to open its definition and example.
+                </p>
+            </div>
+
+            <div id="dictionaryResults"></div>
+
+            <div style="text-align:center;margin:22px 0;">
+                <button
+                    id="closeProbationDictionary"
+                    type="button"
+                    style="background:#1e334f;color:white;border:0;border-radius:8px;padding:13px 22px;font-weight:bold;cursor:pointer;"
+                >
+                    ← Back to Client App
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(view);
+
+    const search = view.querySelector("#dictionarySearch");
+    const results = view.querySelector("#dictionaryResults");
+
+    function renderDictionary() {
+        const query = search.value.trim().toLowerCase();
+        const matches = dictionaryTerms.filter(item =>
+            `${item.term} ${item.full} ${item.definition} ${item.example}`
+                .toLowerCase()
+                .includes(query)
+        );
+
+        results.innerHTML = "";
+
+        if (matches.length === 0) {
+            results.innerHTML = `
+                <div style="background:white;padding:20px;border-radius:10px;color:#64748b;">
+                    No matching terms found. Try another word or ask your probation officer for help.
+                </div>
+            `;
+            return;
+        }
+
+        matches.forEach((item, index) => {
+            const card = document.createElement("details");
+            card.style.cssText =
+                "background:white;border-radius:10px;margin-bottom:10px;box-shadow:0 2px 6px rgba(0,0,0,.06);overflow:hidden;";
+
+            const summary = document.createElement("summary");
+            summary.style.cssText =
+                "padding:17px;cursor:pointer;list-style-position:inside;color:#1e334f;font-weight:bold;";
+
+            const termLabel = document.createElement("span");
+            termLabel.textContent = ` ${item.term} — ${item.full}`;
+            summary.appendChild(termLabel);
+
+            const content = document.createElement("div");
+            content.style.cssText =
+                "padding:0 20px 18px 38px;line-height:1.6;color:#334155;";
+
+            const definitionHeading = document.createElement("strong");
+            definitionHeading.textContent = "What it means";
+            const definitionText = document.createElement("p");
+            definitionText.textContent = item.definition;
+
+            const exampleHeading = document.createElement("strong");
+            exampleHeading.textContent = "Example";
+            const exampleText = document.createElement("p");
+            exampleText.style.marginBottom = "0";
+            exampleText.textContent = item.example;
+
+            content.append(
+                definitionHeading,
+                definitionText,
+                exampleHeading,
+                exampleText
+            );
+
+            card.append(summary, content);
+            results.appendChild(card);
+
+            if (query && index === 0) {
+                card.open = true;
+            }
+        });
+    }
+
+    search.addEventListener("input", renderDictionary);
+
+    view.querySelector("#closeProbationDictionary").addEventListener("click", () => {
+        view.remove();
+    });
+
+    renderDictionary();
+    search.focus();
+}
+           
 
 /* =========================
    CONTACT MODAL
