@@ -3710,6 +3710,25 @@ localStorage.setItem(activityKey, JSON.stringify(activity));
     Client Phase information will appear here.
 </p>
             </div>
+           <div style="
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:18px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+">
+    <h3 style="margin-top:0;">💬 CSS Messenger</h3>
+    <p style="color:#666;">
+        A place for case-related messages and communication.
+    </p>
+    <button
+        type="button"
+        onclick="openCSSMessenger()"
+        style="background:#243653;color:white;border:0;border-radius:8px;padding:10px 16px;cursor:pointer;"
+    >
+        Open Messenger
+    </button>
+</div>
             </div>
             <div style="
                 background:white;
@@ -3742,6 +3761,102 @@ function showDashboard() {
 
     window.scrollTo(0, 0);
 
+} 
+    // CSS MESSENGER — DEMO FRAMEWORK
+function openCSSMessenger() {
+    const existingMessenger = document.getElementById("cssMessengerView");
+
+    if (existingMessenger) {
+        existingMessenger.remove();
+    }
+
+    const messengerView = document.createElement("div");
+    messengerView.id = "cssMessengerView";
+
+    messengerView.style.cssText = `
+        position:fixed;
+        inset:0;
+        z-index:10000;
+        background:#f1f5f9;
+        padding:24px;
+        font-family:Arial,sans-serif;
+        overflow-y:auto;
+    `;
+
+    messengerView.innerHTML = `
+        <div style="max-width:900px;margin:0 auto;">
+            <div style="background:#243653;color:white;padding:20px;border-radius:12px;margin-bottom:18px;">
+                <h2 style="margin:0;">💬 CSS Messenger</h2>
+                <p style="margin:8px 0 0;">Demo communication workspace</p>
+            </div>
+
+            <div style="background:white;padding:20px;border-radius:12px;margin-bottom:18px;">
+                <h3 style="margin-top:0;">📥 Inbox</h3>
+                <p style="color:#64748b;">Your conversations will appear here.</p>
+                <p style="color:#64748b;font-size:13px;">Demo only — no messages are sent or stored.</p>
+            </div>
+
+            <div style="background:white;padding:20px;border-radius:12px;margin-bottom:18px;">
+                <h3 style="margin-top:0;">💬 Conversation</h3>
+                <div style="background:#f1f5f9;padding:14px;border-radius:8px;margin-bottom:12px;">
+                    <strong>Sample message</strong>
+                    <p style="margin-bottom:0;">“I need help figuring out my next steps for housing.”</p>
+                </div>
+
+                <button type="button"
+                    onclick="copyCSSMessageQuote('I need help figuring out my next steps for housing.')"
+                    style="background:#243653;color:white;border:0;border-radius:8px;padding:10px 14px;cursor:pointer;">
+                    📋 Copy Quote
+                </button>
+
+                <button type="button"
+                    onclick="addCSSMessageToCaseNote('I need help figuring out my next steps for housing.')"
+                    style="background:#e2e8f0;color:#243653;border:0;border-radius:8px;padding:10px 14px;margin-left:8px;cursor:pointer;">
+                    📝 Add to Case Note
+                </button>
+            </div>
+
+            <div id="cssCaseNoteDraft" style="background:white;padding:20px;border-radius:12px;margin-bottom:18px;">
+                <h3 style="margin-top:0;">📝 Case Note Draft</h3>
+                <textarea id="cssCaseNoteText"
+                    placeholder="A quoted message will appear here..."
+                    style="width:100%;min-height:120px;box-sizing:border-box;padding:12px;border:1px solid #cbd5e1;border-radius:8px;font:14px Arial;"></textarea>
+                <p style="color:#64748b;font-size:13px;">Demo draft only. Review and copy into the authorized case-note system.</p>
+            </div>
+
+            <button type="button"
+                onclick="document.getElementById('cssMessengerView').remove()"
+                style="background:#243653;color:white;border:0;border-radius:8px;padding:12px 18px;cursor:pointer;">
+                ← Back to Client App
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(messengerView);
+}
+
+function copyCSSMessageQuote(message) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText('"' + message + '"');
+    }
+
+    const note = document.getElementById("cssCaseNoteText");
+    if (note) {
+        note.value = '"' + message + '"';
+    }
+}
+
+function addCSSMessageToCaseNote(message) {
+    const note = document.getElementById("cssCaseNoteText");
+    const draft = document.getElementById("cssCaseNoteDraft");
+
+    if (note) {
+        note.value += (note.value ? "\n\n" : "") + '"' + message + '"';
+    }
+
+    if (draft) {
+        draft.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
 }
 // PROBATION DICTIONARY
 function openProbationDictionary() {
