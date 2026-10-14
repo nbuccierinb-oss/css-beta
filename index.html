@@ -3952,6 +3952,7 @@ function openProbationDictionary() {
     view.dataset.activeCategory = category;
     renderDictionary();
 }
+ window.setDictionaryCategory = setDictionaryCategory; 
     function renderDictionary() {
     const query = search.value.trim().toLowerCase();
 
