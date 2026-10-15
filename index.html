@@ -5796,7 +5796,15 @@ function renderGoalCard(goal) {
 
     `;
 
+card.style.cursor = "pointer";
+card.setAttribute("role", "button");
+card.setAttribute("tabindex", "0");
+card.setAttribute("aria-label", "View goal details");
 
+card.addEventListener("click", function (event) {
+    if (event.target.closest("button")) return;
+    openGoalDetails(goal.id);
+});
  button.parentNode.insertBefore(card, button); 
 
 }
@@ -5830,6 +5838,73 @@ function loadSavedGoals() {
 
         });
 
+} 
+    function openGoalDetails(goalId) {
+    const savedGoals = JSON.parse(
+        localStorage.getItem("cssGoals") || "[]"
+    );
+
+    const client =
+        typeof currentClient !== "undefined"
+            ? currentClient
+            : "Current Client";
+
+    const goal = savedGoals.find(
+        item => item.id === goalId && item.client === client
+    );
+
+    if (!goal) {
+        alert("Goal could not be found for this client.");
+        return;
+    }
+
+    const details = document.createElement("div");
+    details.id = "goalDetailsOverlay";
+    details.style.cssText = `
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    `;
+
+    details.innerHTML = `
+        <div style="
+            background: white;
+            color: #222;
+            padding: 24px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            overflow-y: auto;
+        ">
+            <h2>Goal Details</h2>
+            <p><strong>Category:</strong> ${escapeGoalText(goal.category || "")}</p>
+            <p><strong>Goal:</strong> ${escapeGoalText(goal.description || "")}</p>
+            <p><strong>Barrier:</strong> ${escapeGoalText(goal.barrier || "Not identified")}</p>
+            <p><strong>Next Action:</strong> ${escapeGoalText(goal.action || "Not documented")}</p>
+            <p><strong>Commitment:</strong> ${escapeGoalText(goal.commitment || "Not documented")}</p>
+            <p><strong>Due Date:</strong> ${escapeGoalText(goal.dueDate || "No due date")}</p>
+            <p><strong>Status:</strong> ${escapeGoalText(goal.status || "In Progress")}</p>
+            <button id="closeGoalDetails" type="button">Close</button>
+        </div>
+    `;
+
+    document.body.appendChild(details);
+
+    document.getElementById("closeGoalDetails").addEventListener("click", function () {
+        details.remove();
+    });
+
+    details.addEventListener("click", function (event) {
+        if (event.target === details) {
+            details.remove();
+        }
+    });
 }
 /* TEMPORARY DEMO TIMELINE */
 
