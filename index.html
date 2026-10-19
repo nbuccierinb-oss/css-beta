@@ -3757,7 +3757,25 @@ const clientPhase = selectedClientCard?.querySelector(".phase")?.textContent.tri
 
 document.getElementById("clientPhase").innerText = clientPhase || "Client phase information unavailable.";
 }
+function restoreSavedCSSClients() {
+    const clientsContainer = document.querySelector(".clients");
+    if (!clientsContainer) return;
 
+    let savedClients = [];
+
+    try {
+        savedClients = JSON.parse(
+            localStorage.getItem("cssDemoClients") || "[]"
+        );
+    } catch (error) {
+        console.error("Could not load saved CSS demo clients:", error);
+        return;
+    }
+
+    savedClients.forEach((client) => {
+        renderSavedCSSClient(client, clientsContainer);
+    });
+}
 function showDashboard() {
 
     document.getElementById("clientView").style.display = "none";
@@ -3947,10 +3965,77 @@ function openAddClientModal() {
         event.target.value = event.target.value.replace(/[^a-z]/gi, "").slice(0, 1).toUpperCase();
     });
 
-    modal.querySelector("#addClientForm").addEventListener("submit", (event) => {
-        event.preventDefault();
-        alert("The Add a Client window is working. Saving and displaying new clients will be our next step.");
-    });
+   modal.querySelector("#addClientForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const firstName = modal.querySelector("#newClientFirst").value.trim();
+    const lastInitial = modal.querySelector("#newClientLast").value.trim().replace(/[^a-z]/gi, "").slice(0, 1).toUpperCase();
+    const phase = modal.querySelector("#newClientPhase").value;
+    const barrier = modal.querySelector("#newClientBarrier").value.trim();
+    const nextAction = modal.querySelector("#newClientAction").value.trim();
+
+    if (!firstName || !lastInitial || !phase || !barrier || !nextAction) {
+        alert("Please complete all five fields.");
+        return;
+    }
+
+    const clientsContainer = document.querySelector(".clients");
+    if (!clientsContainer) {
+        alert("Could not find the caseload container. No client was saved.");
+        return;
+    }
+
+    const savedClients = JSON.parse(localStorage.getItem("cssDemoClients") || "[]");
+    const client = {
+        id: Date.now().toString(),
+        firstName,
+        lastInitial,
+        phase,
+        barrier,
+        nextAction
+    };
+
+    savedClients.push(client);
+    localStorage.setItem("cssDemoClients", JSON.stringify(savedClients));
+
+    renderSavedCSSClient(client, clientsContainer);
+    modal.remove();
+    alert("Demo client saved to this browser!");
+});
+}
+   function renderSavedCSSClient(client, container) {
+    const card = document.createElement("div");
+    card.className = "client-card";
+
+    const phaseLabels = {
+        "PHASE 1 — FOUNDATION": "PHASE 1 — FOUNDATION",
+        "PHASE 2 — ENGAGEMENT": "PHASE 2 — ENGAGEMENT",
+        "PHASE 3 — PROGRESS": "PHASE 3 — PROGRESS"
+    };
+
+    const phase = phaseLabels[client.phase] || client.phase;
+
+    card.innerHTML = `
+        <div class="client-top">
+            <div class="client-name">${client.firstName} ${client.lastInitial}.</div>
+            <span class="status-dot status-dot-yellow"></span>
+        </div>
+        <div class="phase">${phase}</div>
+        <div class="goal">
+            <span>📌 ${client.barrier}</span>
+            <span class="goal-status yellow">Working</span>
+        </div>
+        <div class="goal">
+            <span>➡️ Next Action</span>
+            <span class="goal-status">${client.nextAction}</span>
+        </div>
+        <button class="view-btn" type="button"
+            onclick="alert('Demo client: ${client.firstName} ${client.lastInitial}.')">
+            View Client
+        </button>
+    `;
+
+    container.appendChild(card);
 }
     // PROBATION DICTIONARY
 function openProbationDictionary() {
@@ -6064,7 +6149,8 @@ document.addEventListener(
     "DOMContentLoaded",
     function() {
 
-        loadSavedGoals();
+        initDashboard();
+restoreSavedCSSClients();
 
     }
 );
