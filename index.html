@@ -1206,6 +1206,11 @@ textarea {
     </div>
 
 
+    <div style="margin-bottom: 16px;">
+    <button class="view-btn" type="button" onclick="openAddClientModal()">
+        + Add a Client
+    </button>
+</div>
     <div class="clients">
 
 
@@ -1410,7 +1415,7 @@ textarea {
                 class="view-btn"
                 onclick="showClient('David L.')">
 
-                View Client
+                
 
             </button>
 
@@ -3858,7 +3863,96 @@ function addCSSMessageToCaseNote(message) {
         draft.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 }
-// PROBATION DICTIONARY
+// ADD A CLIENT — CSS POC
+function openAddClientModal() {
+    const existingModal = document.getElementById("addClientModal");
+    if (existingModal) existingModal.remove();
+
+    const modal = document.createElement("div");
+    modal.id = "addClientModal";
+    modal.style.cssText = `
+        position: fixed;
+        inset: 0;
+        z-index: 11000;
+        background: rgba(0, 0, 0, 0.65);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    `;
+
+    modal.innerHTML = `
+        <div style="background: white; color: #1f2937; width: 100%;
+            max-width: 520px; max-height: 90vh; overflow-y: auto;
+            border-radius: 14px; padding: 24px;">
+            <h2 style="margin-top: 0;">Add a Client</h2>
+            <p style="color: #64748b;">Create a demo client for the CSS proof of concept.</p>
+
+            <form id="addClientForm">
+                <label for="newClientFirst">Client First Name</label>
+                <input id="newClientFirst" required maxlength="50"
+                    autocomplete="off"
+                    style="display:block;width:100%;box-sizing:border-box;padding:10px;margin:6px 0 14px;">
+
+                <label for="newClientLast">Client Last Initial</label>
+                <input id="newClientLast" required maxlength="1"
+                    autocomplete="off"
+                    style="display:block;width:100%;box-sizing:border-box;padding:10px;margin:6px 0 14px;">
+
+                <label for="newClientPhase">Current Phase</label>
+                <select id="newClientPhase" required
+                    style="display:block;width:100%;box-sizing:border-box;padding:10px;margin:6px 0 14px;">
+                    <option value="PHASE 1 — FOUNDATION">Phase 1 — Foundation</option>
+                    <option value="PHASE 2 — ENGAGEMENT">Phase 2 — Engagement</option>
+                    <option value="PHASE 3 — PROGRESS">Phase 3 — Progress</option>
+                </select>
+
+                <label for="newClientBarrier">Primary Barrier</label>
+                <input id="newClientBarrier" required maxlength="150"
+                    placeholder="e.g., Housing stability"
+                    style="display:block;width:100%;box-sizing:border-box;padding:10px;margin:6px 0 14px;">
+
+                <label for="newClientAction">Next Action</label>
+                <textarea id="newClientAction" required maxlength="300" rows="3"
+                    placeholder="What is the next step?"
+                    style="display:block;width:100%;box-sizing:border-box;padding:10px;margin:6px 0 18px;"></textarea>
+
+                <div style="display:flex;gap:10px;justify-content:flex-end;">
+                    <button type="button" id="cancelAddClient"
+                        style="padding:10px 16px;cursor:pointer;">Cancel</button>
+                    <button type="submit"
+                        style="padding:10px 16px;cursor:pointer;background:#21875b;color:white;border:0;border-radius:6px;">
+                        Add Client
+                    </button>
+                </div>
+            </form>
+            <p style="font-size:12px;color:#64748b;margin-bottom:0;">
+                CSS POC demo only. Do not enter identifying or confidential client information.
+            </p>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    modal.querySelector("#cancelAddClient").addEventListener("click", () => {
+        modal.remove();
+    });
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) modal.remove();
+    });
+
+    modal.querySelector("#newClientLast").addEventListener("input", (event) => {
+        event.target.value = event.target.value.replace(/[^a-z]/gi, "").slice(0, 1).toUpperCase();
+    });
+
+    modal.querySelector("#addClientForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        alert("The Add a Client window is working. Saving and displaying new clients will be our next step.");
+    });
+}
+    // PROBATION DICTIONARY
 function openProbationDictionary() {
     const existingDictionary = document.getElementById("probationDictionaryView");
     if (existingDictionary) {
