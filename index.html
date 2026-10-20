@@ -3788,21 +3788,28 @@ function restoreSavedCSSClients() {
         renderSavedCSSClient(client, clientsContainer);
     });
 }
-  function filterCaseload() {
+function filterCaseload() {
     const searchInput = document.getElementById("clientSearch");
     const clientsContainer = document.querySelector(".clients");
 
     if (!searchInput || !clientsContainer) return;
 
     const searchTerm = searchInput.value.trim().toLowerCase();
-    const clientCards = clientsContainer.querySelectorAll(".client-card");
+    const clientCards = Array.from(
+        clientsContainer.querySelectorAll(".client-card")
+    );
 
-    clientCards.forEach(card => {
-        const clientName = card.querySelector(".client-name")?.textContent
-            .trim()
-            .toLowerCase() || "";
+    clientCards.forEach((card, index) => {
+        const clientName = (
+            card.querySelector(".client-name")?.textContent || ""
+        ).trim().toLowerCase();
 
-        card.style.display = clientName.includes(searchTerm) ? "" : "none";
+        const matchesSearch = clientName.includes(searchTerm);
+        const showCard = searchTerm
+            ? matchesSearch
+            : index < 3;
+
+        card.style.display = showCard ? "" : "none";
     });
 }
 
