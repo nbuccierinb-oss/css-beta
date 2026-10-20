@@ -1223,7 +1223,32 @@ textarea {
         style="width: 100%; max-width: 420px; box-sizing: border-box; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px;"
    oninput="filterCaseload()" >
 </div>
-<div class="clients">
+<!-- RECENTLY ACTIVE CLIENTS - DEMO -->
+<div id="recentlyActiveClients" style="margin: 0 0 18px; padding: 16px; border: 1px solid #dbe3ed; border-radius: 12px; background: #f8fafc;">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px;">
+        <h3 style="margin: 0; font-size: 17px; color: #1e293b;">Recently Active Clients</h3>
+        <span style="font-size: 11px; font-weight: 700; color: #92400e; background: #fef3c7; padding: 4px 8px; border-radius: 999px;">DEMO</span>
+    </div>
+    <p style="margin: 0 0 12px; color: #64748b; font-size: 12px;">
+        Sample activity only — not connected to live client usage.
+    </p>
+    <div id="recentlyActiveClientList" style="display: grid; gap: 8px;">
+        <div style="padding: 10px 12px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <strong>Sarah T.</strong>
+            <span style="float: right; color: #64748b; font-size: 12px;">Demo activity · 1:39 PM</span>
+        </div>
+        <div style="padding: 10px 12px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <strong>Michael R.</strong>
+            <span style="float: right; color: #64748b; font-size: 12px;">Demo activity · 1:21 PM</span>
+        </div>
+        <div style="padding: 10px 12px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px;">
+            <strong>David L.</strong>
+            <span style="float: right; color: #64748b; font-size: 12px;">Demo activity · 12:58 PM</span>
+        </div>
+    </div>
+</div>
+<!-- END RECENTLY ACTIVE CLIENTS - DEMO -->
+    <div class="clients">
 
 
         <!-- MICHAEL -->
@@ -3805,9 +3830,9 @@ function filterCaseload() {
         ).trim().toLowerCase();
 
         const matchesSearch = clientName.includes(searchTerm);
-        const showCard = searchTerm
-            ? matchesSearch
-            : index < 3;
+      const showCard = searchTerm
+    ? matchSearch
+    : index < 3; 
 
         card.style.display = showCard ? "" : "none";
     });
