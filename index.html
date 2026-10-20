@@ -3522,7 +3522,9 @@ function goToCalendarToday() {
 function showClient(name, card) {
 
     currentClient = name;
-     selectedClientCard = card;
+    recordDemoClientActivity(name);
+    filterCaseload(); 
+    selectedClientCard = card;
     
     document.getElementById("dashboard").style.display = "none";
 
@@ -3539,7 +3541,21 @@ function showClient(name, card) {
     window.scrollTo(0, 0);
 
 }
-// REAL showClient function above
+// DEMO ONLY: Track recent client app activity in this browser.
+function recordDemoClientActivity(clientName) {
+    const activityKey = "cssDemoClientActivity";
+
+    let activity = {};
+    try {
+        activity = JSON.parse(localStorage.getItem(activityKey) || "{}");
+    } catch (error) {
+        activity = {};
+    }
+
+    activity[clientName] = Date.now();
+    localStorage.setItem(activityKey, JSON.stringify(activity));
+}
+    // REAL showClient function above
 
 function openClientApp(name) {
     const existingView = document.getElementById("clientAppView");
@@ -3796,19 +3812,43 @@ function filterCaseload() {
     if (!searchInput || !clientsContainer) return;
 
     const searchTerm = searchInput.value.trim().toLowerCase();
+    const activityKey = "cssDemoClientActivity";
+
+    let activity = {};
+    try {
+        activity = JSON.parse(localStorage.getItem(activityKey) || "{}");
+    } catch (error) {
+        activity = {};
+    }
+
     const clientCards = Array.from(
         clientsContainer.querySelectorAll(".client-card")
     );
 
+    // Sort existing cards by most recent demo Client App activity.
+    clientCards.sort((a, b) => {
+        const nameA = (a.querySelector(".client-name")?.textContent || "").trim();
+        const nameB = (b.querySelector(".client-name")?.textContent || "").trim();
+
+        const timeA = Number(activity[nameA]) || 0;
+        const timeB = Number(activity[nameB]) || 0;
+
+        return timeB - timeA;
+    });
+
+    // Reorder the existing cards without creating duplicates.
+    clientCards.forEach(card => clientsContainer.appendChild(card));
+
+    // Searches show every match; otherwise show the top three.
     clientCards.forEach((card, index) => {
         const clientName = (
             card.querySelector(".client-name")?.textContent || ""
         ).trim().toLowerCase();
 
         const matchesSearch = clientName.includes(searchTerm);
-      const showCard = searchTerm
-    ? matchSearch
-    : index < 3; 
+        const showCard = searchTerm
+            ? matchesSearch
+            : index < 3;
 
         card.style.display = showCard ? "" : "none";
     });
