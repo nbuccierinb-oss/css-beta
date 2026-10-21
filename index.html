@@ -1150,7 +1150,7 @@ textarea {
                 TOTAL CASELOAD
             </div>
 
-            <div class="stat-number">
+            <div class="stat-number" id="totalCaseloadCount">
                 15
             </div>
 
@@ -1163,7 +1163,7 @@ textarea {
                 PROGRESSING
             </div>
 
-            <div class="stat-number green">
+           <div class="stat-number green" id="progressingCount">
                 6
             </div>
 
@@ -1176,7 +1176,7 @@ textarea {
                 NEED ATTENTION
             </div>
 
-            <div class="stat-number yellow">
+          <div class="stat-number yellow" id="needAttentionCount"> 
                 4
             </div>
 
@@ -1189,7 +1189,7 @@ textarea {
                 CRITICAL BARRIERS
             </div>
 
-            <div class="stat-number red">
+          <div class="stat-number red" id="criticalBarriersCount"> 
                 2
             </div>
 
@@ -4007,7 +4007,25 @@ function openAddClientModal() {
                 <input id="newClientBarrier" required maxlength="150"
                     placeholder="e.g., Housing stability"
                     style="display:block;width:100%;box-sizing:border-box;padding:10px;margin:6px 0 14px;">
+                 <label for="newClientProgressStatus">Progress Status</label>
+<select
+    id="newClientProgressStatus"
+    required
+    style="display:block;width:100%;box-sizing:border-box;border:1px solid #cbd5e1;padding:10px;margin:6px 0 14px;"
+>
+    <option value="Progressing">Progressing</option>
+    <option value="Needs Attention">Needs Attention</option>
+</select>
 
+<label for="newClientCriticalBarrier">Critical Barrier?</label>
+<select
+    id="newClientCriticalBarrier"
+    required
+    style="display:block;width:100%;box-sizing:border-box;border:1px solid #cbd5e1;padding:10px;margin:6px 0 14px;"
+>
+    <option value="No">No</option>
+    <option value="Yes">Yes</option>
+</select>
                 <label for="newClientAction">Next Action</label>
                 <textarea id="newClientAction" required maxlength="300" rows="3"
                     placeholder="What is the next step?"
@@ -4049,9 +4067,11 @@ function openAddClientModal() {
     const lastInitial = modal.querySelector("#newClientLast").value.trim().replace(/[^a-z]/gi, "").slice(0, 1).toUpperCase();
     const phase = modal.querySelector("#newClientPhase").value;
     const barrier = modal.querySelector("#newClientBarrier").value.trim();
-    const nextAction = modal.querySelector("#newClientAction").value.trim();
-
-    if (!firstName || !lastInitial || !phase || !barrier || !nextAction) {
+    const nextAction = modal.querySelector("#").value.trim();
+    const progressStatus = modal.querySelector("#newClientProgressStatus").value;
+    const criticalBarrier = modal.querySelector("#newClientCriticalBarrier").value;
+   
+    if (!firstName || !lastInitial || !phase || !barrier || !nextAction || !progressStatus || !criticalBarrier) {
         alert("Please complete all five fields.");
         return;
     }
@@ -4069,7 +4089,9 @@ function openAddClientModal() {
         lastInitial,
         phase,
         barrier,
-        nextAction
+        nextAction,
+        progressStatus,
+        criticalBarrier: criticalBarrier === "Yes" 
     };
 
     savedClients.push(client);
@@ -4099,8 +4121,8 @@ function openAddClientModal() {
         </div>
         <div class="phase">${phase}</div>
         <div class="goal">
-            <span>📌 ${client.barrier}</span>
-            <span class="goal-status yellow">Working</span>
+           <span> ${client.barrier}</span>
+           <span class="goal-status ${client.progressStatus === "Needs Attention" ? "yellow" : "green"}">${client.progressStatus}</span>
         </div>
         <div class="goal">
             <span>➡️ Next Action</span>
@@ -6218,6 +6240,31 @@ function escapeGoalText(text) {
 }
 
 
+// UPDATE DASHBOARD COUNTS FROM DEMO CLIENT DATA
+function updateDashboardCounts() {
+    const savedClients = JSON.parse(
+        localStorage.getItem("cssDemoClients") || "[]"
+    );
+
+    const totalCount = 3 + savedClients.length;
+
+    const progressingCount = savedClients.filter(
+        client => client.progressStatus === "Progressing"
+    ).length;
+
+    const needsAttentionCount = savedClients.filter(
+        client => client.progressStatus === "Needs Attention"
+    ).length;
+
+    const criticalBarriersCount = savedClients.filter(
+        client => client.criticalBarrier === "Yes"
+    ).length;
+
+    document.getElementById("totalCaseloadCount").textContent = totalCount;
+    document.getElementById("progressingCount").textContent = progressingCount;
+    document.getElementById("needAttentionCount").textContent = needsAttentionCount;
+    document.getElementById("criticalBarriersCount").textContent = criticalBarriersCount;
+}
 /* =========================
    LOAD GOALS WHEN APP LOADS
 ========================= */
@@ -6226,8 +6273,9 @@ document.addEventListener(
     "DOMContentLoaded",
     function() {
 
-        initDashboard();
+ initDashboard();
 restoreSavedCSSClients();
+updateDashboardCounts();
 
     }
 );
