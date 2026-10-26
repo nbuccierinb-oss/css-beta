@@ -1992,219 +1992,15 @@ textarea {
 ========================= -->
 
 <section id="learnMode" style="display:none;">
-
-    <button
-        class="back-btn"
-        onclick="closeLearnMode()">
-        ← Back to Client
-    </button>
-
-    <div class="profile-header">
-
-        <div class="profile-top">
-
-            <div>
-
-                <h2>🧠 Learn Mode</h2>
-
-                <div class="profile-meta">
-                    Practical learning for case planning and client success
-                </div>
-
-            </div>
-
-            <div class="overall-status">
-
-                <div class="overall-status-label">
-                    LEARNING MODE
-                </div>
-
-                <div class="overall-status-value blue">
-                    ● Ready to Learn
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="panel">
-
-        <h3>
-            What would you like to learn about?
-        </h3>
-
-        <p style="
-            color:var(--muted);
-            font-size:13px;
-            margin-bottom:20px;
-            line-height:1.5;
-        ">
-            Choose a topic to explore practical information,
-            questions to consider, and next-step strategies.
-        </p>
-
-
-        <div class="clients">
-
-
-            <!-- HOUSING -->
-
-            <div
-                class="client-card"
-                onclick="openLesson('housing')"
-                style="cursor:pointer;">
-
-                <div style="font-size:34px; margin-bottom:12px;">
-                    🏠
-                </div>
-
-                <div class="client-name">
-                    Housing Stability
-                </div>
-
-                <p style="
-                    color:var(--muted);
-                    font-size:12px;
-                    margin-top:8px;
-                    line-height:1.4;
-                ">
-                    Understand housing barriers and identify
-                    realistic next steps.
-                </p>
-
-            </div>
-
-
-            <!-- EMPLOYMENT -->
-
-            <div
-                class="client-card"
-                onclick="openLesson('employment')"
-                style="cursor:pointer;">
-
-                <div style="font-size:34px; margin-bottom:12px;">
-                    💼
-                </div>
-
-                <div class="client-name">
-                    Employment
-                </div>
-
-                <p style="
-                    color:var(--muted);
-                    font-size:12px;
-                    margin-top:8px;
-                    line-height:1.4;
-                ">
-                    Explore employment barriers, preparation,
-                    and realistic job-search strategies.
-                </p>
-
-            </div>
-
-
-            <!-- TRANSPORTATION -->
-
-            <div
-                class="client-card"
-                onclick="openLesson('transportation')"
-                style="cursor:pointer;">
-
-                <div style="font-size:34px; margin-bottom:12px;">
-                    🚌
-                </div>
-
-                <div class="client-name">
-                    Transportation
-                </div>
-
-                <p style="
-                    color:var(--muted);
-                    font-size:12px;
-                    margin-top:8px;
-                    line-height:1.4;
-                ">
-                    Identify transportation barriers and
-                    possible solutions.
-                </p>
-
-            </div>
-
-
-            <!-- ID -->
-
-            <div
-                class="client-card"
-                onclick="openLesson('documents')"
-                style="cursor:pointer;">
-
-                <div style="font-size:34px; margin-bottom:12px;">
-                    📄
-                </div>
-
-                <div class="client-name">
-                    ID & Documents
-                </div>
-
-                <p style="
-                    color:var(--muted);
-                    font-size:12px;
-                    margin-top:8px;
-                    line-height:1.4;
-                ">
-                    Learn how missing identification or documents
-                    can create barriers to progress.
-                </p>
-
-            </div>
-
-
-            <!-- FINANCIAL -->
-
-            <div
-                class="client-card"
-                onclick="openLesson('financial')"
-                style="cursor:pointer;">
-
-                <div style="font-size:34px; margin-bottom:12px;">
-                    💰
-                </div>
-
-                <div class="client-name">
-                    Financial Stability
-                </div>
-
-                <p style="
-                    color:var(--muted);
-                    font-size:12px;
-                    margin-top:8px;
-                    line-height:1.4;
-                ">
-                    Explore financial barriers, budgeting,
-                    and practical planning.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-    <div class="demo-note">
-
-        <strong>LEARN MODE • POC / DEMO:</strong>
-
-        This learning content is designed to support
-        case planning and discussion. It does not replace
-        professional judgment or individualized assessment.
-
-    </div>
-
+  <button class="back-btn" onclick="closeLearnMode()">← Back to Client</button>
+  <div class="profile-header"><div class="profile-top"><div><h2>🧠 CSS Learning Center</h2><div class="profile-meta">12 practical life-skills pillars • guided learning • no pass/fail</div></div><div class="overall-status"><div class="overall-status-label">LEARNING PATH</div><div class="overall-status-value blue">● Learn at your pace</div></div></div></div>
+  <div class="panel">
+    <h3 id="learnClientHeading">Choose a learning pillar</h3>
+    <p style="color:var(--muted);font-size:13px;line-height:1.5;margin:8px 0 18px">All three phases are available. The recommended path is Beginner → Intermediate → Advanced. Responses are conversation starters, not a grade or pass/fail test.</p>
+    <div id="learnPathSummary" style="padding:12px 14px;margin-bottom:18px;border-radius:10px;background:#eef5fb;border:1px solid #d7e7f5;color:var(--navy);font-size:13px">Recommended path: start with Beginner, then move forward when it feels useful.</div>
+    <div id="learnPillarGrid" class="clients" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));"></div>
+  </div>
+  <div class="demo-note"><strong>LEARN MODE • POC / DEMO:</strong> This tool supports discussion and individualized planning. It does not replace professional judgment. Prototype progress is stored in this browser only; do not enter confidential or identifying client information.</div>
 </section>
 <!-- =========================
      RECORD CONTACT MODAL
@@ -5037,732 +4833,102 @@ function closeLearnMode() {
 
 
 /* =========================
-   LEARN MODE LESSONS
+   CSS LEARNING CENTER • 12 PILLARS
 ========================= */
-function openLesson(topic) {
-
-    if (topic !== "housing") {
-        alert("This Learn Mode topic is coming next.");
-        return;
-    }
-
-    const lessonOverlay = document.createElement("div");
-
-    lessonOverlay.id = "learnQuestionOverlay";
-    lessonOverlay.className = "modal-overlay";
-    lessonOverlay.style.display = "block";
-
-    lessonOverlay.innerHTML = `
-        <div class="modal">
-
-            <div class="modal-header">
-
-                <div>
-                    <h2>🏠 Housing Stability</h2>
-                    <p>Learn Mode • Question 1 of 5</p>
-                </div>
-
-                <button
-                    class="close-btn"
-                    type="button"
-                    onclick="document.getElementById('learnQuestionOverlay').remove()">
-                    ×
-                </button>
-
-            </div>
-
-            <div class="modal-body">
-
-                <div style="
-                    margin-bottom:20px;
-                    color:var(--muted);
-                    font-size:13px;
-                    line-height:1.5;
-                ">
-                    There are no right or wrong answers. Your answers
-                    help identify areas that may be useful to discuss
-                    with your caseworker.
-                </div>
-
-                <div class="form-section">
-
-                    <div class="form-section-title">
-                        HOUSING STABILITY
-                    </div>
-
-                    <h3 style="
-                        font-size:18px;
-                        line-height:1.4;
-                        margin-bottom:18px;
-                    ">
-                        How confident are you that your current housing
-                        situation will remain stable over the next 30 days?
-                    </h3>
-
-                    <div style="
-                        display:flex;
-                        flex-direction:column;
-                        gap:10px;
-                    ">
-
-                        <label style="
-                            border:1px solid #cfd8df;
-                            border-radius:8px;
-                            padding:13px;
-                            cursor:pointer;
-                            font-weight:normal;
-                            background:white;
-                        ">
-                            <input
-                                type="radio"
-                                name="housingQuestion1"
-                                value="very-confident"
-                                style="width:auto; margin-right:8px;">
-                            Very confident
-                        </label>
-
-                        <label style="
-                            border:1px solid #cfd8df;
-                            border-radius:8px;
-                            padding:13px;
-                            cursor:pointer;
-                            font-weight:normal;
-                            background:white;
-                        ">
-                            <input
-                                type="radio"
-                                name="housingQuestion1"
-                                value="somewhat-confident"
-                                style="width:auto; margin-right:8px;">
-                            Somewhat confident
-                        </label>
-
-                        <label style="
-                            border:1px solid #cfd8df;
-                            border-radius:8px;
-                            padding:13px;
-                            cursor:pointer;
-                            font-weight:normal;
-                            background:white;
-                        ">
-                            <input
-                                type="radio"
-                                name="housingQuestion1"
-                                value="not-very-confident"
-                                style="width:auto; margin-right:8px;">
-                            Not very confident
-                        </label>
-
-                        <label style="
-                            border:1px solid #cfd8df;
-                            border-radius:8px;
-                            padding:13px;
-                            cursor:pointer;
-                            font-weight:normal;
-                            background:white;
-                        ">
-                            <input
-                                type="radio"
-                                name="housingQuestion1"
-                                value="no-stable-housing"
-                                style="width:auto; margin-right:8px;">
-                            I don't currently have stable housing
-                        </label>
-
-                        <label style="
-                            border:1px solid #cfd8df;
-                            border-radius:8px;
-                            padding:13px;
-                            cursor:pointer;
-                            font-weight:normal;
-                            background:white;
-                        ">
-                            <input
-                                type="radio"
-                                name="housingQuestion1"
-                                value="not-sure"
-                                style="width:auto; margin-right:8px;">
-                            I'm not sure
-                        </label>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer">
-
-                <div class="footer-left">
-                    Learn Mode • Housing Stability
-                </div>
-
-                <div class="footer-actions">
-
-                    <button
-                        class="secondary-btn"
-                        type="button"
-                        onclick="document.getElementById('learnQuestionOverlay').remove()">
-                        Exit
-                    </button>
-
-                    <button
-                        class="primary-btn"
-                        type="button"
-                        onclick="learnQuestionOneNext()">
-                        Next →
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-    `;
-
-    document.body.appendChild(lessonOverlay);
+const CSS_LEARN_PILLARS = [
+ {id:'housing',icon:'🏠',title:'Housing',desc:'Apartment searches, applications, rental costs, housing stability',focus:'finding and keeping safe, affordable housing'},
+ {id:'employment',icon:'💼',title:'Employment',desc:'Job searches, applications, interviews, workplace expectations',focus:'finding work and preparing for workplace expectations'},
+ {id:'money',icon:'💰',title:'Money Management',desc:'Budgeting, bills, saving, debt, financial decisions',focus:'planning spending, bills, and financial choices'},
+ {id:'decisions',icon:'🧭',title:'Decision-Making',desc:'Choices, consequences, problem-solving, evaluating options',focus:'thinking through choices and possible consequences'},
+ {id:'emotions',icon:'🧠',title:'Emotional Regulation',desc:'Recognizing emotions, triggers, and managing reactions',focus:'recognizing triggers and choosing helpful responses'},
+ {id:'communication',icon:'🗣️',title:'Communication',desc:'Listening, expressing needs, conflict resolution, self-advocacy',focus:'expressing needs, listening, and handling disagreements'},
+ {id:'relationships',icon:'🤝',title:'Relationships & Support',desc:'Healthy relationships, boundaries, positive support networks',focus:'building healthy relationships and identifying supportive people'},
+ {id:'organization',icon:'📅',title:'Organization & Responsibilities',desc:'Scheduling, appointments, deadlines, routines',focus:'organizing time, appointments, and daily responsibilities'},
+ {id:'probation',icon:'⚖️',title:'Probation & Court Responsibilities',desc:'Reporting, communication, preparing for appointments, addressing barriers',focus:'understanding requirements and communicating about barriers'},
+ {id:'wellness',icon:'🏥',title:'Health & Wellness',desc:'Wellness routines, stress management, accessing services',focus:'building wellness routines and finding appropriate services'},
+ {id:'transportation',icon:'🚗',title:'Transportation',desc:'Transit options, route planning, costs, backup plans',focus:'planning reliable transportation and backup options'},
+ {id:'resources',icon:'🆘',title:'Community Resources',desc:'Finding services, navigating assistance programs, connecting with organizations',focus:'finding community services and taking the next step to connect'}
+];
+const CSS_LEARN_PHASES = [
+ {id:1,name:'Beginner',label:'FOUNDATION',hint:'Explore what you know and what feels confusing.'},
+ {id:2,name:'Intermediate',label:'BUILD SKILLS',hint:'Practice planning, comparing options, and taking next steps.'},
+ {id:3,name:'Advanced',label:'APPLY & PLAN',hint:'Work through barriers, backup plans, and real-life scenarios.'}
+];
+const CSS_LEARN_QUESTIONS = [
+ {q:'How familiar does this topic feel to you right now?',a:['I feel comfortable with it','I know a little, but want to learn more','I am not sure where to start','I would rather talk it through with someone']},
+ {q:'What part of this topic is most challenging for you?',a:['Knowing what steps to take','Finding the right information or service','Having the time, money, or transportation','Feeling confident or knowing who to ask','I am not sure yet']},
+ {q:'When you need to handle this, what do you usually do first?',a:['Make a plan and take a step','Ask someone I trust for help','Search for information or services','Put it off because it feels overwhelming','It depends on the situation']},
+ {q:'Which kind of support would be most useful right now?',a:['A simple step-by-step checklist','Help finding a local resource','Practice or examples before I try it','Help making a plan that fits my situation','I am not sure yet']},
+ {q:'What could get in the way of making progress in this area?',a:['Cost or money','Transportation or access','Time, scheduling, or paperwork','Stress, confidence, or competing priorities','I do not see a major barrier right now']},
+ {q:'What is one next step that feels realistic for you?',a:['Try one small step on my own','Work on it with my caseworker','Connect with a community resource','Learn more before deciding','I would like help choosing a next step']}
+];
+let cssLearnSession = null;
+function cssLearnStorageKey(){
+ const client = (typeof currentClient !== 'undefined' && currentClient) ? currentClient : 'Current Client';
+ return 'cssLearnProgress_v1_' + client.replace(/[^a-z0-9_-]/gi,'_');
 }
-
-let housingLearnResponses = {};
-
-function recordHousingAnswer(questionNumber) {
-    const selected = document.querySelector(
-        'input[name="housingQuestion' + questionNumber + '"]:checked'
-    );
-
-    if (selected) {
-        housingLearnResponses[questionNumber] = selected.value;
-    }
+function cssLearnReadProgress(){ try{return JSON.parse(localStorage.getItem(cssLearnStorageKey())||'{}')}catch(e){return {}} }
+function cssLearnSaveProgress(data){ try{localStorage.setItem(cssLearnStorageKey(),JSON.stringify(data));}catch(e){console.warn('Learn progress could not be saved',e);} }
+function openLearnMode(){
+ const clientView=document.getElementById('clientView'), learnMode=document.getElementById('learnMode');
+ if(clientView) clientView.style.display='none'; if(learnMode) learnMode.style.display='block';
+ const heading=document.getElementById('learnClientHeading'); if(heading) heading.textContent='Learning Center • '+((typeof currentClient!=='undefined'&&currentClient)?currentClient:'Current client');
+ renderCSSLearnCenter(); window.scrollTo(0,0);
 }
-function learnQuestionOneNext() {
-
-    const selected = document.querySelector(
-        'input[name="housingQuestion1"]:checked'
-    );
-
-    if (!selected) {
-        alert("Please select an answer before continuing.");
-        return;
-    }
-    recordHousingAnswer(1);
-    const overlay = document.getElementById("learnQuestionOverlay");
-
-    const questionNumber = overlay.querySelector(".modal-header p");
-    const questionTitle = overlay.querySelector(".modal-body h3");
-    const sectionTitle = overlay.querySelector(".form-section-title");
-    const answerContainer = overlay.querySelector(".form-section > div:last-child");
-    const nextButton = overlay.querySelector(".primary-btn");
-
-    questionNumber.textContent = "Learn Mode • Question 2 of 5";
-
-    sectionTitle.textContent = "HOUSING STABILITY";
-
-    questionTitle.textContent =
-        "How confident are you that you can maintain your housing costs for the next 30 days?";
-
-    answerContainer.innerHTML = `
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion2"
-                value="very-confident"
-                style="width:auto; margin-right:8px;">
-            Very confident
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion2"
-                value="somewhat-confident"
-                style="width:auto; margin-right:8px;">
-            Somewhat confident
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion2"
-                value="not-very-confident"
-                style="width:auto; margin-right:8px;">
-            Not very confident
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion2"
-                value="behind"
-                style="width:auto; margin-right:8px;">
-            I am behind on housing costs
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion2"
-                value="not-sure"
-                style="width:auto; margin-right:8px;">
-            I'm not sure
-        </label>
-    `;
-
-    nextButton.textContent = "Next →";
-  nextButton.setAttribute("onclick", "learnQuestionTwoNext()"); 
+function closeLearnMode(){
+ const overlay=document.getElementById('learnQuestionOverlay'); if(overlay) overlay.remove();
+ const learnMode=document.getElementById('learnMode'), clientView=document.getElementById('clientView');
+ if(learnMode) learnMode.style.display='none'; if(clientView) clientView.style.display='block'; window.scrollTo(0,0);
 }
-
-
-function learnQuestionTwoNext() {
-
-    const selected = document.querySelector(
-        'input[name="housingQuestion2"]:checked'
-    );
-
-    if (!selected) {
-        alert("Please select an answer before continuing.");
-        return;
-    }
-    recordHousingAnswer(2);
-    const overlay = document.getElementById("learnQuestionOverlay");
-
-    const questionNumber = overlay.querySelector(".modal-header p");
-    const questionTitle = overlay.querySelector(".modal-body h3");
-    const sectionTitle = overlay.querySelector(".form-section-title");
-    const answerContainer = overlay.querySelector(".form-section > div:last-child");
-    const nextButton = overlay.querySelector(".primary-btn");
-
-    questionNumber.textContent = "Learn Mode • Question 3 of 5";
-
-    sectionTitle.textContent = "HOUSING STABILITY";
-
-    questionTitle.textContent =
-        "What is the biggest thing that could make it difficult for you to maintain your current housing?";
-
-    answerContainer.innerHTML = `
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion3"
-                value="rent"
-                style="width:auto; margin-right:8px;">
-            Paying rent or other housing costs
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion3"
-                value="utilities"
-                style="width:auto; margin-right:8px;">
-            Keeping up with utilities or other household bills
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion3"
-                value="roommates"
-                style="width:auto; margin-right:8px;">
-            Problems with roommates, family, or others in the home
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion3"
-                value="housing-condition"
-                style="width:auto; margin-right:8px;">
-            Problems with the condition or safety of my housing
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion3"
-                value="other"
-                style="width:auto; margin-right:8px;">
-            Something else or I'm not sure
-        </label>
-    `;
-
-    nextButton.textContent = "Next →";
- nextButton.setAttribute("onclick", "learnQuestionThreeNext()"); 
+function renderCSSLearnCenter(){
+ const grid=document.getElementById('learnPillarGrid'); if(!grid)return;
+ const progress=cssLearnReadProgress();
+ grid.innerHTML=CSS_LEARN_PILLARS.map(p=>{
+  const completed=CSS_LEARN_PHASES.filter(ph=>progress[p.id+'_'+ph.id]&&progress[p.id+'_'+ph.id].completed).length;
+  return `<div class="client-card" style="cursor:default;min-width:0"><div style="font-size:30px;margin-bottom:8px">${p.icon}</div><div class="client-name">${p.title}</div><p style="color:var(--muted);font-size:12px;line-height:1.45;margin:8px 0 12px">${p.desc}</p><div style="font-size:11px;color:var(--muted);margin-bottom:10px">${completed}/3 phases explored</div><div style="display:grid;gap:7px">${CSS_LEARN_PHASES.map(ph=>{const done=progress[p.id+'_'+ph.id]&&progress[p.id+'_'+ph.id].completed;return `<button class="secondary-btn" style="width:100%;text-align:left;font-size:12px;padding:9px 10px" onclick="openCSSLearnQuiz('${p.id}',${ph.id})">${done?'✓ ':''}${ph.name} ${ph.id===1?'• Recommended start':''}</button>`}).join('')}</div></div>`;
+ }).join('');
 }
-
-
-function learnQuestionThreeNext() {
-
-    const selected = document.querySelector(
-        'input[name="housingQuestion3"]:checked'
-    );
-
-    if (!selected) {
-        alert("Please select an answer before continuing.");
-        return;
-    }
-
-    const overlay = document.getElementById("learnQuestionOverlay");
-
-    const questionNumber = overlay.querySelector(".modal-header p");
-    const questionTitle = overlay.querySelector(".modal-body h3");
-    const sectionTitle = overlay.querySelector(".form-section-title");
-    const answerContainer = overlay.querySelector(".form-section > div:last-child");
-    const nextButton = overlay.querySelector(".primary-btn");
-
-    questionNumber.textContent = "Learn Mode • Question 4 of 5";
-
-    sectionTitle.textContent = "HOUSING STABILITY";
-
-    questionTitle.textContent =
-        "If your housing situation changed, how confident are you that you would know where to go for help?";
-
-    answerContainer.innerHTML = `
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion4"
-                value="very-confident"
-                style="width:auto; margin-right:8px;">
-            Very confident
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion4"
-                value="somewhat-confident"
-                style="width:auto; margin-right:8px;">
-            Somewhat confident
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion4"
-                value="not-very-confident"
-                style="width:auto; margin-right:8px;">
-            Not very confident
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion4"
-                value="no-idea"
-                style="width:auto; margin-right:8px;">
-            I would not know where to start
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion4"
-                value="not-sure"
-                style="width:auto; margin-right:8px;">
-            I'm not sure
-        </label>
-    `;
-
-    nextButton.textContent = "Next →";
-   nextButton.setAttribute("onclick", "recordHousingAnswer(3); learnQuestionFourNext()");
+function openLesson(topic){openCSSLearnQuiz(topic==='financial'?'money':topic==='documents'?'resources':topic,1);}
+function openCSSLearnQuiz(pillarId,phaseId){
+ const pillar=CSS_LEARN_PILLARS.find(p=>p.id===pillarId); const phase=CSS_LEARN_PHASES.find(ph=>ph.id===phaseId); if(!pillar||!phase)return;
+ cssLearnSession={pillarId,phaseId,answers:{},step:0};
+ const old=document.getElementById('learnQuestionOverlay');if(old)old.remove();
+ const overlay=document.createElement('div');overlay.id='learnQuestionOverlay';overlay.className='modal-overlay';overlay.style.display='block';
+ overlay.innerHTML=`<div class="modal" style="max-width:760px;max-height:90vh;overflow:auto"><div class="modal-header"><div><h2>${pillar.icon} ${pillar.title}</h2><p>${phase.name} • ${phase.label} • Reflection, not a test</p></div><button class="secondary-btn" onclick="closeCSSLearnQuiz()">✕ Close</button></div><div class="modal-body" id="cssLearnQuizBody"></div></div>`;
+ document.body.appendChild(overlay);renderCSSLearnQuestion();
 }
-
-
-function learnQuestionFourNext() {
-
-    const selected = document.querySelector(
-        'input[name="housingQuestion4"]:checked'
-    );
-
-    if (!selected) {
-        alert("Please select an answer before continuing.");
-        return;
-    }
-
-    const overlay = document.getElementById("learnQuestionOverlay");
-
-    const questionNumber = overlay.querySelector(".modal-header p");
-    const questionTitle = overlay.querySelector(".modal-body h3");
-    const sectionTitle = overlay.querySelector(".form-section-title");
-    const answerContainer = overlay.querySelector(".form-section > div:last-child");
-    const nextButton = overlay.querySelector(".primary-btn");
-
-    questionNumber.textContent = "Learn Mode • Question 5 of 5";
-
-    sectionTitle.textContent = "HOUSING STABILITY";
-
-    questionTitle.textContent =
-        "What would you most like help with regarding your housing situation right now?";
-
-    answerContainer.innerHTML = `
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion5"
-                value="finding-housing"
-                style="width:auto; margin-right:8px;">
-            Finding affordable housing
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion5"
-                value="keeping-housing"
-                style="width:auto; margin-right:8px;">
-            Keeping my current housing
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion5"
-                value="housing-costs"
-                style="width:auto; margin-right:8px;">
-            Paying rent or housing costs
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion5"
-                value="utilities"
-                style="width:auto; margin-right:8px;">
-            Utilities or household expenses
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion5"
-                value="resources"
-                style="width:auto; margin-right:8px;">
-            Finding housing resources or assistance
-        </label>
-
-        <label style="
-            border:1px solid #cfd8df;
-            border-radius:8px;
-            padding:13px;
-            cursor:pointer;
-            font-weight:normal;
-            background:white;
-        ">
-            <input
-                type="radio"
-                name="housingQuestion5"
-                value="not-sure"
-                style="width:auto; margin-right:8px;">
-            I'm not sure what I need help with yet
-        </label>
-    `;
-
-    nextButton.textContent = "Finish";
-   nextButton.setAttribute("onclick", "recordHousingAnswer(4); finishHousingLearnMode()");
+function closeCSSLearnQuiz(){const o=document.getElementById('learnQuestionOverlay');if(o)o.remove();cssLearnSession=null;}
+function cssLearnEscape(text){return String(text||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderCSSLearnQuestion(){
+ const body=document.getElementById('cssLearnQuizBody');if(!body||!cssLearnSession)return;
+ const s=cssLearnSession,p=CSS_LEARN_PILLARS.find(x=>x.id===s.pillarId),ph=CSS_LEARN_PHASES.find(x=>x.id===s.phaseId),item=CSS_LEARN_QUESTIONS[s.step],saved=s.answers[s.step];
+ const phaseNudge=s.phaseId===1?'Think about what you already know and what you would like help understanding.':s.phaseId===2?'Think about choices, steps, and supports you could use in a real situation.':'Think about how you would handle barriers, adjust a plan, and follow through.';
+ body.innerHTML=`<div style="height:6px;background:#e5e7eb;border-radius:6px;margin-bottom:18px"><div style="height:6px;width:${((s.step+1)/CSS_LEARN_QUESTIONS.length)*100}%;background:var(--blue);border-radius:6px"></div></div><div style="font-size:12px;color:var(--muted);margin-bottom:8px">QUESTION ${s.step+1} OF ${CSS_LEARN_QUESTIONS.length}</div><h3 style="margin-bottom:8px">${item.q}</h3><p style="color:var(--muted);font-size:13px;margin-bottom:16px">Topic: ${p.focus}. ${phaseNudge}</p><div style="display:grid;gap:9px">${item.a.map((a,i)=>`<label style="display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--border);border-radius:9px;cursor:pointer"><input type="radio" name="cssLearnAnswer" value="${i}" style="width:auto;margin-top:3px" ${String(saved)===String(i)?'checked':''}><span>${a}</span></label>`).join('')}</div><div style="display:flex;justify-content:space-between;gap:10px;margin-top:22px"><button class="secondary-btn" onclick="cssLearnPrevious()" ${s.step===0?'disabled':''}>← Back</button><button class="primary-btn" onclick="cssLearnNext()">${s.step===CSS_LEARN_QUESTIONS.length-1?'Review answers':'Next →'}</button></div>`;
 }
-
-
-function finishHousingLearnMode() {
-
-    const selected = document.querySelector(
-        'input[name="housingQuestion5"]:checked'
-    );
-
-    if (!selected) {
-        alert("Please select an answer before finishing.");
-        return;
-    }
-recordHousingAnswer(5);
-   const overlay = document.getElementById("learnQuestionOverlay");
-const questionNumber = overlay.querySelector(".modal-header p");
-const body = overlay.querySelector(".modal-body");
-
-questionNumber.textContent = "Learn Mode • Results";
-
-body.innerHTML = `
-    <div class="form-section-title">HOUSING STABILITY</div>
-
-    <h3>Client Responses</h3>
-
-    <div style="display:grid; gap:10px; margin-top:15px;">
-        <div>
-            <strong>Question 1</strong><br>
-            ${housingLearnResponses[1] || "No response recorded"}
-        </div>
-
-        <div>
-            <strong>Question 2</strong><br>
-            ${housingLearnResponses[2] || "No response recorded"}
-        </div>
-
-        <div>
-            <strong>Question 3</strong><br>
-            ${housingLearnResponses[3] || "No response recorded"}
-        </div>
-
-        <div>
-            <strong>Question 4</strong><br>
-            ${housingLearnResponses[4] || "No response recorded"}
-        </div>
-
-        <div>
-            <strong>Question 5</strong><br>
-            ${housingLearnResponses[5] || "No response recorded"}
-        </div>
-    </div>
-
-    <div style="margin-top:20px; padding:14px; border:1px solid #cfd8e3; border-radius:8px;">
-        <strong>💬 Caseworker Discussion</strong>
-        <p style="margin-top:8px;">
-            These responses are intended to help guide the next conversation
-            with the client and identify areas that may be useful to explore.
-        </p>
-    </div>
-`; 
+function cssLearnNext(){const picked=document.querySelector('input[name="cssLearnAnswer"]:checked');if(!picked){alert('Choose the response that best fits, or discuss the question together before continuing.');return;}cssLearnSession.answers[cssLearnSession.step]=Number(picked.value);if(cssLearnSession.step<CSS_LEARN_QUESTIONS.length-1){cssLearnSession.step++;renderCSSLearnQuestion();}else renderCSSLearnResults();}
+function cssLearnPrevious(){if(!cssLearnSession)return;const picked=document.querySelector('input[name="cssLearnAnswer"]:checked');if(picked)cssLearnSession.answers[cssLearnSession.step]=Number(picked.value);if(cssLearnSession.step>0)cssLearnSession.step--;renderCSSLearnQuestion();}
+function renderCSSLearnResults(){
+ const body=document.getElementById('cssLearnQuizBody'),s=cssLearnSession,p=CSS_LEARN_PILLARS.find(x=>x.id===s.pillarId),ph=CSS_LEARN_PHASES.find(x=>x.id===s.phaseId);if(!body)return;
+ const responses=CSS_LEARN_QUESTIONS.map((q,i)=>`<div style="padding:10px 12px;border:1px solid var(--border);border-radius:8px"><strong>${i+1}. ${q.q}</strong><p style="margin-top:6px;color:var(--muted)">${cssLearnEscape(q.a[s.answers[i]])}</p></div>`).join('');
+ body.innerHTML=`<div style="padding:12px;border-radius:9px;background:#eef5fb;margin-bottom:16px"><strong>Reflection complete — no score, no pass/fail.</strong><p style="font-size:13px;margin-top:5px">Use these answers to guide a supportive conversation and choose a practical next step.</p></div><h3>Client reflections</h3><div style="display:grid;gap:8px;margin:12px 0 20px">${responses}</div><div style="border:1px solid var(--border);border-radius:10px;padding:15px"><h3>💬 Caseworker Discussion</h3><p style="font-size:13px;color:var(--muted);margin:7px 0 12px">Suggested opening: “Based on your answers, which part of ${p.title.toLowerCase()} would be most helpful for us to work on together?”</p><label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Resource or support discussed</label><input id="cssLearnResource" placeholder="e.g., local housing agency, job center, transit information" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:7px;margin-bottom:12px"><label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Discussion notes / agreed next step</label><textarea id="cssLearnNotes" rows="3" placeholder="Record the support discussed and the next step the client wants to take." style="width:100%;padding:10px;border:1px solid var(--border);border-radius:7px"></textarea></div><div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:16px"><button class="primary-btn" onclick="saveCSSLearnResults()">Save reflections</button><button class="secondary-btn" onclick="copyCSSLearnNotes()">Copy case-note summary</button><button class="secondary-btn" onclick="closeCSSLearnQuiz()">Close</button></div>`;
 }
+function cssLearnBuildSummary(){const s=cssLearnSession,p=CSS_LEARN_PILLARS.find(x=>x.id===s.pillarId),ph=CSS_LEARN_PHASES.find(x=>x.id===s.phaseId),client=(typeof currentClient!=='undefined'&&currentClient)?currentClient:'Current client',resource=document.getElementById('cssLearnResource')?.value.trim()||'No specific resource recorded',notes=document.getElementById('cssLearnNotes')?.value.trim()||'No additional discussion notes recorded';let out=`CSS LEARN MODE — ${client}
+Pillar: ${p.title}
+Phase: ${ph.name}
 
-   
- /* =========================
+Client reflections:
+`;CSS_LEARN_QUESTIONS.forEach((q,i)=>out+=`${i+1}. ${q.q}
+Response: ${q.a[s.answers[i]]||'Not recorded'}
+`);out+=`
+Resource/support discussed: ${resource}
+Discussion notes / next step: ${notes}
+
+This is a non-graded reflection to support caseworker discussion; it is not a pass/fail assessment.`;return out;}
+function saveCSSLearnResults(){if(!cssLearnSession)return;const s=cssLearnSession,progress=cssLearnReadProgress();progress[s.pillarId+'_'+s.phaseId]={completed:true,answers:s.answers,resource:document.getElementById('cssLearnResource')?.value.trim()||'',notes:document.getElementById('cssLearnNotes')?.value.trim()||'',updatedAt:new Date().toISOString()};cssLearnSaveProgress(progress);renderCSSLearnCenter();alert('Reflections saved for this client in this browser.');}
+function copyCSSLearnNotes(){const summary=cssLearnBuildSummary();if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(summary).then(()=>alert('Case-note summary copied.')).catch(()=>cssLearnFallbackCopy(summary));}else cssLearnFallbackCopy(summary);}
+function cssLearnFallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');alert('Case-note summary copied.');}catch(e){alert('Copy was not available. You can select and copy the summary manually.');}ta.remove();}
+
+/* =========================
    GOAL MANAGEMENT
 ========================= */
 
