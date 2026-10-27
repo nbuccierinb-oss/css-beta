@@ -2831,7 +2831,13 @@ let currentClient = "Michael R.";
     let selectedClientCard = null;
 let calendarViewDate = new Date();
 
+const CSS_CALENDAR_STORAGE_KEY = "cssCalendarStatesByClient";
 let calendarStatesByClient = {};
+try {
+    calendarStatesByClient = JSON.parse(localStorage.getItem(CSS_CALENDAR_STORAGE_KEY) || "{}");
+} catch (error) {
+    calendarStatesByClient = {};
+}
 
 const CALENDAR_STATUSES = [
     {
@@ -3068,6 +3074,8 @@ function cycleCalendarDate(dateKey) {
 
     clientStates[dateKey] =
         nextState;
+
+    localStorage.setItem(CSS_CALENDAR_STORAGE_KEY, JSON.stringify(calendarStatesByClient));
 
     const status =
         CALENDAR_STATUSES[nextState];
@@ -3351,6 +3359,29 @@ function recordDemoClientActivity(clientName) {
 }
     // REAL showClient function above
 
+function renderClientAppCalendar(clientName) {
+    const calendarHost = document.getElementById("clientAppCalendarList");
+    const remindersHost = document.getElementById("clientAppUpcomingReminders");
+    if (!calendarHost || !remindersHost) return;
+    let allStates = {};
+    try { allStates = JSON.parse(localStorage.getItem(CSS_CALENDAR_STORAGE_KEY) || "{}"); }
+    catch (error) { allStates = {}; }
+    const clientStates = allStates[clientName] || {};
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const visibleKeys = new Set(["office", "urine", "court", "home"]);
+    const events = Object.entries(clientStates).map(([dateKey, stateIndex]) => {
+        const status = CALENDAR_STATUSES[Number(stateIndex)];
+        if (!status || !visibleKeys.has(status.key)) return null;
+        const [year, month, day] = dateKey.split("-").map(Number);
+        return { date: new Date(year, month - 1, day), status };
+    }).filter(event => event && event.date >= today).sort((a, b) => a.date - b.date);
+    const formatDate = date => date.toLocaleDateString("en-US", {weekday:"short", month:"short", day:"numeric", year:"numeric"});
+    const eventCard = event => `<div style="display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #e8edf3;"><div style="font-size:20px;">${event.status.icon}</div><div><div style="font-weight:700;color:#1f3655;">${event.status.label}</div><div style="font-size:14px;color:#536273;">${formatDate(event.date)}</div><div style="font-size:12px;color:#778394;">Time/details: Please confirm with your caseworker.</div></div></div>`;
+    const thisMonth = events.filter(event => event.date.getFullYear() === today.getFullYear() && event.date.getMonth() === today.getMonth());
+    calendarHost.innerHTML = thisMonth.length ? thisMonth.map(eventCard).join("") : '<p style="margin:0;">No upcoming calendar items scheduled for this month.</p>';
+    remindersHost.innerHTML = events.length ? events.map(eventCard).join("") : '<p style="margin:0;">You have no upcoming reminders scheduled right now.</p>';
+}
+
 function openClientApp(name) {
     const existingView = document.getElementById("clientAppView");
     if (existingView) {
@@ -3442,9 +3473,7 @@ localStorage.setItem(activityKey, JSON.stringify(activity));
                 box-shadow:0 2px 6px rgba(0,0,0,.08);
             ">
                 <h3 style="margin-top:0;">📅 Client Calendar</h3>
-                <p style="color:#666;">
-                    Client-facing calendar information will appear here.
-                </p>
+                <div id="clientAppCalendarList" style="color:#666;line-height:1.6;">Loading calendar…</div>
             </div>
 
             <div style="
@@ -3455,9 +3484,7 @@ localStorage.setItem(activityKey, JSON.stringify(activity));
                 box-shadow:0 2px 6px rgba(0,0,0,.08);
             ">
                 <h3 style="margin-top:0;">🔔 Upcoming Reminders</h3>
-                <p style="color:#666;">
-                    Reminders scheduled to appear in the client app will appear here.
-                </p>
+                <div id="clientAppUpcomingReminders" style="color:#666;line-height:1.6;">Loading reminders…</div>
             </div>
 
             <div style="
@@ -3574,6 +3601,7 @@ localStorage.setItem(activityKey, JSON.stringify(activity));
     `;
 
     document.body.appendChild(appView);
+    renderClientAppCalendar(name);
   
 
 const clientPhase = selectedClientCard?.querySelector(".phase")?.textContent.trim();
