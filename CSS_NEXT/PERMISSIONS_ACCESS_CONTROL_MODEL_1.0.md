@@ -1,6 +1,6 @@
 # CSS NEXT — Permissions & Access Control Model 1.0
 
-**Status:** Proposed baseline for design review; not an adopted agency policy  
+**Status:** Proposed baseline updated with CSS NEXT permission decisions; requires pilot-agency, legal, privacy, and security review  
 **Date:** November 2, 2026  
 **Branch:** `css-next`
 
@@ -72,8 +72,8 @@ Use immutable IDs (UUIDs or equivalent); do not use names, email addresses, or j
 - A client is not the same thing as a case. One client may have multiple cases.
 - A staff member may have more than one assignment, but each assignment has a scope and effective dates.
 - Assignment changes must not silently transfer access to unrelated records.
-- Supervisory access is based on an explicitly configured team/caseload scope, not merely a Supervisor title.
-- Agency administrators manage configuration and accounts; administration does not automatically grant access to confidential case content.
+- Supervisory access is based on an explicitly configured department scope, not merely a Supervisor title. The proposed CSS NEXT baseline permits supervisors to access all cases within their own department.
+- Agency administrators manage configuration and accounts; administration does not automatically grant access to confidential case content. Access to confidential case notes requires separate, explicit authorization.
 - Cross-agency sharing is denied by default and requires a documented, approved sharing mechanism.
 
 ## 4. Proposed initial role catalogue
@@ -83,9 +83,9 @@ Roles are starting templates, not hard-coded global rules. Each agency can renam
 | Role template | Intended scope | Default access principle |
 |---|---|---|
 | Client | Own client account and explicitly client-visible records | Own information only; no access to staff-only notes or other clients |
-| Assigned Officer / Caseworker | Specifically assigned cases | Work records necessary for assigned responsibilities |
-| Specialist / Resource Coordinator | Explicitly referred clients or selected resource records | Minimum fields necessary for the referral/service task |
-| Supervisor | Assigned team or approved supervisory caseload | Oversight within configured scope; sensitive content may require additional permission |
+| Assigned Officer / Caseworker | Only cases specifically assigned to that officer | Work records necessary for assigned responsibilities; no department-wide browse access |
+| Specialist / Resource Coordinator | Explicitly referred clients and limited client profile | Limited client profile plus referral-related information; no complete probation case file |
+| Supervisor | All cases within their own department | Department-wide case access for supervisory duties; sensitive record categories may still require additional permission |
 | Agency Administrator | Agency configuration and user administration | No automatic access to case content |
 | Auditor / Compliance Reviewer | Explicitly approved audit scope | Read-only access to permitted records and audit trails |
 | System Operator | Technical platform operations | No routine content access; tightly controlled, logged, time-limited support access |
@@ -99,14 +99,14 @@ This is a conservative product-design baseline. Agencies must review it against 
 | Resource / action | Client | Assigned officer | Specialist | Supervisor | Agency admin |
 |---|---|---|---|---|---|
 | Own profile / permitted client fields | Read/update allowed fields | Read assigned client | Read referral-minimum fields | Read within scope | Manage account metadata, not case narrative by default |
-| Case details | Client-visible subset | Read/update assigned case | Referral subset only | Read within supervisory scope | No default content access |
+| Case details | Client-visible subset | Read/update assigned case only | Limited client profile plus referral-related fields | Read all cases in own department | No default content access |
 | Goals and progress | Read permitted goals; contribute if enabled | Read/create/update assigned case goals | Only explicitly shared/referral fields | Read within scope; approve if configured | No default content access |
-| Staff case notes | No | Read/create for assigned case | No, unless specifically authorized | Read within scope if policy permits | No default content access |
+| Staff case notes | No | Read/create for assigned case, subject to record-specific restrictions | No, unless separately authorized for a defined purpose | Read within own department, subject to record-specific restrictions and agency policy | Only with separate additional authorization |
 | Client calendar | Read permitted items | Manage assigned case events | Only relevant referral events | Read within scope | Configure event types, not automatically view contents |
 | Court reports | Client-visible subset only if approved | Read/create/submit for assigned case as authorized | No by default | Review/approve if configured | No default content access |
 | Resource referral | Read own referral status | Create/manage assigned referral | Manage assigned referral | Oversight within scope | Configure resource catalogue |
 | Learning Center | Use own permitted content | Assign/recommend if enabled | No by default | Oversight if configured | Manage content configuration |
-| Private reflection letters | Author only; client controls approved sharing | No letter-content access by default | No by default | No by default | No by default |
+| Words That Move Me Forward content | Author only by default; client may separately authorize specific content sharing | Only the specific content the client separately authorizes for that officer, subject to legal/safety restrictions | No by default; only if separately authorized for a defined recipient and purpose | No by default; only if separately authorized for a defined recipient and purpose | No by default; separate authorization and purpose required |
 | Agency users/roles/settings | No | No | No | Limited delegated admin if configured | Manage within agency |
 | Audit records | Own permitted activity summary only | Access logs only as policy permits | No by default | Scoped oversight | Manage audit access; sensitive audit content separately permissioned |
 
@@ -120,7 +120,7 @@ Examples:
 - A staff case note may be visible to the assigned officer and authorized supervisor, but not to the client.
 - A client-facing calendar may show an appointment time without exposing internal staff notes.
 - A referral partner may receive only the information needed to provide a service, not the full case file.
-- A restorative reflection letter is private by default and should not be exposed through ordinary officer or supervisor permissions.
+- Words That Move Me Forward content is private by default. An officer may see only the specific content the client separately authorizes for that officer; ordinary case assignment or supervisory status does not grant access.
 - A victim-related record may require additional restrictions on identity, location, contact information, and disclosure.
 - SAFEZONE location events require tightly scoped access, minimal notification content, retention rules, and human review.
 
@@ -142,10 +142,11 @@ At minimum, record:
 
 For **Words That Move Me Forward**:
 - Private by default.
-- A general share action must not offer the assigned probation officer/caseworker as a recipient.
+- Content remains private unless the client takes a separate, explicit sharing action.
+- The client may authorize a specific officer to see specifically selected content; assignment to the case alone is not authorization.
+- The sharing flow must identify the recipient, exact content, purpose, and duration, and explain that access may be constrained by law, court order, safety rules, or agency policy.
 - No automatic delivery to victims or family members.
 - No assumption that a letter is safe or appropriate to send.
-- Officer/caseworker visibility of letter content remains a separate policy decision; the conservative default is no content access.
 - The client must receive a clear privacy notice explaining any applicable legal limits. CSS must not promise absolute confidentiality.
 
 A consent grant does not override law, a court order, a safety restriction, or another person's rights.
@@ -184,15 +185,27 @@ Do not trust agency IDs, user IDs, client IDs, role names, or permission flags s
 
 Before finalizing the first role matrix, interview officers, supervisors, administrators, and client representatives and obtain policy/legal review.
 
-1. Can supervisors see every case in their unit, or only assigned supervisory cases?
-2. Which case notes are client-visible, and which are staff-only?
-3. Who may create, edit, submit, and approve court reports?
-4. Can specialists see a referral only, or a limited client profile?
-5. Which client calendar events and reminders are visible to clients?
-6. Can a client authorize sharing of a specific resource referral or reflection letter with an outside recipient? How is identity and revocation handled?
-7. What can assigned officers see about Words That Move Me Forward: nothing, completion metadata only, or another explicitly defined view?
-8. Who can export records, and under what approval process?
-9. What are the rules for staff reassignment, leave coverage, case transfer, and terminated access?
+**Decisions proposed by the CSS NEXT product team (November 2, 2026):**
+
+1. Officers may access only clients/cases assigned to them; department-wide officer browsing is not permitted.
+2. Supervisors may access all cases within their own department.
+3. Resource coordinators receive a limited client profile plus referral-related information, not the complete probation case file.
+4. Agency administrators do not automatically receive confidential case-note access; separate additional authorization is required.
+5. For Words That Move Me Forward, officers may see only content the client separately authorizes for them.
+
+These are the selected product-design defaults for the next model revision. They remain subject to pilot-agency approval and legal/privacy review.
+
+**Still requiring explicit policy decisions:**
+
+1. Which case-note categories, if any, are excluded from routine supervisor access, and what additional authorization is needed for restricted notes?
+2. Who grants and reviews an administrator's additional authorization to view confidential case notes? Should it be time-limited, purpose-limited, and require a reason and audit alert?
+3. What exact client-profile fields and referral fields may a resource coordinator see? Who approves exceptions?
+4. How does a client authorize an officer to see Words That Move Me Forward content: selected letter, selected excerpt, or full item? What expiry, revocation, and access-history controls apply?
+5. Does client authorization permit viewing only, or also downloading, printing, forwarding, or copying? Default recommendation: viewing only, with other actions separately authorized.
+6. What happens when an officer is newly assigned, removed, or temporarily covering a case, and how quickly does access change?
+7. Who may create, edit, submit, and approve court reports?
+8. Which client calendar events and reminders are visible to clients?
+9. Who can export records, and under what approval process?
 10. What emergency/break-glass access is permitted, who reviews it, and how quickly?
 11. What retention, legal hold, disclosure, and audit rules apply?
 12. What client access, correction, and appeal rights apply in the pilot jurisdiction?
