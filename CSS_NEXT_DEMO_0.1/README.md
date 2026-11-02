@@ -39,3 +39,15 @@ Select an account card on the login page to autofill its credentials. The named 
 The usernames and passwords are intentionally embedded in public client-side code. Anyone who can inspect the page can discover them. These are shared demo credentials, not private accounts, and the login is a demonstration gate only; it is not authentication or access control. All data is fictional. Never enter real client information, identifying information, real credentials, or confidential records.
 
 Production CSS NEXT requires real identity/authentication, server-side authorization on every request, secure data storage, audit logging, agency isolation, and a reviewed deployment/security architecture. A hidden page or client-side password check must never be used to protect real case data.
+
+
+## Publish the live demo with GitHub Pages
+A deployment workflow is included at `.github/workflows/deploy-css-next-demo.yml`. To publish it:
+
+1. Open the repository on GitHub: https://github.com/nbuccierinb-oss/css-beta
+2. Go to **Settings → Pages**.
+3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+4. Open the **Actions** tab and select **Deploy CSS NEXT Demo**. If it has not started automatically, choose **Run workflow** on branch `css-next`.
+5. When the deployment succeeds, the expected project-site address is https://nbuccierinb-oss.github.io/css-beta/
+
+The site is not live until GitHub Pages is enabled and the deployment workflow completes successfully. Subsequent pushes to the demo folder on `css-next` will trigger a redeploy.
