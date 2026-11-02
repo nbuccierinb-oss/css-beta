@@ -71,8 +71,10 @@ This is a logical architecture, not a commitment to a specific programming frame
 The core should own the concepts and rules shared across modules:
 
 - **Agency and jurisdiction:** agency identity, jurisdiction, configuration, enabled modules, policy settings.
-- **Identity and access:** users, authentication, role assignments, account lifecycle, multi-factor authentication where appropriate.
-- **Client and case records:** stable client IDs, case IDs, agency ownership, case status, assigned staff, dates, and permitted relationships.
+- **Organizational divisions:** standard CSS supervision classifications (Adult Probation, Juvenile Probation, Problem-Solving Courts, and Pretrial Services), with agency-configurable local names and mappings.
+- **Identity and access:** users, authentication, role assignments, account lifecycle, multi-factor authentication where appropriate. A staff member may hold active assignments in multiple divisions within an agency; division membership alone does not grant access to every case in that division.
+- **Client and case records:** stable client IDs, case IDs, agency ownership, division context, case status, assigned staff, dates, and permitted relationships.
+- **Staff coverage and continuity:** effective-dated primary and temporary coverage assignments, bulk reassignment workflows, leave/absence coverage, separation/termination transitions, and a complete assignment history. Coverage must preserve the client's case history and prior staff authorship.
 - **Goals and progress:** goals, action steps, barriers, commitments, status changes, and history.
 - **Phases:** agency-configurable phase names, criteria, transitions, and staff permissions.
 - **Timeline:** durable, append-oriented record of meaningful case events with source, actor, timestamp, and visibility rules.
@@ -81,6 +83,18 @@ The core should own the concepts and rules shared across modules:
 - **Notifications:** in-app and approved external channels, delivery status where available, acknowledgments, and escalation history.
 - **Reporting:** operational and outcome reporting with agency-level access controls.
 - **Audit:** record access and material changes to sensitive records and configuration.
+
+### Divisions, staff membership, and assignment continuity
+
+CSS should use four standard supervision classifications as its common cross-jurisdiction framework: **Adult Probation, Juvenile Probation, Problem-Solving Courts, and Pretrial Services**. Agencies may map local terminology to these classifications or configure additional local categories without changing the shared core model.
+
+A staff user may be affiliated with multiple divisions at the same agency. Model this with explicit, effective-dated staff-to-division memberships and division-specific role assignments. A user's division affiliation describes where they may work; it does not, by itself, grant access to every client or case in that division. Case-level authorization still depends on the user's active case assignment, coverage assignment, supervisory scope, and record-specific permissions.
+
+Case responsibility must be modeled separately from staff identity and division membership. Each case should support an effective-dated primary assignment and, when authorized, one or more temporary coverage assignments. This supports planned leave, unexpected absence, workload balancing, transfers, and staff departures. A temporary coverage assignment must identify its start/end dates (or an open-ended status pending review), scope, reason, authorizing person, and whether the covering worker may perform day-to-day actions or has read-only access.
+
+When a staff member leaves the agency, their active assignments must be ended and reassigned through a controlled workflow. For leave, CSS should support temporary coverage without erasing the primary assignment. When coverage ends, the agency can restore the original assignment or designate a new primary worker. Every transition must be audited. Prior notes, actions, and timeline events remain attributed to the staff member who created them; reassignment never rewrites historical authorship or transfers ownership of the client's history.
+
+A supervisor's department-wide visibility remains a separate supervisory permission. If a supervisor is also expected to perform day-to-day casework during coverage, CSS must grant an explicit coverage/casework assignment for those actions rather than assuming supervisor visibility automatically grants editing rights.
 
 ### Stable identity rule
 
@@ -159,7 +173,7 @@ Agencies must configure priorities, on-call rosters, escalation windows, and res
 ## 5. Role-based experiences
 
 ### Officer Workspace
-Caseload, client/case overview, goals, phases, timeline, notes, calendar, court-report workflow, referrals, and authorized client-app navigation.
+Caseload across the divisions in which the staff member is authorized to work, with clear division filters and case-level assignments. Includes client/case overview, goals, phases, timeline, notes, calendar, court-report workflow, referrals, and authorized client-app navigation. Temporary coverage cases must be clearly labeled with the coverage period and permitted actions.
 
 ### Client Experience
 A simple, mobile-first experience for permitted calendar items, reminders, goals, resource bulletins, learning content, and voluntary reflection. Show only information the client is authorized to see.
@@ -260,12 +274,15 @@ Use a **hybrid rebuild**: create a clean CSS NEXT foundation while preserving an
 ## 9. Decisions still required
 
 1. Which client/case data fields are essential for the first pilot, and which should not be collected?
-2. What is the initial authentication and identity model for staff and clients?
-3. What exact access (if any) should officers/caseworkers have to Words That Move Me Forward content?
-4. Which agency-level roles and permissions are required for the first pilot?
-5. What are the agency's approved retention, audit, notification, and escalation policies?
-6. Which first pilot organization and workflow will validate the core platform?
-7. Which hosting, database, and application stack meet the agency's security, procurement, accessibility, and budget requirements?
+2. How should each agency map its local division names to the four standard CSS supervision classifications, and may it add local categories?
+3. Who may create, approve, modify, and end primary or temporary coverage assignments? What actions may a covering worker perform?
+4. What is the required handoff checklist when a staff member leaves, takes leave, or returns?
+5. What is the initial authentication and identity model for staff and clients?
+6. What exact access (if any) should officers/caseworkers have to Words That Move Me Forward content?
+7. Which agency-level roles and permissions are required for the first pilot?
+8. What are the agency's approved retention, audit, notification, and escalation policies?
+9. Which first pilot organization and workflow will validate the core platform?
+10. Which hosting, database, and application stack meet the agency's security, procurement, accessibility, and budget requirements?
 
 ---
 
