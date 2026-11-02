@@ -59,6 +59,9 @@ Use immutable IDs (UUIDs or equivalent); do not use names, email addresses, or j
 | RolePermission | Connects a role to allowed permissions | Role + permission; optional constraints |
 | Team | Organizational unit | Belongs to one agency; has members |
 | TeamMembership | Connects user to team | User + team + dates |
+| Division | Standard CSS supervision classification or agency-defined local division | Belongs to an agency; maps to a standard classification where applicable |
+| StaffDivisionMembership | Connects a staff user to one or more divisions | User + division + role/scope + effective dates/status |
+| CaseCoverageAssignment | Grants temporary, explicit coverage responsibility for a case | Case + covering user + scope/actions + start/end + reason + authorizer |
 | Client | Person receiving services | Belongs to agency; may be linked to multiple cases |
 | Case | A specific legal/supervision/service matter | Belongs to agency and client |
 | CaseAssignment | Connects staff to a case | User + case + assignment type + effective dates |
@@ -70,7 +73,12 @@ Use immutable IDs (UUIDs or equivalent); do not use names, email addresses, or j
 ### Important relationship rules
 
 - A client is not the same thing as a case. One client may have multiple cases.
-- A staff member may have more than one assignment, but each assignment has a scope and effective dates.
+- A staff member may be affiliated with multiple divisions within an agency. Division membership alone does not grant access to every case in that division.
+- A staff member may have more than one case assignment, but each assignment has a scope and effective dates.
+- Primary case assignment and temporary coverage are distinct. A leave/absence coverage assignment grants only the case access and actions explicitly defined for the coverage period.
+- Ending an assignment or coverage period removes future access according to the documented session-revocation window; it does not erase prior work or change historical authorship.
+- Staff departure requires ending all active memberships/assignments and routing affected cases through a controlled reassignment workflow.
+- Supervisory visibility and day-to-day casework authority are separate. A supervisor who temporarily performs casework must receive an explicit case coverage assignment for the actions they need.
 - Assignment changes must not silently transfer access to unrelated records.
 - Supervisory access is based on an explicitly configured department scope, not merely a Supervisor title. The proposed CSS NEXT baseline permits supervisors to access all cases within their own department.
 - Agency administrators manage configuration and accounts; administration does not automatically grant access to confidential case content. Access to confidential case notes requires separate, explicit authorization.
@@ -83,7 +91,7 @@ Roles are starting templates, not hard-coded global rules. Each agency can renam
 | Role template | Intended scope | Default access principle |
 |---|---|---|
 | Client | Own client account and explicitly client-visible records | Own information only; no access to staff-only notes or other clients |
-| Assigned Officer / Caseworker | Only cases specifically assigned to that officer | Work records necessary for assigned responsibilities; no department-wide browse access |
+| Assigned Officer / Caseworker | Cases specifically assigned to the officer, including explicitly authorized temporary coverage cases | Work records and actions necessary for assigned responsibilities; no department-wide browse access |
 | Specialist / Resource Coordinator | Explicitly referred clients and limited client profile | Limited client profile plus referral-related information; no complete probation case file |
 | Supervisor | All cases within their own department | Department-wide case access for supervisory duties; sensitive record categories may still require additional permission |
 | Agency Administrator | Agency configuration and user administration | No automatic access to case content |
@@ -159,7 +167,7 @@ For each protected API request, the server should:
 2. Resolve the active agency context and verify active membership.
 3. Load the requested resource using its immutable ID and confirm it belongs to that agency.
 4. Resolve the user's active role permissions within that agency.
-5. Verify the necessary client/case/team/referral relationship and its effective dates.
+5. Verify the necessary client/case/team/referral relationship and its effective dates. For casework access, distinguish primary assignment from temporary coverage and enforce the permitted action scope and coverage dates.
 6. Evaluate record sensitivity, ownership, consent, legal restrictions, and workflow state.
 7. Check whether the requested action is permitted (including separation-of-duties rules).
 8. Allow or deny; record an audit event for sensitive reads, changes, exports, and denied access as appropriate.
@@ -202,7 +210,7 @@ These are the selected product-design defaults for the next model revision. They
 3. What exact client-profile fields and referral fields may a resource coordinator see? Who approves exceptions?
 4. How does a client authorize an officer to see Words That Move Me Forward content: selected letter, selected excerpt, or full item? What expiry, revocation, and access-history controls apply?
 5. Does client authorization permit viewing only, or also downloading, printing, forwarding, or copying? Default recommendation: viewing only, with other actions separately authorized.
-6. What happens when an officer is newly assigned, removed, or temporarily covering a case, and how quickly does access change?
+6. Who may create, approve, change, and end primary and temporary coverage assignments? What actions can a covering worker perform, and how quickly does access change when coverage expires or a staff member leaves?
 7. Who may create, edit, submit, and approve court reports?
 8. Which client calendar events and reminders are visible to clients?
 9. Who can export records, and under what approval process?
@@ -218,7 +226,10 @@ These are the selected product-design defaults for the next model revision. They
 - An administrator can manage agency users and settings without automatically seeing case notes or private letters.
 - A specialist can see only the fields and referrals needed for their assigned task.
 - A client cannot see staff-only notes, another client's information, or records not marked client-visible.
-- Expired or revoked assignments stop granting access immediately or within the documented session-revocation window.
+- Expired or revoked primary and temporary coverage assignments stop granting access immediately or within the documented session-revocation window.
+- A staff member affiliated with multiple divisions cannot access an unassigned case solely because they belong to that division.
+- A temporary coverage assignment grants only the authorized case, action scope, and effective period; ending coverage removes that access without changing historical notes or authorship.
+- When a staff member leaves the agency, all active access is ended and their cases can be reassigned without losing case history.
 - Revoked consent stops future CSS access and delivery according to the documented policy.
 - Every sensitive access, export, permission change, and emergency access event is auditable.
 - A user cannot approve their own restricted action when separation of duties is required.
