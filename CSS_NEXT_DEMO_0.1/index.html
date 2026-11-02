@@ -21,14 +21,19 @@ const accounts=[
  {u:"officer.demo",p:"OfficerDemo01!",name:"Jordan Lee",role:"Officer",division:"Adult Probation",scope:"Assigned cases only"},
  {u:"supervisor.demo",p:"SupervisorDemo01!",name:"Morgan Reed",role:"Supervisor",division:"Adult Probation",scope:"Department-wide visibility"},
  {u:"resource.demo",p:"ResourceDemo01!",name:"Taylor Brooks",role:"Resource Coordinator",division:"Community Resources",scope:"Limited profiles and referrals"},
- {u:"admin.demo",p:"AdminDemo01!",name:"Casey Morgan",role:"Agency Administrator",division:"Agency Administration",scope:"Configuration; no confidential notes by default"}
+ {u:"admin.demo",p:"AdminDemo01!",name:"Casey Morgan",role:"Agency Administrator",division:"Agency Administration",scope:"Configuration; no confidential notes by default"},
+ {u:"caylee.demo",p:"CayleeCSS!26",name:"Caylee",role:"Officer",division:"Adult Probation",scope:"Assigned cases only"},
+ {u:"jenni.demo",p:"JenniCSS!26",name:"Jenni",role:"Officer",division:"Adult Probation",scope:"Assigned cases only"},
+ {u:"kayleigh.demo",p:"KayleighCSS!26",name:"Kayleigh",role:"Officer",division:"Adult Probation",scope:"Assigned cases only"},
+ {u:"audra.demo",p:"AudraCSS!26",name:"Audra",role:"Supervisor",division:"Adult Probation",scope:"Department-wide visibility"},
+ {u:"nick.demo",p:"NickCSS!26",name:"Nick Buccieri",role:"Agency Administrator",division:"Agency Administration",scope:"Configuration; no confidential notes by default"}
 ];
 const clients=[
- {id:"C-1042",name:"Alex Rivera",phase:"Phase 2 — Building",officer:"Jordan Lee",division:"Adult Probation",next:"Office visit · Nov 5",barrier:"Transportation"},
- {id:"C-1088",name:"Sam Carter",phase:"Phase 1 — Foundation",officer:"Jordan Lee",division:"Adult Probation",next:"Court · Nov 12",barrier:"Employment"},
- {id:"C-1103",name:"Jamie Parker",phase:"Phase 3 — Sustaining",officer:"Avery Quinn",division:"Adult Probation",next:"Home contact · Nov 7",barrier:"Housing"},
- {id:"C-1120",name:"Riley Chen",phase:"Phase 1 — Foundation",officer:"Morgan Reed",division:"Juvenile Probation",next:"Family meeting · Nov 6",barrier:"School engagement"},
- {id:"C-1135",name:"Drew Ellis",phase:"Phase 2 — Building",officer:"Morgan Reed",division:"Problem-Solving Courts",next:"Treatment review · Nov 9",barrier:"Transportation"}
+ {id:"C-1042",name:"Alex Rivera",phase:"Phase 2 — Building",officer:"Caylee",division:"Adult Probation",next:"Office visit · Nov 5",barrier:"Transportation"},
+ {id:"C-1088",name:"Sam Carter",phase:"Phase 1 — Foundation",officer:"Jenni",division:"Adult Probation",next:"Court · Nov 12",barrier:"Employment"},
+ {id:"C-1103",name:"Jamie Parker",phase:"Phase 3 — Sustaining",officer:"Kayleigh",division:"Adult Probation",next:"Home contact · Nov 7",barrier:"Housing"},
+ {id:"C-1120",name:"Riley Chen",phase:"Phase 1 — Foundation",officer:"Audra",division:"Adult Probation",next:"Office visit · Nov 6",barrier:"School engagement"},
+ {id:"C-1135",name:"Drew Ellis",phase:"Phase 2 — Building",officer:"Audra",division:"Adult Probation",next:"Review meeting · Nov 9",barrier:"Transportation"}
 ];
 let current=null,activePage="overview";
 const $=id=>document.getElementById(id);
