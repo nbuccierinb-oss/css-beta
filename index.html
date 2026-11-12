@@ -1293,15 +1293,18 @@ textarea {
 
             <button
                 class="view-btn"
-                onclick="showClient('Michael R.')">
+                type="button"
+                onclick="showClient('Michael R.', this.closest('.client-card'))">
 
                 View Client
-    <button
-  class="view-btn"
-  type="button"
-  onclick="openClientApp('Michael R.')">
-  📱 App Navigation
-</button>
+
+            </button>
+            <button
+                class="view-btn"
+                type="button"
+                onclick="openClientApp('Michael R.')">
+                📱 App Navigation
+            </button>
 
         </div>
 
@@ -5219,7 +5222,7 @@ function loadSavedGoals() {
 }
 /* TEMPORARY DEMO TIMELINE */
 
-let demoTimelineEvents = [];
+// Shared demo timeline state is declared above.
 
 function renderDemoTimeline() {
     const timeline = document.getElementById("timelineContainer");
