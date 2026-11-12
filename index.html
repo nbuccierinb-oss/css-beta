@@ -2831,6 +2831,7 @@ textarea {
 ========================= */
 
 let currentClient = "Michael R.";
+let demoTimelineEvents = [];
     let selectedClientCard = null;
 let calendarViewDate = new Date();
 
@@ -4926,39 +4927,8 @@ function saveGoal() {
 
     };
 
-/* TEMPORARY DEMO TIMELINE */
+/* Timeline rendering is defined once at global scope below. */
 
-let demoTimelineEvents = [];
-   function renderDemoTimeline() {
-    const timeline = document.getElementById("timelineContainer");
-
-    if (!timeline) {
-        return;
-    }
-
-    // Remove temporary demo entries before rebuilding
-    timeline.querySelectorAll(".demo-timeline-item").forEach(item => {
-        item.remove();
-    });
-
-    const clientEvents = demoTimelineEvents.filter(
-        event => event.client === currentClient
-    );
-
-    clientEvents.reverse().forEach(event => {
-        const item = document.createElement("div");
-
-        item.className = "timeline-item demo-timeline-item";
-
-        item.innerHTML = `
-            <div class="timeline-date">${escapeGoalText(event.date)}</div>
-            <div class="timeline-title">${escapeGoalText(event.title)}</div>
-            <div class="timeline-text">${escapeGoalText(event.text)}</div>
-        `;
-
-        timeline.insertBefore(item, timeline.firstChild);
-    });
-} 
     /* GET EXISTING GOALS */
 
     const savedGoals =
