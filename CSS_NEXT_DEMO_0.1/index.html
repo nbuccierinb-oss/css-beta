@@ -41,6 +41,7 @@ function saveStaffOverrides(){const v={};accounts.forEach(a=>{if(a.custom||a.rol
 function readAdminAudit(){try{const v=JSON.parse(localStorage.getItem(CSS_NEXT_AUDIT_KEY)||"[]");return Array.isArray(v)?v:[];}catch(e){return [];}}
 function logAdminAction(action,detail){const events=readAdminAudit();events.unshift({at:new Date().toISOString(),by:current?.name||"Unknown administrator",action,detail});localStorage.setItem(CSS_NEXT_AUDIT_KEY,JSON.stringify(events.slice(0,100)));}
 function renderLoginAccounts(){$("accountList").innerHTML=accounts.map((a,i)=>({a,i})).filter(x=>x.a.active!==false).map(({a,i})=>'<button class="account" type="button" data-account="'+i+'"><b>'+escapeDemoText(a.role)+'</b><small>'+escapeDemoText(a.scope||roleScope(a.role))+'</small><code>'+escapeDemoText(a.u)+'</code></button>').join("");document.querySelectorAll("[data-account]").forEach(b=>b.addEventListener("click",()=>{const a=accounts[+b.dataset.account];$("username").value=a.u;$("password").value=a.p;$("error").textContent="";}));}
+accounts.forEach(a=>{a.seedRole=a.role;a.seedDivision=a.division;a.seedName=a.name;a.active=true;});
 applyStaffOverrides();
 const clients=[
  {id:"C-1042",name:"Alex Rivera",phase:"Phase 2 — Building",officer:"Caylee",division:"Adult Probation",next:"Office visit · Nov 5",barrier:"Transportation"},
